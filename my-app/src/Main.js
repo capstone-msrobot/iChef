@@ -3,7 +3,16 @@ import React from "react";
 export default class MainView extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            search: "",
+            clicked: false
+        }
     }
+    handleClick = () => {
+        console.log("clicked")
+        this.props.history.push({pathname:"/result"})
+    }
+
     render() {
         return (
             <div>
@@ -40,8 +49,30 @@ export default class MainView extends React.Component {
                     </div>
                 </nav>
                 <div id="searchBox">
-                    <input id="box" type="text" placeholder="Search.."/>
-                    <button id="btngo" class="btn btn-primary" type="button" disabled>Go</button> 
+                    <input id="box" type="text" placeholder="Search.." onInput={evt=>this.setState({search:evt.target.value})}/>
+                    <button id="btngo" className="btn btn-primary" type="button" onClick={()=>this.setState({clicked: true})}>Go</button>
+                    <div>
+                     {this.state.clicked ? <div className="pt-5">
+                        <div className="card mt-2" onClick={this.handleClick}>
+                            <div className="container">
+                                <h5>One Pot Chicken Parmesan Pasta</h5>
+                                <p>estimated time: 20min</p>
+                            </div>
+                        </div>
+                        <div className="card mt-2">
+                            <div className="container">
+                                <h5>Chicken Noodle Soup</h5>
+                                <p>estimated time: 30min</p>
+                            </div>
+                        </div>
+                        <div className="card mt-2">
+                            <div className="container">
+                                <h5>Chicken Parmesan</h5>
+                                <p>estimated time: 1h</p>
+                            </div>
+                        </div>
+                     </div> : <div></div>}
+                    </div>
                 </div>
             </div>
         );

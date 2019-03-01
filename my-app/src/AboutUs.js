@@ -42,7 +42,7 @@ export default class AboutUs extends React.Component {
                     </nav>
                 </div>
                 <div>
-                    <section class="m-4">
+                    <section className="m-4">
                         <h4>What is iChef?</h4>
                         <p><b>How do we improve the cooking process within a college lifestyle so that students can explore and
                                 experience nutritious foods in the coming years?</b></p>
@@ -54,12 +54,12 @@ export default class AboutUs extends React.Component {
                             of our audiences find receipes through the web.
                         </p>
                         <h4>Who is Ms. Robot?</h4>
-                        <div class="card-group">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Neha Yadav</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">Project Manager & Developer</h6>
-                                    <p class="card-text"><ul>
+                        <div className="card-group">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h5 className="card-title">Neha Yadav</h5>
+                                    <h6 className="card-subtitle mb-2 text-muted">Project Manager & Developer</h6>
+                                    <p className="card-text"><ul>
                                             <li>Coding: Go, Java, SQL, R, React, HTML/CSS/JS, Firebase, Swift</li>
                                             <li>Design: Some experience - have worked mainly with Illustrator</li>
                                             <li>Experienced in full-stack development</li>
