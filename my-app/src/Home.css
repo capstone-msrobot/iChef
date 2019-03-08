@@ -1,0 +1,88 @@
+#image {
+    background-image: url('./img/homeCover.jpg'); 
+    max-width: 100%;
+    height: 75vh;
+    max-height: 20%;
+    background-size: cover;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+#searchBox {
+    position: relative;
+}
+
+#search {
+    padding: 1%;
+    width: 75%;
+    margin-top: 18%;
+    border: #F4C557 5px solid;
+    outline: none;
+    display: inline-block;
+}
+
+::placeholder {
+    color: grey;
+    opacity: 0.5;
+}
+
+#buttonSearch {
+    padding-top: 0.5rem; 
+    padding-bottom: 0.3rem;
+    border: #F4C557 5px solid;
+    background-color: #F4C557;
+    outline: none;
+    width: 10%;
+    display: inline-block;
+}
+
+#shortcuts {
+    background-color: white;
+    margin-top: 13%;
+    position: relative;
+}
+
+#shortcuts::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+#shortcuts .categoryColumns:hover {
+    text-decoration: underline;
+    font-weight: 900;
+    color: black;
+}
+
+.categoryColumns {
+    float: left;
+    width: 20%;
+    padding-top: 2%;
+    padding-left: 5%;
+}
+
+.imageCrop {
+    width: 100px;
+    height: 100px;
+    position: relative; /*fixed?*/
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.Snacks, .Dinner {
+    padding-left: 1.3rem;
+}
+
+.Lunch {
+    padding-left: 1.73rem;
+}
+
+.Breakfast {
+    padding-left: 0.85rem;
+}
+
+.Desserts {
+    padding-left: 1.1rem;
+}

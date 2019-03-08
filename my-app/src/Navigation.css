@@ -1,0 +1,47 @@
+#navigation {
+    background-color: #F4C557;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0%;
+}
+
+.navigBar {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index:1;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
+
+#logo {
+    max-width: 3rem;
+    padding-right: 5%;
+}
+
+#tabLink-logo {
+    font-size: 22pt;
+}
+
+#tabLink-home, #tabLink-explore, #tabLink-about, #tabLink-signup {
+    font-size: 14pt;
+    margin-top: 0.4rem;
+}
+
+#tabLink-home, #tabLink-about, #tabLink-explore, #tabLink-logo {
+    padding-right: 5rem;
+    padding-left: 1.5rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#tabLink-signup {
+    padding-right: 1.5rem;
+}
+
+#navTabs {
+    margin-right: auto;
+    margin-left: auto;
+}

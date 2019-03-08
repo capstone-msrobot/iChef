@@ -1,0 +1,59 @@
+#contentDiv {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    text-align: center;
+}
+
+.card-group {
+    margin-bottom: 3%;
+    /* margin-left: 3%;
+    margin-right: 3%; */
+    margin-right: auto;
+    margin-left: auto;
+    width: 80%;
+}
+
+.card-text ul {
+    padding-left: 10%;
+}
+
+#cover {
+    text-align: center;
+    width: 85%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 20%;
+    height: 100vh;
+}
+
+.quickTasteExplanation {
+    margin-right: auto;
+    margin-left: auto;
+    width: 80%;
+}
+
+#teamImage {
+    background-image: url('./img/homeCover.jpg'); 
+    margin-bottom: 2%;
+}
+
+#intro {
+    padding-top: 10%;
+    padding-bottom: 10%;
+    padding-left: 7%;
+}
+
+#msrobotIntro {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 1%;
+    margin-bottom: 3%;
+}
+
+h5, h6 {
+    text-align: center;
+}

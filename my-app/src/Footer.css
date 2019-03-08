@@ -1,0 +1,15 @@
+footer {
+    background-color: #F4C557;
+}
+
+#contactText {
+    padding-top: 1.2rem;
+}
+
+a {
+    color: gray;
+}
+
+a:hover {
+    color: gray;
+}

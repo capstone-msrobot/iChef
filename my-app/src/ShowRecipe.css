@@ -1,0 +1,16 @@
+#title {
+    margin-top: 5%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#title-img {
+    overflow: hidden;
+    /* margin-right: auto;
+    margin-left: auto; */
+}
+
+#img-food {
+    width: 10%;
+    height: 15%;
+}

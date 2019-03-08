@@ -1,5 +1,10 @@
+import ShowRecipe from "./ShowRecipe";
+
 export const ROUTES = {
-    main:"/main",
-    aboutUs:"/aboutUs",
-    result: "/result"
+    Home:"/Home",
+    AboutUs:"/AboutUs",
+    Navigation: "/Navigation",
+    Footer: "/Footer",
+    Results: "/Results",
+    ShowRecipe: "/ShowRecipe"
 }
