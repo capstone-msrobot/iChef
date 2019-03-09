@@ -11,7 +11,7 @@
     border-bottom: 1px solid grey;
 }
 
-h5 {
+.cardTitle-results {
     padding-bottom: 2%;
     padding-top: 1%;
 }
@@ -48,18 +48,18 @@ h5 {
 
 #searchBox-results {
     position: relative;
-    margin-right: auto;
-    margin-left: auto;
 }
 
 #search-results {
     padding: 1%;
+    position: relative;
     width: 75%;
     margin-top: 2%;
     margin-bottom: 4%;
     border: #F4C557 5px solid;
     outline: none;
     display: inline-block;
+    margin-left: 7%;
 }
 
 ::placeholder {
@@ -68,12 +68,17 @@ h5 {
 }
 
 #buttonSearch-results {
-    padding-top: 0.4rem; 
-    padding-bottom: 0.1rem;
+    position: relative;
+    padding-top: 0.5rem; 
+    padding-bottom: 0.3rem;
     border: #F4C557 5px solid;
     background-color: #F4C557;
     outline: none;
     width: 10%;
     display: inline-block;
+}
+
+#buttonSearch-results img {
+    padding-left: 30%;
 }
 

@@ -29,7 +29,7 @@ export default class AboutUs extends React.Component {
                             </p>
                         </div>
                         <div id="msrobotIntro">
-                            <h2>WHO IS THE CREATOR, MS.ROBOT?</h2>
+                            <h2>MEET THE TEAM - MS.ROBOT?</h2>
                             <p>We are 4 seniors at the University of Washington, who understand the struggles of cooking and making
                                 healthy foods choices with a busy schedule, while all having different living situations. We all have 
                                 a passion to help others, and with this product, we hope to make other students want to cook under 

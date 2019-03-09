@@ -38,11 +38,12 @@ export default class Home extends React.Component {
             <div>
                 <div id="image" role="img" alt ="fitness image" aria-label="Textual Description"> 
                     <Navigation />
+                    
                     <div id="searchBox">
                         <input id="search" type="text" placeholder="Search for a Recipe..." onInput={evt=>this.setState({search:evt.target.value})}/>
-                        <div id="buttonSearch" onClick={()=>this.setState({clicked: true})}><img src={searchIcon} alt="search icon" /></div>
+                        <div id="buttonSearch" onClick={()=>this.setState({clicked: true})}> <a class="buttonSearch" href="./Results"><i class="fas fa-search"></i></a></div>
                         
-                        
+                       
                         
                         {/* <div>
                         {this.state.clicked ? <div className="pt-5">
@@ -68,17 +69,17 @@ export default class Home extends React.Component {
                         </div> */}
 
 
-                        
+                        </div>
                     </div> 
-                    <div id="shortcuts">
-                        <div class="categoryColumns"><a href="./Home">{array[0]}</a></div>
-                        <div class="categoryColumns"><a href="./Home">{array[1]}</a></div>
-                        <div class="categoryColumns"><a href="./Home">{array[2]}</a></div>
-                        <div class="categoryColumns"><a href="./Home">{array[3]}</a></div>
-                        <div class="categoryColumns"><a href="./Home">{array[4]}</a></div>
+                    {/* <div id="shortcuts">
+                        <div className="categoryColumns"><a href="./Home">{array[0]}</a></div>
+                        <div className="categoryColumns"><a href="./Home">{array[1]}</a></div>
+                        <div className="categoryColumns"><a href="./Home">{array[2]}</a></div>
+                        <div className="categoryColumns"><a href="./Home">{array[3]}</a></div>
+                        <div className="categoryColumns"><a href="./Home">{array[4]}</a></div>
                     </div>
-                </div>
-                <Footer />
+                </div> */}
+                {/* <Footer /> */}
             </div>   
         );
     }
