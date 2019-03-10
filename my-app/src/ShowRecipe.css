@@ -1,16 +1,74 @@
-#title {
-    margin-top: 5%;
+#basic-info {
+    display: flex;
+    transform: translate(15%, 3%);
+}
+
+#showRecipe-image {
+    max-width: 350px;
+    height: 375px;
+    display: flex;
+    margin-left: 17rem;
+}
+
+
+#showRecipe-info {
+    margin-top: 8%;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -33rem;
+}
+
+#card-text {
+    border-left: 0.5px solid lightgrey;
+    text-align: center;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+#card-text-1 {
+    border-left: none;
+    text-align: center;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid lightgrey;
+    padding-top: 0;
+    width: 60%;
+    margin-top: 5.5%;
+}
+
+#showRecipe-content {
+    width: 80%;
     margin-right: auto;
     margin-left: auto;
+    margin-top: 3%;
 }
 
-#title-img {
-    overflow: hidden;
-    /* margin-right: auto;
-    margin-left: auto; */
+/*https://stackoverflow.com/questions/9258070/adding-text-before-list*/
+#customlist {
+    /* delete default counter */
+    list-style-type: none;
+    /* create custom counter and set it to 0 */
+    counter-reset: elementcounter;
+    padding-left: 2%;
 }
 
-#img-food {
-    width: 10%;
-    height: 15%;
+#customlist>li:before {
+    /* print out "Element " followed by the current counter value */
+    content: "STEP " counter(elementcounter) ": ";
+    /* increment counter */
+    counter-increment: elementcounter;
+    font-weight: bold;
+    display: block;
+}
+
+#customlist>li::after {
+    color:red;
 }

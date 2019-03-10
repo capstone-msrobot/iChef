@@ -1,5 +1,5 @@
 #navigation {
-    padding: 0%;
+    padding: 1%;
     opacity: 0%;
     width: 100%;
 }
@@ -17,14 +17,18 @@
 }
 
 #tabLink-home, #tabLink-about, #tabLink-explore {
-    padding-right: 5rem;
-    padding-left: 1.5rem;
+    padding-right: 8rem;
+    padding-left: 3rem;
     margin-right: auto;
     margin-left: auto;
 }
 
 #tabLink-signup {
-    padding-right: 1.5rem;
+    padding-right: 3rem;
+}
+
+#tabLink-logo {
+    padding-left: 3rem;
 }
 
 /* ///// */

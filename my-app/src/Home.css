@@ -7,15 +7,14 @@
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    /* background-position: center; */
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 #searchBox {
     position: relative;
-    max-width: 40%; 
-    margin-bottom: 18%;
-    margin-top: 18%;
+    max-width: 45%; 
+    margin-bottom: 15%;
+    margin-top: 15%;
     transform: translate(-50%, -50%);
     height: 2.5rem;
     background: white;
@@ -23,7 +22,7 @@
     padding: 1px;
     margin-left: 50%;
     display: flex;
-    box-shadow: 0px 0px 40px #696969;
+    box-shadow: 0px 0px 20px #696969;
     border: 0.5px solid #696969;
 }
 
@@ -64,53 +63,42 @@
     justify-content: center;
     align-items: center;
     background-color: #F4C557;
-    margin-left: 0.25%;
+    /* margin-left: 1.1%; */
+    margin-left: 1.9%;
 }
 
-/*
-#shortcuts {
+#featureBoxes {
     background-color: white;
-    margin-top: 13%;
-    position: relative;
+    margin-top: 13%; 
+    /* position: relative; */
 }
 
-#shortcuts::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-
-#shortcuts .categoryColumns:hover {
-    font-weight: 900;
+#time-feature, #equipment-feature, #ingredients-feature {
+   padding: 0;
+   max-width: 100%;
+   height: auto;
 }
 
-.categoryColumns {
-    float: left;
-    width: 20%;
-    padding-top: 2%;
-    padding-left: 5%;
+.card-body {
+    margin-right: auto;
+    margin-left: auto;
 }
 
-.imageCrop {
+.feature-icon-image {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.feature-icon {
     width: 100px;
-    height: 100px;
-    position: relative; 
-    overflow: hidden;
-    border-radius: 50%;
+    height: 90px;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    
 }
 
-.Snacks, .Dinner {
-    padding-left: 1.3rem;
+.feature-text {
+    margin-right: auto;
+    margin-left:auto;
 }
-
-.Lunch {
-    padding-left: 1.73rem;
-}
-
-.Breakfast {
-    padding-left: 0.85rem;
-}
-
-.Desserts {
-    padding-left: 1.1rem;
-} */

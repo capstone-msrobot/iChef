@@ -1,8 +1,9 @@
 import React from "react";
 import Navigation from "./Navigation"
 import Footer from "./Footer"
-import snacks from "./img/test_homeCover.jpg";
-import searchIcon from "./img/searchIcon.png";
+import time from "./img/timeIcon.png";
+import equipment from "./img/equipmentIcon.png";
+import ingredients from "./img/ingredientIcon.png";
 import './Home.css';
 
 export default class Home extends React.Component {
@@ -20,66 +21,62 @@ export default class Home extends React.Component {
     }
 
     render() {
-        let forms = [{ image: <img src={snacks} alt="snacks" className="imageCrop" />, label: "Snacks" },
-        { image: <img src={snacks} alt="snacks" className="imageCrop" />, label: "Breakfast" },
-        { image: <img src={snacks} alt="snacks" className="imageCrop" />, label: "Lunch" },
-        { image: <img src={snacks} alt="snacks" className="imageCrop" />, label: "Dinner" },
-        { image: <img src={snacks} alt="snacks" className="imageCrop" />, label: "Desserts" },
-        ]
-
-        let array = forms.map((d, i) => {
-            return <div className={d.class}>
-                    {d.image}
-                    <p className={d.label}>{d.label}</p>
-            </div>
-        })
-
         return (
             <div>
-                <div id="image" role="img" alt ="fitness image" aria-label="Textual Description"> 
+                <div id="image" className="img-fluid" alt ="home cover"> 
                     <Navigation />
                     
                     <div id="searchBox">
                         <input id="search" type="text" placeholder="Search for a Recipe..." onInput={evt=>this.setState({search:evt.target.value})}/>
-                        <div id="buttonSearch" onClick={()=>this.setState({clicked: true})}> <a className="searchIcon" href="./Results"><i class="fas fa-search"></i></a></div>
-                        
-                       
-                        
-                        {/* <div>
-                        {this.state.clicked ? <div className="pt-5">
-                            <div className="card mt-2" onClick={this.handleClick}>
-                                <div className="container">
-                                    <h5>One Pot Chicken Parmesan Pasta</h5>
-                                    <p>estimated time: 20min</p>
-                                </div>
-                            </div>
-                            <div className="card mt-2">
-                                <div className="container">
-                                    <h5>Chicken Noodle Soup</h5>
-                                    <p>estimated time: 30min</p>
-                                </div>
-                            </div>
-                            <div className="card mt-2">
-                                <div className="container">
-                                    <h5>Chicken Parmesan</h5>
-                                    <p>estimated time: 1h</p>
-                                </div>
-                            </div>
-                        </div> : <div></div>}
-                        </div> */}
-
-
+                        <div id="buttonSearch" onClick={()=>this.setState({clicked: true})}> 
+                            <a className="searchIcon" href="./Results"><i className="fas fa-search"></i></a>
                         </div>
-                    </div> 
-                    {/* <div id="shortcuts">
-                        <div className="categoryColumns"><a href="./Home">{array[0]}</a></div>
-                        <div className="categoryColumns"><a href="./Home">{array[1]}</a></div>
-                        <div className="categoryColumns"><a href="./Home">{array[2]}</a></div>
-                        <div className="categoryColumns"><a href="./Home">{array[3]}</a></div>
-                        <div className="categoryColumns"><a href="./Home">{array[4]}</a></div>
                     </div>
-                </div> */}
-                {/* <Footer /> */}
+                    <div id="featureBoxes" className="row">
+                        <div id="time-feature" className="col">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="feature-icon-image">
+                                        <img className="img-fluid feature-icon" src={time} alt="equipment icon" />
+                                    </div>
+                                    <h5 className="card-title">Fast Recipes</h5>
+                                    {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
+                                    <p className="card-text">All our recipes take 30 minutes or less to cook</p>
+                                    
+                                </div>
+                            </div>  
+                        </div>
+
+                        <div id="equipment-feature" className="col">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="feature-icon-image">
+                                        <img className="img-fluid feature-icon" src={equipment} alt="equipment icon" />
+                                    </div>
+                                    <h5 className="card-title">Choose Your Equipment</h5>
+                                    {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
+                                    <p className="card-text">Choose a recipe with equipment that you have</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="ingredients-feature" className="col">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="feature-icon-image">
+                                        <img className="img-fluid feature-icon" src={ingredients} alt="equipment icon" />
+                                    </div>
+                                    <h5 className="card-title">Filter Through Ingredients</h5>
+                                    {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
+                                    <p className="card-text">Make a dish with ingredients you have at home</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <Footer />
             </div>   
         );
     }

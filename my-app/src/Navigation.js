@@ -6,7 +6,7 @@ export default class Navigation extends React.Component {
     render() {
         return (
             <div id="navigationBar" className="navigBar">
-                <nav className="navbar navbar-expand-lg navbar-dark" id="navigation">
+                <nav className="navbar navbar-expand-lg navbar-light" id="navigation">
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -29,10 +29,10 @@ export default class Navigation extends React.Component {
                             </a>
                             <a
                                 className="nav-item nav-link"
-                                id="tabLink-explore"
-                                href="./Results"
+                                id="tabLink-about"
+                                href="./AboutUs"
                             >
-                                Explore//////REsults
+                                About Us
                             </a>
                             <a 
                                 className="navbar-brand" 
@@ -40,19 +40,19 @@ export default class Navigation extends React.Component {
                                 href="Home">
                                 <img id="logo" src={logo} alt="logo" />
                             </a>
-                            <a
+                          <a
                                 className="nav-item nav-link"
-                                id="tabLink-about"
-                                href="./AboutUs"
+                                id="tabLink-explore"
+                                href="./Results"
                             >
-                                About Us
+                                Explore
                             </a>
                             <a
                                 className="nav-item nav-link"
                                 id="tabLink-signup"
-                                href="./ShowRecipe"
+                                href="./Homee"
                             >
-                                Sign Up /////Show Recipe
+                                Upload a Recipe
                             </a>
                         </div>
                     </div>
@@ -81,7 +81,7 @@ export default class Navigation extends React.Component {
 // import './Navigation.css';
 // import logo from "./img/logo.png";
 
-// export default class Navigation extends Component {
+// export default className Navigation extends Component {
 //     constructor(props) {
 //         super(props);
     
@@ -104,7 +104,7 @@ export default class Navigation extends React.Component {
 //             <Navbar className="navbar" id="navigation" expand="md">
 //                 <NavbarToggler onClick={this.toggle} />
 //                 <Collapse isOpen={this.state.isOpen} navbar>
-//                 <div class="row">
+//                 <div className="row">
 //                     <Nav className="mr-auto" navbar>
 //                         <NavItem className=".col-md-4">
 //                             <Link to={ROUTES.Home} id="link" replace>Home</Link>

@@ -1,5 +1,3 @@
-import ShowRecipe from "./ShowRecipe";
-
 export const ROUTES = {
     Home:"/Home",
     AboutUs:"/AboutUs",

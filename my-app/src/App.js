@@ -14,8 +14,8 @@ class App extends Component {
         <Switch>
           <Route exact path={ROUTES.Home} component={Home} />
           <Route path={ROUTES.AboutUs} component={AboutUs} />
-          {/* <Route path={ROUTES.Results} component={Results} />
-          <Route path={ROUTES.ShowRecipe} component={ShowRecipe} /> */}
+          <Route path={ROUTES.Results} component={Results} />
+          <Route path={ROUTES.ShowRecipe} component={ShowRecipe} />
           <Redirect to={ROUTES.Home} />
         </Switch>
       </BrowserRouter>

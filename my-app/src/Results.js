@@ -2,84 +2,105 @@ import React from 'react';
 import Navigation from "./Navigation"
 import Footer from "./Footer"
 import "./Results.css"
-import recipe from "./img/test_homeCover.jpg"
-import searchIcon from "./img/searchIcon.png";
+import food from "./img/homeCover.jpg"
+import food2 from "./img/pasta.jpg"
 
 export default class Results extends React.Component {
+    ShowRecipe = () => {
+        this.props.history.push('/ShowRecipe');
+    };
+
     render() {
         return (
             <div>
                 <Navigation />
-                 <div className="results">
+                <div id="search-filter">
                     <div id="searchBox-results">
-                        <input id="search-results" type="text" placeholder="//////WHATEVER THE USER TYPED" onInput={evt=>this.setState({search:evt.target.value})}/>
-                        <div id="buttonSearch-results" onClick={()=>this.setState({clicked: true})}><img src={searchIcon} alt="search icon" /></div>
-                        
-                            
-                            
-                            {/* <div>
-                            {this.state.clicked ? <div className="pt-5">
-                                <div className="card mt-2" onClick={this.handleClick}>
-                                    <div className="container">
-                                        <h5>One Pot Chicken Parmesan Pasta</h5>
-                                        <p>estimated time: 20min</p>
-                                    </div>
-                                </div>
-                                <div className="card mt-2">
-                                    <div className="container">
-                                        <h5>Chicken Noodle Soup</h5>
-                                        <p>estimated time: 30min</p>
-                                    </div>
-                                </div>
-                                <div className="card mt-2">
-                                    <div className="container">
-                                        <h5>Chicken Parmesan</h5>
-                                        <p>estimated time: 1h</p>
-                                    </div>
-                                </div>
-                            </div> : <div></div>}
-                            </div> */}
+                        <input id="search-results" type="text" placeholder="/////SHOW WHATEVER USER TYPED" onInput={evt=>this.setState({search:evt.target.value})}/>
+                        <div id="buttonSearch-results" onClick={()=>this.setState({clicked: true})}> 
+                            <a className="searchIcon-results" href="./Results"><i className="fas fa-search"></i></a>
+                        {/* ^No filters but should link to all of the results again */}
+                        </div>
+                    </div>
+                    <div id="filter-options">
+                        <div id="filter-equipment">
+                            By Equipment
+                        </div>
+                        <div id="filter-ingredients">
+                            By Ingredients
+                        </div>
+                        <div id="reset" onClick={()=>this.setState({clicked: true})}> 
+                            <a href="/Results">RESET</a>
+                        </div>
+                    </div>
 
+                </div>
+            
 
-                        
-                    </div> 
+                 <div className="results">
                     <h4>Results</h4>
-                       <div className="cards">
-                            <div className="card card-recipe" onClick={this.handleClick}>
-                                <div className="card-info">
-                                    <div className="image">
-                                        <img className="img-recipe" src={recipe} alt="recipe" />
+                       <div className="row">
+                        <div id="recipe" className="col-md-3">
+                                <div className="card" onClick={()=> this.ShowRecipe()}>
+                                    <div className="card-body" id="results-card-body">
+                                        <div className="card-img-top recipe-image">
+                                            <img className="img-fluid card-img-top results-card-image" src={food} alt="equipment icon" />
+                                        </div>
+
+                                        <h5 className="results-card-title"><a href="/ShowRecipe">One Pot Chicken Parmesan Pasta</a></h5>
+                                        {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
+                                        <p className="card-text" id="card-text">3 Equipment</p>
+                                        <p className="card-text" id="card-text">5 Ingredients</p>
+                                        
                                     </div>
-                                    <div id="info">
-                                        <h5 className="cardTitle-results">One Pot Chicken Parmesan Pasta</h5>
-                                        <p id="ingredients">Ingredients</p>
-                                        <p id="time">Estimated time: 20min</p>
-                                        <p id="equipment">3 Equipments, asidghiaugougshfoa;fhueiuhf;woeu3 Equipments, asidghiaugougshfoa;fhueiuhf;woeu3 Equipments, asidghiaugougshfoa;fhueiuhf;woeu</p>
-                                    </div>
-                                </div>
+                                </div>  
                             </div>
-                            <div className="card card-recipe">
-                                <div className="card-info">
-                                    <div className="image">
-                                        <img className="img-recipe" src={recipe} alt="recipe" />
+                            <div id="recipe" className="col-md-3">
+                                <div className="card" onClick={()=> this.ShowRecipe()}>
+                                    <div className="card-body" id="results-card-body">
+                                        <div className="card-img-top recipe-image">
+                                            <img className="img-fluid card-img-top results-card-image" src={food2} alt="equipment icon" />
+                                        </div>
+
+                                        <h5 className="results-card-title"><a href="/ShowRecipe">One Pot Chicken Parmesan Pasta</a></h5>
+                                        {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
+                                        <p className="card-text" id="card-text">3 Equipment</p>
+                                        <p className="card-text" id="card-text">5 Ingredients</p>
+                                        
                                     </div>
-                                    <div id="info">
-                                    <h5 className="cardTitle-results">Chicken Noodle Soup</h5>
-                                    <p>estimated time: 30min</p>
-                                    </div>
-                                </div>
+                                </div>  
                             </div>
-                            <div className="card card-recipe">
-                                <div className="card-info">
-                                    <div className="image">
-                                        <img className="img-recipe" src={recipe} alt="recipe" />
+                            <div id="recipe" className="col-md-3">
+                                <div className="card" onClick={()=> this.ShowRecipe()}>
+                                    <div className="card-body" id="results-card-body">
+                                        <div className="card-img-top recipe-image">
+                                            <img className="img-fluid card-img-top results-card-image" src={food} alt="equipment icon" />
+                                        </div>
+
+                                        <h5 className="results-card-title"><a href="/ShowRecipe">One Pot Chicken Parmesan Pasta</a></h5>
+                                        {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
+                                        <p className="card-text" id="card-text">3 Equipment</p>
+                                        <p className="card-text" id="card-text">5 Ingredients</p>
+                                        
                                     </div>
-                                    <div id="info">
-                                        <h5 className="cardTitle-results">Chicken Parmesan</h5>
-                                        <p>estimated time: 1h</p>
-                                    </div>
-                                </div>
+                                </div>  
                             </div>
+                            <div id="recipe" className="col-md-3">
+                                <div className="card" onClick={()=> this.ShowRecipe()}>
+                                    <div className="card-body" id="results-card-body">
+                                        <div className="card-img-top recipe-image">
+                                            <img className="img-fluid card-img-top results-card-image" src={food} alt="equipment icon" />
+                                        </div>
+
+                                        <h5 className="results-card-title"><a href="/ShowRecipe">One Pot Chicken Parmesan Pasta</a></h5>
+                                        {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
+                                        <p className="card-text" id="card-text">3 Equipment</p>
+                                        <p className="card-text" id="card-text">5 Ingredients</p>
+                                        
+                                    </div>
+                                </div>  
+                            </div>
+
                         </div> 
                     </div>
                 <Footer />
