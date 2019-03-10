@@ -41,7 +41,7 @@ export default class Home extends React.Component {
                     
                     <div id="searchBox">
                         <input id="search" type="text" placeholder="Search for a Recipe..." onInput={evt=>this.setState({search:evt.target.value})}/>
-                        <div id="buttonSearch" onClick={()=>this.setState({clicked: true})}> <a class="buttonSearch" href="./Results"><i class="fas fa-search"></i></a></div>
+                        <div id="buttonSearch" onClick={()=>this.setState({clicked: true})}> <a className="searchIcon" href="./Results"><i class="fas fa-search"></i></a></div>
                         
                        
                         
