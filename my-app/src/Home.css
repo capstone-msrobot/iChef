@@ -13,8 +13,8 @@
 #searchBox {
     position: relative;
     max-width: 45%; 
-    margin-bottom: 15%;
-    margin-top: 15%;
+    margin-bottom: 16%;
+    margin-top: 16%;
     transform: translate(-50%, -50%);
     height: 2.5rem;
     background: white;
@@ -22,7 +22,7 @@
     padding: 1px;
     margin-left: 50%;
     display: flex;
-    box-shadow: 0px 0px 20px #696969;
+    /* box-shadow: 0px 0px 20px lightgrey; */
     border: 0.5px solid #696969;
 }
 
@@ -77,6 +77,12 @@
    padding: 0;
    max-width: 100%;
    height: auto;
+   margin-right: auto;
+   margin-left: auto;
+}
+
+.home-card {
+    border: none;
 }
 
 .card-body {
@@ -101,4 +107,9 @@
 .feature-text {
     margin-right: auto;
     margin-left:auto;
+}
+
+.home-card-text {
+    color: #4B4E4F; 
+    text-align: center;
 }

@@ -76,6 +76,8 @@
     text-align: center;
     width: 0;
     padding-left: 1.2%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
 }
 
 #reset > p {
@@ -83,7 +85,8 @@
 }
 
 #card-text {
-    text-align:center;
+    text-align: center;
+    margin: 0;
 }
 
 #results-card-body {
@@ -96,7 +99,9 @@
     width: 100%;
     height: 250px;
     overflow: hidden;
-    background-position: center;
+    display:table-cell; 
+    vertical-align:middle; 
+    text-align:center
 }
 
 .results-card-title {
@@ -109,4 +114,8 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 3%;
+}
+
+.results-card, .recipe-image {
+    border-radius: 30px;
 }
