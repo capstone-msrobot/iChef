@@ -2,24 +2,35 @@ import React from 'react';
 import Navigation from "./Navigation"
 import Footer from "./Footer"
 import "./Results.css"
-import snacks2 from "./img/homeCover.jpg"
-import snacks from "./img/pasta.jpg"
 
 export default class Results extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            search: this.props.location.state.search,
             equipmentClick: false,
             ingredientClick: false
         }
+    }
+
+    componentDidMount(){
+        // console.log(this.props.location) 
     }
 
     ShowRecipe = () => {
         this.props.history.push({pathname: '/ShowRecipe'});
     };
 
-    render() {
+    ReLoad = () => {
+        this.props.history.push({
+            pathname: "/Results", // should be queried to correct recipes
+            state:{
+                search: this.state.search
+            }
+        })
+    }
 
+    render() {
         /* import each recipe, name, image src, equipment, and ingredients from firebase - parse through equipment and ingredients, etc. to save as separate item into an array*/
         let recipes = [{ imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
             time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
@@ -56,8 +67,10 @@ export default class Results extends React.Component {
                     <div className="card results-card" onClick={()=> this.ShowRecipe()}>
                         <div className="card-body" id="results-card-body">
                             <div className="card-img-top recipe-image">
-                                <img className={"img-fluid card-img-top results-card-image"} src={d.imageSrc} alt="picture of food" />
+                                <img className={"img-fluid card-img-top results-card-image"} src={d.imageSrc} alt="food" />
                             </div>
+
+                            {/* If clicked without a word in search --> should link back to Explore page with ALL of the recipes showing */}
 
                             <h5 className="results-card-title">{d.name}</h5>
                             {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
@@ -73,12 +86,10 @@ export default class Results extends React.Component {
         return (
             <div>
                 <Navigation />
-
                 <div id="search-filter">
                     <div id="searchBox-results">
-                        <input id="search-results" type="text" placeholder="/////SHOW WHATEVER USER TYPED" onInput={evt=>this.setState({search:evt.target.value})}/>
-                        <div id="buttonSearch-results" onClick={()=>this.setState({clicked: true})}>
-                            { console.log(this.state.clicked)} 
+                        <input id="search-results" type="text" placeholder={this.state.search} onInput={evt=>this.setState({search: evt.target.value})}/>
+                        <div id="buttonSearch-results" onClick={()=> this.ReLoad()}>
                             <a className="searchIcon-results" href="./Results"><i className="fas fa-search"></i></a>
                         {/* ^No filters but should link to all of the results again */}
                         </div>
@@ -87,11 +98,9 @@ export default class Results extends React.Component {
                     <div id="filter-options">
                         <div id="filter-equipment" onClick={()=> this.setState({equipmentClick: true})}>
                             By Equipment
-                            { console.log(this.state.equipmentClick)} 
                         </div>
                         <div id="filter-ingredients" onClick={()=> this.setState({ingredientClick: true})}>
                             By Ingredients
-                            { console.log(this.state.ingredientClick)} 
                         </div>
                         <div id="reset" onClick={()=> this.setState({clicked: true})}> 
                             <a href="/Results">RESET</a>

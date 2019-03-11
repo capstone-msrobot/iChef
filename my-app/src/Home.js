@@ -20,17 +20,28 @@ export default class Home extends React.Component {
         this.props.history.push({pathname:"/result"})
     }
 
+    // https://stackoverflow.com/questions/39847360/how-to-pass-state-props-when-redirecting-to-another-route-in-react
+    ShowResults = () => {
+        this.props.history.push({
+            pathname: "/Results", //linked to correct recipes
+            state:{
+                search: this.state.search
+            }
+        })
+    }
+
     render() {
         return (
             <div>
                 <div id="image" className="img-fluid" alt ="home cover"> 
                     <Navigation />
-                    
                     <div id="searchBox">
-                        <input id="search" type="text" placeholder="Search for a Recipe..." onInput={evt=>this.setState({search:evt.target.value})}/>
-                        <div id="buttonSearch" onClick={()=>this.setState({clicked: true})}> 
+                        <input id="search" type="text" placeholder="Search for a Recipe..." onInput={evt=>this.setState({search: evt.target.value})}/>
+                        <div id="buttonSearch" onClick={()=>this.ShowResults()}> 
                             <a className="searchIcon" href="./Results"><i className="fas fa-search"></i></a>
                         </div>
+                        {/* If clicked without a word in search --> should link back to Explore page with ALL of the recipes showing */}
+
                     </div>
                     <div id="featureBoxes" className="row">
                         <div id="time-feature" className="col-md-3">
@@ -42,7 +53,6 @@ export default class Home extends React.Component {
                                     <h5 className="card-title">Fast Recipes</h5>
                                     {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
                                     <p className="card-text home-card-text">All our recipes take 30 minutes or less to cook</p>
-                                    
                                 </div>
                             </div>  
                         </div>
@@ -56,7 +66,6 @@ export default class Home extends React.Component {
                                     <h5 className="card-title">Choose Your Equipment</h5>
                                     {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
                                     <p className="card-text home-card-text">Choose a recipe with equipment that you have</p>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -70,7 +79,6 @@ export default class Home extends React.Component {
                                     <h5 className="card-title">Filter Through Ingredients</h5>
                                     {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
                                     <p className="card-text home-card-text">Make a dish with ingredients you have at home</p>
-                                
                                 </div>
                             </div>
                         </div>

@@ -40,13 +40,18 @@ export default class Navigation extends React.Component {
                                 href="Home">
                                 <img id="logo" src={logo} alt="logo" />
                             </a>
-                          <a
+
+
+                            {/* Explore should show ALL of the recipes? */}
+                            <a
                                 className="nav-item nav-link"
                                 id="tabLink-explore"
-                                href="./Results"
+                                href="./Home"
                             >
                                 Explore
                             </a>
+
+                            {/* Add a recipe WITHOUT making an account?  */}
                             <a
                                 className="nav-item nav-link"
                                 id="tabLink-signup"

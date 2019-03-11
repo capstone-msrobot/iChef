@@ -1,5 +1,4 @@
 import React from "react";
-import pasta from './img/pasta.jpg';
 import Navigation from "./Navigation"
 import Footer from "./Footer"
 import "./ShowRecipe.css"
@@ -20,13 +19,13 @@ export default class ShowRecipe extends React.Component {
 
 	
         let array = recipes.map((d, i) => {
-            let regex = /\d/g;
+            // let regex = /\d/g;
                 
             return  (
-                <div id="body">
+                <div id="body" key={i}>
                     <div id="basic-info">
                         <div id="showRecipe-image" className="col">
-                            <img className="img-fluid" id="recipe-image" src={d.imageSrc} alt="picture of food"/>
+                            <img className="img-fluid" id="recipe-image" src={d.imageSrc} alt="food"/>
                         </div>
                         <div id="showRecipe-info" className="col">
                             <div className="card" id="show-card">
@@ -62,7 +61,7 @@ export default class ShowRecipe extends React.Component {
                                     //     // console.log("regex - " + ingredient)
                                     //     return <li className="number-in-ingredient"><b>{ingredient}</b></li>
                                     // } else {
-                                        return <li>{ingredient}</li>
+                                        return <li key={i}>{ingredient}</li>
                                     // }
                                 
                                 })} 
@@ -73,7 +72,7 @@ export default class ShowRecipe extends React.Component {
                             <ul>
                                 {d.equipments.map((equipment, i) => {
                                     return (
-                                        <li>{equipment}</li>
+                                        <li key={i}>{equipment}</li>
                                     )
                                 })} 
                             </ul>
@@ -83,7 +82,7 @@ export default class ShowRecipe extends React.Component {
                             <ol id="customlist">
                                 {d.steps.map((step, i) => {
                                     return (
-                                        <li>{step}</li>
+                                        <li key={i}>{step}</li>
                                     )
                                 })} 
                             </ol>

@@ -22,7 +22,7 @@ export default class AboutUs extends React.Component {
                 <div id="contentDiv">
                     <div className="row row-no-gutters quickTasteExplanation">
                         <div className="col-sm-4">
-                            <img className="img-fluid" id="aboutUs-purpose" src={aboutUsPurpose} alt="picture of food" />
+                            <img className="img-fluid" id="aboutUs-purpose" src={aboutUsPurpose} alt="food" />
                         </div>
                         <div className="col-sm-8" id="intro">
                          <p>The purpose of this electronic cookbook is to assist college students in making delicious, healthy homemade food
