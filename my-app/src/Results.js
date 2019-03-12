@@ -249,7 +249,7 @@ export class FilterOpen extends React.Component {
         // } 
         // console.log(final)
         return (
-            <div id="checkBoxes" className="post_options" onClick={()=> this.done()}>
+            <div id="checkBoxes" className="post_options">
                 {item.map((checkBox, i) => {
                     return checkBox
                 })} 
