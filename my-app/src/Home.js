@@ -15,11 +15,6 @@ export default class Home extends React.Component {
         }
     }
 
-    handleClick = () => {
-        console.log("clicked")
-        this.props.history.push({pathname:"/result"})
-    }
-
     // https://stackoverflow.com/questions/39847360/how-to-pass-state-props-when-redirecting-to-another-route-in-react
     ShowResults = () => {
         this.props.history.push({
