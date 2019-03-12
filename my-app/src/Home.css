@@ -1,26 +1,52 @@
 #image {
-    background-image: url('./img/homeCover.jpg'); 
+    background-image: url('./img/homeCover.jpg');
+    background-repeat: no-repeat;
     max-width: 100%;
-    height: 75vh;
-    max-height: 20%;
+    height: auto;
     background-size: cover;
-    background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
+    /* overflow: hidden; */
 }
 
 #searchBox {
     position: relative;
+    max-width: 45%; 
+    margin-bottom: 16%;
+    margin-top: 16%;
+    transform: translate(-50%, -50%);
+    height: 2.5rem;
+    background: white;
+    border-radius: 40px;
+    padding: 1px;
+    margin-left: 50%;
+    display: flex;
+    /* box-shadow: 0px 0px 20px lightgrey; */
+    border: 0.5px solid #696969;
 }
 
 #search {
-    padding: 1%;
-    width: 75%;
-    margin-top: 18%;
-    border: #F4C557 5px solid;
+    width: 92%;
+    border-radius: 40px;
+    position: relative; 
+    border: none;
     outline: none;
-    display: inline-block;
+    background: white;
+    float: left;
+    padding-left: 2%;
+    overflow: visible;
+    transition: 0.4s;
+    line-height: 2.4rem;
+    display: flex;
+}  
+
+.searchIcon {
+    color: white;
+}
+
+.searchIcon:hover {
+    color: white;
 }
 
 ::placeholder {
@@ -29,60 +55,61 @@
 }
 
 #buttonSearch {
-    padding-top: 0.5rem; 
-    padding-bottom: 0.3rem;
-    border: #F4C557 5px solid;
+    float: right;
+    width: 2.5rem;
+    height: 2.35rem;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #F4C557;
-    outline: none;
-    width: 10%;
-    display: inline-block;
+    /* margin-left: 1.1%; */
+    margin-left: 1.9%;
 }
 
-#shortcuts {
+#featureBoxes {
     background-color: white;
-    margin-top: 13%;
-    position: relative;
+    margin-top: 13%; 
+    /* position: relative; */
 }
 
-#shortcuts::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-
-#shortcuts .categoryColumns:hover {
-    text-decoration: underline;
-    font-weight: 900;
-    color: black;
+#time-feature, #equipment-feature, #ingredients-feature {
+   padding: 0;
+   max-width: 100%;
+   height: auto;
+   margin-right: auto;
+   margin-left: auto;
 }
 
-.categoryColumns {
-    float: left;
-    width: 20%;
-    padding-top: 2%;
-    padding-left: 5%;
+.home-card {
+    border: none;
 }
 
-.imageCrop {
+.card-body {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.feature-icon-image {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.feature-icon {
     width: 100px;
-    height: 100px;
-    position: relative; /*fixed?*/
-    overflow: hidden;
-    border-radius: 50%;
+    height: 90px;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    
 }
 
-.Snacks, .Dinner {
-    padding-left: 1.3rem;
+.feature-text {
+    margin-right: auto;
+    margin-left:auto;
 }
 
-.Lunch {
-    padding-left: 1.73rem;
-}
-
-.Breakfast {
-    padding-left: 0.85rem;
-}
-
-.Desserts {
-    padding-left: 1.1rem;
+.home-card-text {
+    color: #4B4E4F; 
+    text-align: center;
 }

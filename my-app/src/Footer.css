@@ -1,5 +1,6 @@
 footer {
     background-color: #F4C557;
+    margin-top: 2%;
 }
 
 #contactText {
@@ -12,4 +13,5 @@ a {
 
 a:hover {
     color: gray;
+    text-decoration: none;
 }
