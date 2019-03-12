@@ -4,10 +4,32 @@ import Footer from "./Footer"
 import "./Results.css"
 import recipe from "./img/test_homeCover.jpg"
 import searchIcon from "./img/searchIcon.png";
+import firebase from 'firebase/app';
+import 'firebase/database';
+
 
 export default class Results extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            result: [],
+            search:""
+        }
+    }
+    componentDidMount() {
+        let name = (this.props.location.state.search).toLowerCase();
+        var food = firebase.database().ref(name+"/");
+        food.on("child_added", (data, prevChildKey) => {
+            this.state.result.push(data.val());
+            console.log(this.state.result);
+            console.log(name);
+        })
+    }
+
     render() {
+        console.log(this.props.location.state.search);
         return (
+            
             <div>
                 <Navigation />
                  <div className="results">
