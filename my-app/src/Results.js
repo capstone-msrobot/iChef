@@ -118,30 +118,32 @@ export class Equipments extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            blur : false
+            blur: false,
+            ingredientOpen: false,
+            equipmentOpen: false
         }
         this.preview = this.preview.bind(this);
     }
 
     preview = () => {
-        if (!this.state.blur) {
+        if (!this.state.blur) { // if its not blurry then make it blurry - blur = true after
             document.getElementById("results").style.filter = "blur(5px)";
-            
         } else {
             document.getElementById("results").style.filter = "blur(0px)";
         }
 
-        this.setState({
-            blur : !this.state.blur
-        })
+        this.setState({ 
+            blur : !this.state.blur,
+            equipmentOpen: !this.state.equipmentOpen }, () => {
+            console.log(this.state.equipmentOpen, 'dealersOverallTotal1');
+        }); 
     }
           
     render() {
         return (
             <div id="filter-equipment">
                 <span onClick={this.preview}>By Equipments <i className="fas fa-plus-circle"></i></span>
-                { this.state.blur ? <FilterOpen blur={this.state.blur} ingredientClick={false} equipmentClick={true}/> : null }
-            
+                { this.state.blur ? <FilterOpen blur={this.state.blur} ingredientOpen={this.state.ingredientOpen} equipmentOpen={this.state.equipmentOpen} /> : null }
             </div>
         );
     }
@@ -152,7 +154,9 @@ export class Ingredients extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            blur : false
+            blur : false,
+            ingredientOpen: false,
+            equipmentOpen: false
         }
         this.preview = this.preview.bind(this);
     }
@@ -160,22 +164,21 @@ export class Ingredients extends React.Component {
     preview = () => {
         if (!this.state.blur) {
             document.getElementById("results").style.filter = "blur(5px)";
-            
         } else {
             document.getElementById("results").style.filter = "blur(0px)";
         }
 
-        this.setState({
-            blur : !this.state.blur
-        })
+        this.setState({ 
+            blur : !this.state.blur,
+            ingredientOpen: !this.state.ingredientOpen
+        }) 
     }
           
     render() {
         return (
             <div id="filter-equipment">
                 <span onClick={this.preview}>By Ingredients <i className="fas fa-plus-circle"></i></span>
-                { this.state.blur ? <FilterOpen blur={this.state.blur} ingredientClick={true} equipmentClick={false}/> : null }
-            
+                { this.state.blur ? <FilterOpen blur={this.state.blur} ingredientOpen={this.state.ingredientOpen} equipmentOpen={this.state.equipmentOpen} /> : null }
             </div>
         );
     }
@@ -197,9 +200,9 @@ export class FilterOpen extends React.Component {
     render() {
         // GET FROM JSON LIST WE CREATE!!!! or should we create it and add by looping through all the recipe equipments and adding it into an array??
         let list = []
-        if (this.props.ingredientClick) {
+        if (this.props.ingredientOpen) {
             list = ["Chicken", "Pasta", "Cilantro", "Lemon", "Garlic"]
-        } else if (this.props.equipmentClick) {
+        } else if (this.props.equipmentOpen) {
             list = ["Pan", "Pot", "Blender", "Fryer", "Grinder"]
         }
       
@@ -213,8 +216,21 @@ export class FilterOpen extends React.Component {
                 </div>
             )
         })
+
+        // let final;
+        // if (!this.props.ingredientOpen && !this.props.equipmentOpen) {
+        //     final = (
+        //         <div id="checkBoxes" className="post_options">
+        //             {item.map((checkBox, i) => {
+        //                 return checkBox
+        //             })} 
+        //             <div id="filter-done-button" onClick={()=> this.done()}> DONE </div>
+        //         </div>
+        //     )
+        // } 
+        // console.log(final)
         return (
-            <div id="checkBoxes" className="post_options">
+            <div id="checkBoxes" className="post_options" onClick={()=> this.done()}>
                 {item.map((checkBox, i) => {
                     return checkBox
                 })} 
