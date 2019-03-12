@@ -2,17 +2,20 @@ import React from 'react';
 import Navigation from "./Navigation"
 import Footer from "./Footer"
 import "./Results.css"
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 export default class Results extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: this.props.location.state.search
+            search: this.props.location.state.search,
+            result:[]
         }
     }
     
-    ShowRecipe = () => {
-        this.props.history.push({pathname: '/ShowRecipe'});
+    ShowRecipe = (d) => {
+        this.props.history.push({pathname: '/ShowRecipe', state:{recipe: d}});
     };
 
     ReLoad = () => {
@@ -24,52 +27,66 @@ export default class Results extends React.Component {
         })
     }
 
+    componentDidMount() {
+        let name = (this.props.location.state.search).toLowerCase();
+        let arr = [];
+        var food = firebase.database().ref(name+"/");
+        food.on("child_added", (data, prevChildKey) => {
+            arr.push(data.val());
+            this.setState({
+                result: arr
+            })
+        })
+    }
+
     render() {
+
         /* import each recipe, name, image src, equipment, and ingredients from firebase - parse through equipment and ingredients, etc. to save as separate item into an array*/
-        let recipes = [{ imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
-            time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
-            steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
-            "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
-            "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
-            "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
-            "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] },
-            { imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
-            time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
-            steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
-            "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
-            "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
-            "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
-            "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] },
-            { imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
-            time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
-            steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
-            "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
-            "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
-            "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
-            "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] }, 
-            { imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
-            time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
-            steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
-            "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
-            "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
-            "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
-            "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] }]
+        let recipes = this.state.result;
+        // let recipes = [{ imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
+        //     time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
+        //     steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
+        //     "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
+        //     "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
+        //     "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
+        //     "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] },
+        //     { imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
+        //     time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
+        //     steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
+        //     "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
+        //     "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
+        //     "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
+        //     "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] },
+        //     { imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
+        //     time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
+        //     steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
+        //     "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
+        //     "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
+        //     "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
+        //     "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] }, 
+        //     { imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
+        //     time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
+        //     steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
+        //     "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
+        //     "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
+        //     "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
+        //     "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] }]
 
         let array = recipes.map((d, i) => {
             return  (
                 <div id="recipe" className="col-md-3" key={i}>
-                    <div className="card results-card" onClick={()=> this.ShowRecipe()}>
+                    <div className="card results-card" onClick={()=> this.ShowRecipe(d)}>
                         <div className="card-body" id="results-card-body">
                             <div className="card-img-top recipe-image">
-                                <img className={"img-fluid card-img-top results-card-image"} src={d.imageSrc} alt="food" />
+                                <img className={"img-fluid card-img-top results-card-image"} src={d.imageURL} alt="food" />
                             </div>
 
                             {/* If clicked without a word in search --> should link back to Explore page with ALL of the recipes showing */}
 
                             <h5 className="results-card-title">{d.name}</h5>
                             {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
-                            <p className="card-text" id="card-text">{d.time} Minutes</p>
-                            <p className="card-text" id="card-text">{d.equipments.length} Equipment</p>
+                            <p className="card-text" id="card-text">{d.time}</p>
+                            <p className="card-text" id="card-text">{d.equipment.length} Equipment</p>
                             <p className="card-text" id="card-text">{d.ingredients.length} Ingredients</p>
                         </div>
                     </div>
@@ -78,6 +95,7 @@ export default class Results extends React.Component {
         })
 
         return (
+            
             <div>
                 <Navigation />
                 <div id="search-filter">
