@@ -223,7 +223,8 @@ export class FilterOpen extends React.Component {
         } else if (this.props.equipmentOpen) {
             list = ["Pan", "Pot", "Blender", "Fryer", "Grinder"]
         }
-      
+        
+        
         let item = list.map((d, i) => {
             return (
                 <div className="form-check" id="checkBox" key={i}>

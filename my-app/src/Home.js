@@ -5,7 +5,6 @@ import time from "./img/timeIcon.png";
 import equipment from "./img/equipmentIcon.png";
 import ingredients from "./img/ingredientIcon.png";
 import './Home.css';
-import { Route, Redirect } from 'react-router';
 
 export default class Home extends React.Component {
     constructor(props) {
