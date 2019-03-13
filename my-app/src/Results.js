@@ -10,7 +10,9 @@ export default class Results extends React.Component {
         super(props);
         this.state = {
             search: this.props.location.state.search,
-            result:[]
+            result:[],
+            filter: [],
+            oldResult: []
         }
     }
     
@@ -27,6 +29,42 @@ export default class Results extends React.Component {
         })
     }
 
+    handleEquipmentFilter = (value) => {
+        this.setState({filter: value, result: this.state.oldResult})
+
+        for (let i = 0; i < this.state.result.length; i++) {
+            for (let j = 0; j < this.state.result[i].equipmentList.length; j++) {
+                for (let k = 0; k < value.length; k++) {
+                    if (!this.state.result[i].equipmentList.includes(value[k].toLowerCase())) {
+                        this.setState({
+                            result: this.state.result.slice(i,i)
+                        })
+                        console.log(value[k])
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    handleIngredientsFilter = (value) => {
+        this.setState({filter: value, result: this.state.oldResult})
+
+        for (let i = 0; i < this.state.result.length; i++) {
+            for (let j = 0; j < this.state.result[i].ingredientsList.length; j++) {
+                for (let k = 0; k < value.length; k++) {
+                    if (!this.state.result[i].ingredientsList.includes(value[k].toLowerCase())) {
+                        this.setState({
+                            result: this.state.result.slice(i,i)
+                        })
+                        console.log(value[k])
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     componentDidMount() {
         let name = (this.props.location.state.search).toLowerCase();
         let arr = [];
@@ -34,13 +72,14 @@ export default class Results extends React.Component {
         food.on("child_added", (data, prevChildKey) => {
             arr.push(data.val());
             this.setState({
-                result: arr
+                result: arr,
+                oldResult: arr
             })
         })
     }
 
     render() {
-
+        {console.log(this.state.filter)}
         /* import each recipe, name, image src, equipment, and ingredients from firebase - parse through equipment and ingredients, etc. to save as separate item into an array*/
         let recipes = this.state.result;
         // let recipes = [{ imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
@@ -85,7 +124,7 @@ export default class Results extends React.Component {
 
                             <h5 className="results-card-title">{d.name}</h5>
                             {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
-                            <p className="card-text" id="card-text">{d.time}</p>
+                            <p className="card-text" id="card-text">{d.time} Minutes</p>
                             <p className="card-text" id="card-text">{d.equipment.length} Equipment</p>
                             <p className="card-text" id="card-text">{d.ingredients.length} Ingredients</p>
                         </div>
@@ -106,10 +145,18 @@ export default class Results extends React.Component {
                         {/* ^No filters but should link to all of the results again */}
                         </div>
                     </div>
-
-                    <div id="filter-options">
-                        <Equipments array={recipes} />
+                    {/* {this.state.result.length != 0 ? <div id="filter-options">
+                        <Equipments array={recipes} filter={this.handleFilter}/>
                         <Ingredients array={recipes} />
+                        
+                        <div id="reset" onClick={()=> this.setState({clicked: true})}> 
+                            <a href="/Results">RESET</a>
+                        </div>
+                    </div>:<div></div>} */}
+                    {/* Have to Fix */}
+                    <div id="filter-options">
+                        <Equipments array={recipes} filter={this.handleEquipmentFilter}/>
+                        <Ingredients array={recipes} filter={this.handleIngredientsFilter}/>
                         
                         <div id="reset" onClick={()=> this.setState({clicked: true})}> 
                             <a href="/Results">RESET</a>
@@ -119,11 +166,16 @@ export default class Results extends React.Component {
             
                 <div id="results">
                     <h4>Results</h4>
-                    <div className="row">
+                    {array != 0 ? <div className="row">
                         {array.map((recipe, i) => {
                             return recipe
                         })} 
-                    </div> 
+                    </div> : <div>No Result Found</div>}
+                    {/* <div className="row">
+                        {array.map((recipe, i) => {
+                            return recipe
+                        })} 
+                    </div>  */}
                 </div>
 
                 <Footer />
@@ -136,7 +188,8 @@ export class Equipments extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            blur : false
+            blur : false,
+            filter: []
         }
         this.preview = this.preview.bind(this);
     }
@@ -158,7 +211,7 @@ export class Equipments extends React.Component {
         return (
             <div id="filter-equipment">
                 <span onClick={this.preview}>By Equipments <i className="fas fa-plus-circle"></i></span>
-                { this.state.blur ? <FilterOpen blur={this.state.blur} ingredientClick={false} equipmentClick={true}/> : null }
+                { this.state.blur ? <FilterOpen blur={this.state.blur} filter={this.props.filter} ingredientClick={false} equipmentClick={true}/> : null }
             
             </div>
         );
@@ -174,6 +227,7 @@ export class Ingredients extends React.Component {
         }
         this.preview = this.preview.bind(this);
     }
+
 
     preview = () => {
         if (!this.state.blur) {
@@ -192,7 +246,7 @@ export class Ingredients extends React.Component {
         return (
             <div id="filter-equipment">
                 <span onClick={this.preview}>By Ingredients <i className="fas fa-plus-circle"></i></span>
-                { this.state.blur ? <FilterOpen blur={this.state.blur} ingredientClick={true} equipmentClick={false}/> : null }
+                { this.state.blur ? <FilterOpen blur={this.state.blur} filter={this.props.filter} ingredientClick={true} equipmentClick={false}/> : null }
             
             </div>
         );
@@ -203,13 +257,27 @@ export class FilterOpen extends React.Component {
     constructor(props) {
         super(props);
         this.done = this.done.bind(this);
+        this.state = {
+            filter: []
+        }
     }
 
     done = () => {
         if (this.props.blur) {
             document.getElementById("checkBoxes").style.display = "none";
             document.getElementById("results").style.filter = "blur(0px)";
+            this.props.filter(this.state.filter)
+
         }
+
+    }
+
+    filterFunc = (d) => {
+        let arr = this.state.filter;
+        arr.push(d);
+        this.setState({
+            filter: arr
+        })
     }
     
     render() {
@@ -220,11 +288,11 @@ export class FilterOpen extends React.Component {
         } else if (this.props.equipmentClick) {
             list = ["Pan", "Pot", "Blender", "Fryer", "Grinder"]
         }
-      
+        // https://reactjs.org/docs/forms.html <- look at this exmaple to change checkbox's behavior
         let item = list.map((d, i) => {
             return (
                 <div className="form-check" id="checkBox" key={i}>
-                    <input className="form-check-input" type="checkbox" value="" id={"defaultCheck" + i} />
+                    <input className="form-check-input" onClick={()=>{this.filterFunc(d)}} type="checkbox" value="" id={"defaultCheck" + i} />
                     <label className="form-check-label" htmlFor={"defaultCheck" + i}>
                         {d}
                     </label>
