@@ -4,5 +4,6 @@ export const ROUTES = {
     Navigation: "/Navigation",
     Footer: "/Footer",
     Results: "/Results",
-    ShowRecipe: "/ShowRecipe"
+    ShowRecipe: "/ShowRecipe",
+    Explore: "/Explore"
 }

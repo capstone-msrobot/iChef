@@ -4,12 +4,10 @@ import Footer from "./Footer"
 import "./Results.css"
 import firebase from 'firebase/app';
 import 'firebase/database';
-
-export default class Results extends React.Component {
+export default class Explore extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: this.props.location.state.search,
             result:[],
             filter: [],
             oldResult: []
@@ -66,16 +64,19 @@ export default class Results extends React.Component {
     }
 
     componentDidMount() {
-        let name = (this.props.location.state.search).toLowerCase();
         let arr = [];
-        var food = firebase.database().ref("recipes/"+name+"/");
-        food.on("child_added", (data, prevChildKey) => {
-            arr.push(data.val());
+        var query = firebase.database().ref("recipes").orderByKey();
+        query.once("value")
+        .then(function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                arr.push(childSnapshot.val());
+            });
+        }).then(()=>{
             this.setState({
                 result: arr,
                 oldResult: arr
             })
-        })
+        });
     }
 
     render() {
@@ -111,7 +112,9 @@ export default class Results extends React.Component {
         //     "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
         //     "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] }]
 
-        let array = recipes.map((d, i) => {
+        let array = recipes.map((recipes) => {
+            console.log(recipes)
+            return (recipes.map((d, i) => {
             return  (
                 <div id="recipe" className="col-md-3" key={i}>
                     <div className="card results-card" onClick={()=> this.ShowRecipe(d)}>
@@ -131,10 +134,10 @@ export default class Results extends React.Component {
                     </div>
                 </div>
             )
-        })
+        }))
+    })
 
-        return (
-            
+        return (      
             <div>
                 <Navigation />
                 <div id="search-filter">
@@ -195,17 +198,16 @@ export class Equipments extends React.Component {
     }
 
     preview = () => {
-        if (!this.state.blur) { // if its not blurry then make it blurry - blur = true after
+        if (!this.state.blur) {
             document.getElementById("results").style.filter = "blur(5px)";
+            
         } else {
             document.getElementById("results").style.filter = "blur(0px)";
         }
 
-        this.setState({ 
-            blur : !this.state.blur,
-            equipmentOpen: !this.state.equipmentOpen }, () => {
-            console.log(this.state.equipmentOpen, 'dealersOverallTotal1');
-        }); 
+        this.setState({
+            blur : !this.state.blur
+        })
     }
           
     render() {
@@ -224,9 +226,7 @@ export class Ingredients extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            blur : false,
-            ingredientOpen: false,
-            equipmentOpen: false
+            blur : false
         }
         this.preview = this.preview.bind(this);
     }
@@ -235,14 +235,14 @@ export class Ingredients extends React.Component {
     preview = () => {
         if (!this.state.blur) {
             document.getElementById("results").style.filter = "blur(5px)";
+            
         } else {
             document.getElementById("results").style.filter = "blur(0px)";
         }
 
-        this.setState({ 
-            blur : !this.state.blur,
-            ingredientOpen: !this.state.ingredientOpen
-        }) 
+        this.setState({
+            blur : !this.state.blur
+        })
     }
           
     render() {
@@ -286,9 +286,9 @@ export class FilterOpen extends React.Component {
     render() {
         // GET FROM JSON LIST WE CREATE!!!! or should we create it and add by looping through all the recipe equipments and adding it into an array??
         let list = []
-        if (this.props.ingredientOpen) {
+        if (this.props.ingredientClick) {
             list = ["Chicken", "Pasta", "Cilantro", "Lemon", "Garlic"]
-        } else if (this.props.equipmentOpen) {
+        } else if (this.props.equipmentClick) {
             list = ["Pan", "Pot", "Blender", "Fryer", "Grinder"]
         }
         // https://reactjs.org/docs/forms.html <- look at this exmaple to change checkbox's behavior
@@ -302,19 +302,6 @@ export class FilterOpen extends React.Component {
                 </div>
             )
         })
-
-        // let final;
-        // if (!this.props.ingredientOpen && !this.props.equipmentOpen) {
-        //     final = (
-        //         <div id="checkBoxes" className="post_options">
-        //             {item.map((checkBox, i) => {
-        //                 return checkBox
-        //             })} 
-        //             <div id="filter-done-button" onClick={()=> this.done()}> DONE </div>
-        //         </div>
-        //     )
-        // } 
-        // console.log(final)
         return (
             <div id="checkBoxes" className="post_options">
                 {item.map((checkBox, i) => {
