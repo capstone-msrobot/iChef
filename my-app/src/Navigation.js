@@ -46,7 +46,7 @@ export default class Navigation extends React.Component {
                             <a
                                 className="nav-item nav-link"
                                 id="tabLink-explore"
-                                href="./Home"
+                                href="./Explore"
                             >
                                 Explore
                             </a>

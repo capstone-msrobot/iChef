@@ -4,12 +4,10 @@ import Footer from "./Footer"
 import "./Results.css"
 import firebase from 'firebase/app';
 import 'firebase/database';
-
-export default class Results extends React.Component {
+export default class Explore extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: this.props.location.state.search,
             result:[],
             filter: [],
             oldResult: []
@@ -66,16 +64,19 @@ export default class Results extends React.Component {
     }
 
     componentDidMount() {
-        let name = (this.props.location.state.search).toLowerCase();
         let arr = [];
-        var food = firebase.database().ref("recipes/"+name+"/");
-        food.on("child_added", (data, prevChildKey) => {
-            arr.push(data.val());
+        var query = firebase.database().ref("recipes").orderByKey();
+        query.once("value")
+        .then(function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                arr.push(childSnapshot.val());
+            });
+        }).then(()=>{
             this.setState({
                 result: arr,
                 oldResult: arr
             })
-        })
+        });
     }
 
     render() {
@@ -111,7 +112,9 @@ export default class Results extends React.Component {
         //     "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
         //     "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] }]
 
-        let array = recipes.map((d, i) => {
+        let array = recipes.map((recipes) => {
+            console.log(recipes)
+            return (recipes.map((d, i) => {
             return  (
                 <div id="recipe" className="col-md-3" key={i}>
                     <div className="card results-card" onClick={()=> this.ShowRecipe(d)}>
@@ -131,10 +134,10 @@ export default class Results extends React.Component {
                     </div>
                 </div>
             )
-        })
+        }))
+    })
 
-        return (
-            
+        return (      
             <div>
                 <Navigation />
                 <div id="search-filter">

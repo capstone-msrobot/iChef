@@ -6,6 +6,7 @@ import Home from './Home'
 import AboutUs from './AboutUs'
 import Results from './Results'
 import ShowRecipe from './ShowRecipe'
+import Explore from "./Explore"
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
           <Route path={ROUTES.AboutUs} component={AboutUs} />
           <Route path={ROUTES.Results} component={Results} />
           <Route path={ROUTES.ShowRecipe} component={ShowRecipe} />
+          <Route path={ROUTES.Explore} component={Explore} />
           <Redirect to={ROUTES.Home} />
         </Switch>
       </BrowserRouter>

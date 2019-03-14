@@ -30,14 +30,23 @@ export default class Home extends React.Component {
             <div>
                 <div id="image" className="img-fluid" alt ="home cover"> 
                     <Navigation />
-                    <div id="searchBox">
+                     {/* <div id="searchBox">
+                     <form onSubmit={()=>this.state.search.length > 0 ? this.ShowResults(): this.props.history.push({pathname: "Explore"})}>
                         <input id="search" type="text" placeholder="Search for a Recipe..." onInput={evt=>this.setState({search: evt.target.value})}/>
-                        <div id="buttonSearch" onClick={()=>this.ShowResults()}> 
-                            <a className="searchIcon" href="./Results"><i className="fas fa-search"></i></a>
+                        <div id="buttonSearch"> 
+                            <a className="searchIcon"><i className="fas fa-search"></i></a>
                         </div>
-                        {/* If clicked without a word in search --> should link back to Explore page with ALL of the recipes showing */}
+                    </form>
+                    </div>  */}
+
+                    <div id="searchBox">
+                    <form className="d-flex" onSubmit={()=>this.state.search.length > 0 ? this.ShowResults(): this.props.history.push({pathname: "Explore"})}>
+                        <input id="search" type="text" placeholder="Search for a Recipe..." onInput={evt=>this.setState({search:evt.target.value})}/>
+                        <button id="buttonSearch" className="searchIcon"><i className="fas fa-search"></i></button>
+                    </form>
 
                     </div>
+
                     <div id="featureBoxes" className="row">
                         <div id="time-feature" className="col-md-3">
                             <div className="card home-card">
