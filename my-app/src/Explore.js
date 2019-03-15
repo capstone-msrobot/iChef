@@ -31,14 +31,16 @@ export default class Explore extends React.Component {
         this.setState({filter: value, result: this.state.oldResult})
 
         for (let i = 0; i < this.state.result.length; i++) {
-            for (let j = 0; j < this.state.result[i].equipmentList.length; j++) {
-                for (let k = 0; k < value.length; k++) {
-                    if (!this.state.result[i].equipmentList.includes(value[k].toLowerCase())) {
-                        this.setState({
-                            result: this.state.result.slice(i,i)
-                        })
-                        console.log(value[k])
-                        break;
+            for (let m = 0; m < this.state.result[i]; m++) {
+                for (let j = 0; j < this.state.result[i].recipe[m].equipment.length; j++) {
+                    for (let k = 0; k < value.length; k++) {
+                        if (!this.state.result[i].recipe[m].equipmentList.includes(value[k].toLowerCase())) {
+                            this.setState({
+                                result: this.state.result.recipe.slice(m,m)
+                            })
+                            console.log(value[k])
+                            break;
+                        }
                     }
                 }
             }
@@ -49,14 +51,16 @@ export default class Explore extends React.Component {
         this.setState({filter: value, result: this.state.oldResult})
 
         for (let i = 0; i < this.state.result.length; i++) {
-            for (let j = 0; j < this.state.result[i].ingredientsList.length; j++) {
-                for (let k = 0; k < value.length; k++) {
-                    if (!this.state.result[i].ingredientsList.includes(value[k].toLowerCase())) {
-                        this.setState({
-                            result: this.state.result.slice(i,i)
-                        })
-                        console.log(value[k])
-                        break;
+            for (let m = 0; m < this.state.result[i]; m++) {
+                for (let j = 0; j < this.state.result[i].recipe[m].ingredients.length; j++) {
+                    for (let k = 0; k < value.length; k++) {
+                        if (!this.state.result[i].recipe[m].ingredientsList.includes(value[k].toLowerCase())) {
+                            this.setState({
+                                result: this.state.result.recipe.slice(m,m)
+                            })
+                            console.log(value[k])
+                            break;
+                        }
                     }
                 }
             }

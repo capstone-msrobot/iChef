@@ -30,39 +30,108 @@ export default class Results extends React.Component {
     }
 
     handleEquipmentFilter = (value) => {
-        this.setState({filter: value, result: this.state.oldResult})
+        // this.setState({filter: value, result: this.state.oldResult})
+        let val = this.state.result;
+        let erase = []
+        val.map((recipe, i) => {
+            for (let j = 0; j < value.length; j++) {
+                if (!recipe.equipmentList.includes(value[j].toLowerCase())) {
+                    // this.state.result.splice(i, 1)
+                    // let arr = this.state.result;
+                    // this.setState({
+                    //     result: arr
+                    // })
+                    erase.push(i)
+                    // console.log(erase)
 
-        for (let i = 0; i < this.state.result.length; i++) {
-            for (let j = 0; j < this.state.result[i].equipmentList.length; j++) {
-                for (let k = 0; k < value.length; k++) {
-                    if (!this.state.result[i].equipmentList.includes(value[k].toLowerCase())) {
-                        this.setState({
-                            result: this.state.result.slice(i,i)
-                        })
-                        console.log(value[k])
-                        break;
-                    }
                 }
             }
+        })
+        for (let i = erase.length - 1; i >= 0; i--) {
+            console.log(erase[i])
+            val.splice(erase[i], 1);
+            // console.log(val)
+            // console.log(erase)
         }
+        this.setState({
+            result: val
+        })
+
+        // let val = this.state.result;
+        // console.log(value)
+        // val.map((recipe, i) => {
+        //     console.log(this.state.result)
+        //     for (let j = 0; j < value.length; j++) {
+        //         if (!recipe.equipmentList.includes(value[j].toLowerCase())) {
+        //             this.state.result.splice(i, 1)
+        //             let arr = this.state.result;
+        //             this.setState({
+        //                 result: arr
+        //             })
+        //             console.log("I am here")
+
+        //         }
+        //     }
+        // })
+        // for (let i = 0; i < this.state.result.length; i++) {
+        //     for (let j = 0; j < this.state.result[i].equipmentList.length; j++) {
+        //         for (let k = 0; k < value.length; k++) {
+        //             console.log(this.state.result[i])
+        //             console.log(this.state.result.length)
+        //             if (!this.state.result[i].equipmentList.includes(value[k].toLowerCase())) {
+        //                 console.log(this.state.result[i])
+        //                 // console.log(delete this.state.result[i])
+        //                 break;
+        //                 // this.setState({
+        //                 //     result: this.state.result.splice(i,1)
+        //                 // })
+        //                 // break;
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     handleIngredientsFilter = (value) => {
-        this.setState({filter: value, result: this.state.oldResult})
+        // this.setState({filter: value, result: this.state.oldResult})
+        let val = this.state.result;
+        let erase = []
+        val.map((recipe, i) => {
+            for (let j = 0; j < value.length; j++) {
+                if (!recipe.ingredientsList.includes(value[j].toLowerCase())) {
+                    // this.state.result.splice(i, 1)
+                    // let arr = this.state.result;
+                    // this.setState({
+                    //     result: arr
+                    // })
+                    erase.push(i)
+                    // console.log(erase)
 
-        for (let i = 0; i < this.state.result.length; i++) {
-            for (let j = 0; j < this.state.result[i].ingredientsList.length; j++) {
-                for (let k = 0; k < value.length; k++) {
-                    if (!this.state.result[i].ingredientsList.includes(value[k].toLowerCase())) {
-                        this.setState({
-                            result: this.state.result.slice(i,i)
-                        })
-                        console.log(value[k])
-                        break;
-                    }
                 }
             }
+        })
+        for (let i = erase.length - 1; i >= 0; i--) {
+            console.log(erase[i])
+            val.splice(erase[i], 1);
+            // console.log(val)
+            // console.log(erase)
         }
+        this.setState({
+            result: val
+        })
+        // for (let i = 0; i < this.state.result.length; i++) {
+        //     for (let j = 0; j < this.state.result[i].ingredientsList.length; j++) {
+        //         for (let k = 0; k < value.length; k++) {
+        //             if (!this.state.result[i].ingredientsList.includes(value[k].toLowerCase())) {
+        //                 this.setState({
+        //                     result: this.state.result.slice(i,i)
+        //                 })
+        //                 console.log(value[k])
+        //                 break;
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     componentDidMount() {
@@ -79,37 +148,9 @@ export default class Results extends React.Component {
     }
 
     render() {
-        {console.log(this.state.filter)}
+        // {console.log(this.state.result)}
         /* import each recipe, name, image src, equipment, and ingredients from firebase - parse through equipment and ingredients, etc. to save as separate item into an array*/
         let recipes = this.state.result;
-        // let recipes = [{ imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
-        //     time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
-        //     steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
-        //     "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
-        //     "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
-        //     "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
-        //     "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] },
-        //     { imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
-        //     time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
-        //     steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
-        //     "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
-        //     "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
-        //     "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
-        //     "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] },
-        //     { imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
-        //     time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
-        //     steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
-        //     "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
-        //     "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
-        //     "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
-        //     "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] }, 
-        //     { imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
-        //     time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
-        //     steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
-        //     "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
-        //     "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
-        //     "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
-        //     "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] }]
 
         let array = recipes.map((d, i) => {
             return  (
@@ -286,10 +327,10 @@ export class FilterOpen extends React.Component {
     render() {
         // GET FROM JSON LIST WE CREATE!!!! or should we create it and add by looping through all the recipe equipments and adding it into an array??
         let list = []
-        if (this.props.ingredientOpen) {
-            list = ["Chicken", "Pasta", "Cilantro", "Lemon", "Garlic"]
-        } else if (this.props.equipmentOpen) {
-            list = ["Pan", "Pot", "Blender", "Fryer", "Grinder"]
+        if (this.props.ingredientClick) {
+            list = ["Chicken", "Pasta", "Cilantro", "Lemon", "Garlic", "Pepper", "Tomato Paste", "Nuts", "Flour", "Sugar", "Eggs", "Pepper"]
+        } else if (this.props.equipmentClick) {
+            list = ["Pan", "Pot", "Blender", "Fryer", "Grinder", "Cutting Board", "Ladle", "Spatula", "Kitchen shears", "Can opener", "Corkscrew", "Thermometer"]
         }
         // https://reactjs.org/docs/forms.html <- look at this exmaple to change checkbox's behavior
         let item = list.map((d, i) => {
