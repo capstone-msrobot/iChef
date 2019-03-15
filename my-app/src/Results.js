@@ -325,9 +325,9 @@ export class FilterOpen extends React.Component {
         // GET FROM JSON LIST WE CREATE!!!! or should we create it and add by looping through all the recipe equipments and adding it into an array??
         let list = []
         if (this.props.ingredientClick) {
-            list = ["Chicken", "Pasta", "Cilantro", "Lemon", "Garlic"]
+            list = ["Chicken", "Pasta", "Cilantro", "Lemon", "Garlic", "Pepper", "Tomato Paste", "Nuts", "Flour", "Sugar", "Eggs", "Pepper"]
         } else if (this.props.equipmentClick) {
-            list = ["Pan", "Pot", "Blender", "Fryer", "Grinder"]
+            list = ["Pan", "Pot", "Blender", "Fryer", "Grinder", "Cutting Board", "Ladle", "Spatula", "Kitchen shears", "Can opener", "Corkscrew", "Thermometer"]
         }
         // https://reactjs.org/docs/forms.html <- look at this exmaple to change checkbox's behavior
         let item = list.map((d, i) => {

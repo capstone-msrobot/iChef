@@ -158,11 +158,12 @@
 }
 
 #filter-done-button {
-    background-color: #0F6B0D;
+    background-color: #5EB003;
     color: white;
     margin-top: 5%;
     padding: 1%;
     width: 30%;
     float: right;
     margin-right: 5%;
+    margin-bottom:5%;
 }
