@@ -1,4 +1,4 @@
-#body, #basic-info {
+#showRecipe-content, #basic-info {
     width: 80%;
     margin-right: auto;
     margin-left: auto;
@@ -34,7 +34,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: -65rem;
+    margin-left: -80rem;
 }
 
 #show-card {

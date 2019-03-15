@@ -14,7 +14,7 @@ export default class AboutUs extends React.Component {
                     <div id="aboutUsCover-text">
                         <h1 className="display-3">QUICK TASTE</h1>
                             <p id="researchQ">
-                                How do we improve the cooking process within a college lifestyle so that students are more inclined to cook at home?
+                                How do we cut back on time to make cooking more wholesome and engaging within a college lifestyle?
                             </p>
                     </div>
                 </div>
@@ -24,7 +24,7 @@ export default class AboutUs extends React.Component {
                             <img className="img-fluid" id="aboutUs-purpose" src={aboutUsPurpose} alt="food" />
                         </div>
                         <div className="col-sm-8" id="intro">
-                         <p>The purpose of this electronic cookbook is to assist college students in making delicious, healthy homemade food
+                         <p>The purpose of this electronic cookbook is to assist college students in making delicious homemade food
                             with limited budget. Since most college students are not equipped with the
                             creative food ideas, our team decided to create an informative website that could help students in
                             making quality, special-kind food. Increasing the availability and accessibility

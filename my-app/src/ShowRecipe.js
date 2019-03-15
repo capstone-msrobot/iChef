@@ -21,9 +21,9 @@ export default class ShowRecipe extends React.Component {
         return(
             <div>
                 <Navigation />
-                    <div id="body">
+                    <div>
                         <div id="basic-info">
-                        <div id="showRecipe-image" className="col">
+                            <div id="showRecipe-image" className="col">
                                 <img className="img-fluid" id="recipe-image" src={this.props.location.state.recipe.imageURL} alt="food"/>
                             </div>
                             <div id="showRecipe-info" className="col">
