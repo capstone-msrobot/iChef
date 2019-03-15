@@ -14,8 +14,7 @@ export default class AboutUs extends React.Component {
                     <div id="aboutUsCover-text">
                         <h1 className="display-3">QUICK TASTE</h1>
                             <p id="researchQ">
-                                How do we improve the cooking process within a college lifestyle so that students can explore and
-                                    experience nutritious foods in the coming years?
+                                How do we improve the cooking process within a college lifestyle so that students are more inclined to cook at home?
                             </p>
                     </div>
                 </div>
@@ -51,7 +50,7 @@ export default class AboutUs extends React.Component {
                                     <div className="card-text">
                                         <ul>
                                             <li>Coding: Go, Java, SQL, R, React, HTML/CSS/JS, Firebase, Swift</li>
-                                            <li>Design: Some experience - have worked mainly with Illustrator</li>
+                                            <li>Design: Some experience </li>
                                             <li>Experienced in full-stack development</li>
                                         </ul>
                                     </div>
@@ -64,7 +63,7 @@ export default class AboutUs extends React.Component {
                                     <h6 className="card-subtitle mb-2 text-muted">Developer</h6>
                                     <div className="card-text">
                                         <ul>
-                                            <li>Coding: Go, Java, SQL, R, Reat, HTML/CSS/JS</li>
+                                            <li>Coding: Go, Java, SQL, R, React, Firebase, HTML/CSS/JS</li>
                                             <li>Design: UX, Prototypes, Usability Research, and Interviews</li>
                                             <li>Experienced in full-stack development and design</li>
                                         </ul>
@@ -78,7 +77,7 @@ export default class AboutUs extends React.Component {
                                     <h6 className="card-subtitle mb-2 text-muted">Developer</h6>
                                     <div className="card-text">
                                         <ul>
-                                            <li>Coding: Go, Java, SQL, R, React, HTML/CSS/JS, Swift /Full Stack Experience/ </li>
+                                            <li>Coding: Go, Java, SQL, R, React, HTML/CSS/JS, Swift </li>
                                             <li>Research: Inductive Coding Analysis</li>
                                             <li>Experienced in full-stack development</li>
                                         </ul>

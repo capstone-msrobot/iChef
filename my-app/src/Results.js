@@ -211,7 +211,7 @@ export default class Results extends React.Component {
                         {array.map((recipe, i) => {
                             return recipe
                         })} 
-                    </div> : <div>No Result Found</div>}
+                    </div> : <div>No Results Found</div>}
                     {/* <div className="row">
                         {array.map((recipe, i) => {
                             return recipe
@@ -328,9 +328,9 @@ export class FilterOpen extends React.Component {
         // GET FROM JSON LIST WE CREATE!!!! or should we create it and add by looping through all the recipe equipments and adding it into an array??
         let list = []
         if (this.props.ingredientClick) {
-            list = ["Chicken", "Pasta", "Cilantro", "Lemon", "Garlic", "Pepper", "Tomato Paste", "Nuts", "Flour", "Sugar", "Eggs", "Pepper"]
+            list = ["Chicken", "Beef", "Pork", "Cilantro", "Basil", "Lemon", "Garlic", "Flour", "Butter", "Sugar", "Eggs", "Salt", "Pepper", "Beans"]
         } else if (this.props.equipmentClick) {
-            list = ["Pan", "Pot", "Blender", "Fryer", "Grinder", "Cutting Board", "Ladle", "Spatula", "Kitchen shears", "Can opener", "Corkscrew", "Thermometer"]
+            list = ["Pan", "Pot", "Blender", "Fryer", "Grinder", "Ladle", "Spatula", "Kitchen Shears", "Can Opener", "Corkscrew", "Thermometer"]
         }
         // https://reactjs.org/docs/forms.html <- look at this exmaple to change checkbox's behavior
         let item = list.map((d, i) => {

@@ -8,10 +8,14 @@ footer {
 }
 
 a {
-    color: gray;
+    color: #696969;
 }
 
 a:hover {
-    color: gray;
+    color: #696969;
     text-decoration: none;
+}
+
+#info-logo {
+    padding: 1%;
 }
