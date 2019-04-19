@@ -20,19 +20,19 @@ self.__precacheManifest = [
     "url": "/iChef/static/js/runtime~main.f969be90.js"
   },
   {
-    "revision": "282ab3c2dc47ca53fb19",
-    "url": "/iChef/static/js/main.282ab3c2.chunk.js"
+    "revision": "1cad159e072efb550eba",
+    "url": "/iChef/static/js/main.1cad159e.chunk.js"
   },
   {
     "revision": "165c10a5fab6ab389472",
     "url": "/iChef/static/js/2.165c10a5.chunk.js"
   },
   {
-    "revision": "282ab3c2dc47ca53fb19",
+    "revision": "1cad159e072efb550eba",
     "url": "/iChef/static/css/main.284ac1f0.chunk.css"
   },
   {
-    "revision": "0d0203b3bc4353575d0812cf2b1cd233",
+    "revision": "7d89d33cd3c077f624d882dc29caa434",
     "url": "/iChef/index.html"
   }
 ];

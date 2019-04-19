@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/iChef/precache-manifest.f070a116beacd9dd9e75ba8cb9cd60de.js"
+  "/iChef/precache-manifest.8239df3e786303f6115268374b9ac39b.js"
 );
 
 workbox.clientsClaim();
