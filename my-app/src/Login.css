@@ -1,0 +1,25 @@
+.login-image {
+    max-width:100%;
+   height:auto;
+   max-height:100%;
+   float:right;
+}
+
+#login-form {
+    margin-left: 10%;
+    margin-right: 10%;
+    /* margin: 0; */
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 40%;
+}
+
+#image-pancakes-login {
+    width: 100vw;
+   height: 90vh;
+}
+/* #body-login {
+    margin-bottom: 2%;
+}  */

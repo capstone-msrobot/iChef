@@ -3,6 +3,13 @@ import './Navigation.css';
 import logo from "./img/logo.png";
 
 export default class Navigation extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+          loggedIn: this.props.loggedIn
+        };  
+    }
+
     render() {
         return (
             <div id="navigationBar" className="navigBar">
@@ -43,6 +50,9 @@ export default class Navigation extends React.Component {
 
 
                             {/* Explore should show ALL of the recipes? */}
+                            {/* https://stackoverflow.com/questions/54896637/how-to-change-navbar-when-user-signs-in-and-signs-out */}
+                            {/* https://stackoverflow.com/questions/46993357/logout-update-navbar-react-js */}
+                            {/* https://stackoverflow.com/questions/40055439/check-if-logged-in-react-router-app-es6 */}
                             <a
                                 className="nav-item nav-link"
                                 id="tabLink-explore"
@@ -51,13 +61,13 @@ export default class Navigation extends React.Component {
                                 Explore
                             </a>
 
-                            {/* Add a recipe WITHOUT making an account?  */}
+                            {/* Change this to be Upload a Recipe page IF THEY ARE LOGGED IN  */}
                             <a
                                 className="nav-item nav-link"
                                 id="tabLink-signup"
-                                href="./Homee"
+                                href="./Login"
                             >
-                                Upload a Recipe
+                                Login
                             </a>
                         </div>
                     </div>
