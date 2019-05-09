@@ -1,14 +1,38 @@
 import React from 'react';
 import './Navigation.css';
 import logo from "./img/logo.png";
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 export default class Navigation extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            user: this.props.user,
           loggedIn: this.props.loggedIn
         };  
     }
+
+    componentWillUnmount() {
+        this.stopWatchingAuth();
+    }
+
+    componentDidMount() {
+        // Authentication
+        this.stopWatchingAuth = firebase.auth().onAuthStateChanged(firebaseUser => {
+            if (firebaseUser) {
+                this.setState({
+                    user: firebaseUser,
+                    errorMessage: '',
+                    loggedIn: true
+                });
+            }
+            else {
+                this.setState({ user: null, loggedIn:false}); //null out the saved state
+            }
+        });
+    }
+        
 
     render() {
         return (
@@ -62,13 +86,24 @@ export default class Navigation extends React.Component {
                             </a>
 
                             {/* Change this to be Upload a Recipe page IF THEY ARE LOGGED IN  */}
-                            <a
-                                className="nav-item nav-link"
-                                id="tabLink-signup"
-                                href="./Login"
-                            >
-                                Login
-                            </a>
+                            {(!this.state.user && !this.state.loggedIn) && 
+                                <a
+                                    className="nav-item nav-link"
+                                    id="tabLink-signup"
+                                    href="./Login"
+                                >
+                                    Login
+                                </a>
+                            }
+                            {(this.state.user && this.state.loggedIn) && 
+                                <a
+                                    className="nav-item nav-link"
+                                    id="tabLink-signup"
+                                    href="./Profile"
+                                >
+                                    Profile
+                                </a>
+                            }
                         </div>
                     </div>
                 </nav>

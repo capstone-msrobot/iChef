@@ -25,6 +25,7 @@ export default class Home extends React.Component {
         })
     }
     render() {
+        console.log("hello");
         return (
             <div>
                 <div id="image" className="img-fluid" alt ="home cover"> 

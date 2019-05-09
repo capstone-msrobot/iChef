@@ -7,6 +7,7 @@ import AboutUs from './AboutUs'
 import Login from './Login'
 import Results from './Results'
 import ShowRecipe from './ShowRecipe'
+import firebase from 'firebase';
 import Explore from "./Explore"
 
 class App extends Component {
@@ -22,6 +23,22 @@ class App extends Component {
           this.setState({loggedIn: true}); 
       } 
   }
+
+  componentDidMount() {
+    // Authentication
+    this.stopWatchingAuth = firebase.auth().onAuthStateChanged(firebaseUser => {
+        if (firebaseUser) {
+            this.setState({
+                user: firebaseUser,
+                errorMessage: '',
+                loggedIn: true
+            });
+        }
+        else {
+            this.setState({ user: null, loggedIn:false}); //null out the saved state
+        }
+    });
+}
 
   logOut() {
     this.setState({loggedIn: false}); 
