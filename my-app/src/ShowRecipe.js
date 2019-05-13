@@ -2,12 +2,14 @@ import React from "react";
 import Navigation from "./Navigation"
 import Footer from "./Footer"
 import "./ShowRecipe.css"
-
+import firebase from 'firebase/app';
+import "firebase/storage"
 export default class ShowRecipe extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            recipe: []
+            recipe: [],
+            recipeURL: ""
         }
     }
     componentDidMount() {
@@ -15,6 +17,15 @@ export default class ShowRecipe extends React.Component {
         arr.push(this.props.location.state.recipe)
         this.setState({
             recipe: arr
+        })
+        var storageRef = firebase.storage();
+        var reference = storageRef.ref('Screen Shot 2019-05-03 at 4.14.08 PM.png')
+    
+        reference.getDownloadURL().then((url) => {
+            this.setState({
+                recipeURL: url
+            });
+            console.log(url)
         })
     }
     render() {
