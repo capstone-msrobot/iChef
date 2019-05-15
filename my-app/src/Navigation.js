@@ -1,8 +1,39 @@
 import React from 'react';
 import './Navigation.css';
 import logo from "./img/logo.png";
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 export default class Navigation extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            user: this.props.user,
+          loggedIn: this.props.loggedIn
+        };  
+    }
+
+    componentWillUnmount() {
+        this.stopWatchingAuth();
+    }
+
+    componentDidMount() {
+        // Authentication
+        this.stopWatchingAuth = firebase.auth().onAuthStateChanged(firebaseUser => {
+            if (firebaseUser) {
+                this.setState({
+                    user: firebaseUser,
+                    errorMessage: '',
+                    loggedIn: true
+                });
+            }
+            else {
+                this.setState({ user: null, loggedIn:false}); //null out the saved state
+            }
+        });
+    }
+        
+
     render() {
         return (
             <div id="navigationBar" className="navigBar">
@@ -43,6 +74,9 @@ export default class Navigation extends React.Component {
 
 
                             {/* Explore should show ALL of the recipes? */}
+                            {/* https://stackoverflow.com/questions/54896637/how-to-change-navbar-when-user-signs-in-and-signs-out */}
+                            {/* https://stackoverflow.com/questions/46993357/logout-update-navbar-react-js */}
+                            {/* https://stackoverflow.com/questions/40055439/check-if-logged-in-react-router-app-es6 */}
                             <a
                                 className="nav-item nav-link"
                                 id="tabLink-explore"
@@ -51,14 +85,25 @@ export default class Navigation extends React.Component {
                                 Explore
                             </a>
 
-                            {/* Add a recipe WITHOUT making an account?  */}
-                            <a
-                                className="nav-item nav-link"
-                                id="tabLink-signup"
-                                href="./Homee"
-                            >
-                                Upload a Recipe
-                            </a>
+                            {/* Change this to be Upload a Recipe page IF THEY ARE LOGGED IN  */}
+                            {(!this.state.user && !this.state.loggedIn) && 
+                                <a
+                                    className="nav-item nav-link"
+                                    id="tabLink-signup"
+                                    href="./Login"
+                                >
+                                    Login
+                                </a>
+                            }
+                            {(this.state.user && this.state.loggedIn) && 
+                                <a
+                                    className="nav-item nav-link"
+                                    id="tabLink-signup"
+                                    href="./Profile"
+                                >
+                                    Profile
+                                </a>
+                            }
                         </div>
                     </div>
                 </nav>
