@@ -9,7 +9,7 @@ export default class Navigation extends React.Component {
         super(props);
         this.state = {
             user: this.props.user,
-          loggedIn: this.props.loggedIn
+            loggedIn: this.props.loggedIn
         };  
     }
 
@@ -32,7 +32,19 @@ export default class Navigation extends React.Component {
             }
         });
     }
-        
+    
+    handleSignOut() {
+        this.setState({ errorMessage: null }); //clear old error
+
+        /* Sign out the user, and update the state */
+        firebase.auth().signOut()
+            .catch((err) => {
+                console.log(err)
+                this.setState({ 
+                    errorMessage: err.message 
+                });
+            });
+    }
 
     render() {
         return (
@@ -81,8 +93,8 @@ export default class Navigation extends React.Component {
                                 className="nav-item nav-link"
                                 id="tabLink-explore"
                                 href="./Explore"
-                            >
-                                Explore
+                                >
+                                    Explore
                             </a>
 
                             {/* Change this to be Upload a Recipe page IF THEY ARE LOGGED IN  */}
@@ -104,6 +116,12 @@ export default class Navigation extends React.Component {
                                     Profile
                                 </a>
                             }
+                            <a 
+                                className="nav-item nav-link" 
+                                href="#" 
+                                onClick={() => this.handleSignOut()}>
+                                Log out
+                            </a>
                         </div>
                     </div>
                 </nav>
