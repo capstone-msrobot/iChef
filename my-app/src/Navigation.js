@@ -41,7 +41,9 @@ export default class Navigation extends React.Component {
             .catch((err) => {
                 console.log(err)
                 this.setState({ 
-                    errorMessage: err.message 
+                    errorMessage: err.message,
+                    user: null,
+                    loggedIn: false
                 });
             });
     }
@@ -116,12 +118,14 @@ export default class Navigation extends React.Component {
                                     Profile
                                 </a>
                             }
-                            <a 
-                                className="nav-item nav-link" 
-                                href="#" 
-                                onClick={() => this.handleSignOut()}>
-                                Log out
-                            </a>
+                            {(this.state.user && this.state.loggedIn) && 
+                                <a 
+                                    className="nav-item nav-link" 
+                                    href="#" 
+                                    onClick={() => this.handleSignOut()}>
+                                    Log out
+                                </a>
+                            }
                         </div>
                     </div>
                 </nav>
