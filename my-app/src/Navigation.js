@@ -121,6 +121,7 @@ export default class Navigation extends React.Component {
                             {(this.state.user && this.state.loggedIn) && 
                                 <a 
                                     className="nav-item nav-link" 
+                                    id="tabLink-LogOut"
                                     href="#" 
                                     onClick={() => this.handleSignOut()}>
                                     Log out

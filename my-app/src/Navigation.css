@@ -11,12 +11,12 @@
     z-index:1;
 } */
 
-#tabLink-home, #tabLink-explore, #tabLink-about, #tabLink-signup {
+#tabLink-home, #tabLink-explore, #tabLink-about, #tabLink-signup, #tabLink-LogOut {
     font-size: 14pt;
     margin-top: 0.4rem;
 }
 
-#tabLink-home, #tabLink-about, #tabLink-explore {
+#tabLink-home, #tabLink-about, #tabLink-explore, #tabLink-signup, #tabLink-LogOut {
     padding-right: 8rem;
     padding-left: 3rem;
     margin-right: auto;
