@@ -1,0 +1,48 @@
+.signup-image {
+    max-width:100%;
+    height:auto;
+    max-height:100%;
+    float: left;
+}
+
+#signup-form {
+    margin-left: 48%;
+    margin-right: 90%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-41%);
+    transform: translateY(-41%);
+    width: 40%;
+}
+
+#image-pancakes-signup {
+    width: 100vw;
+    height: 90vh;
+}
+
+#save {
+    background-color: #5EB003;
+    margin-top: 5%;
+    padding: 1%;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    align-content: center;
+    border: 1px solid lightgrey;
+}
+
+#save > a {
+    color: white;
+}
+
+/* #cancel {
+    margin-top: 3%;
+    padding: 1%;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    align-content: center;
+    border: 1px solid lightgrey;
+} */

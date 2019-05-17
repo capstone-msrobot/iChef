@@ -6,5 +6,7 @@ export const ROUTES = {
     Results: "/Results",
     ShowRecipe: "/ShowRecipe",
     Explore: "/Explore",
-    Login: "/Login"
+    Login: "/Login",
+    SignUp: "/SignUp",
+    Profile: "/Profile"
 }

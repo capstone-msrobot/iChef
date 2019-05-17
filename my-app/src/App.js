@@ -9,6 +9,8 @@ import Results from './Results'
 import ShowRecipe from './ShowRecipe'
 import firebase from 'firebase';
 import Explore from "./Explore"
+import SignUp from "./SignUp"
+import Profile from "./Profile"
 
 class App extends Component {
   constructor(props){
@@ -56,6 +58,8 @@ class App extends Component {
           <Route path={ROUTES.ShowRecipe} component={ShowRecipe} />
           <Route path={ROUTES.Explore} component={Explore} />
           <Route exact path={ROUTES.Login} component={Login} />
+          <Route exact path={ROUTES.SignUp} component={SignUp} />
+          <Route exact path={ROUTES.Profile} component={Profile} />
           <Redirect to={ROUTES.Home} />
         </Switch>
       </BrowserRouter>

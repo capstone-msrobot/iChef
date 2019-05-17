@@ -4,6 +4,7 @@ import Footer from "./Footer"
 import "./Results.css"
 import firebase from 'firebase/app';
 import 'firebase/database';
+
 export default class Explore extends React.Component {
     constructor(props) {
         super(props);
@@ -157,7 +158,7 @@ export default class Explore extends React.Component {
                         <Ingredients array={recipes} />
                         
                         <div id="reset" onClick={()=> this.setState({clicked: true})}> 
-                            <a href="/Results">RESET</a>
+                            <a href="/Results">Reset</a>
                         </div>
                     </div>:<div></div>} */}
                     {/* Have to Fix */}
@@ -166,7 +167,7 @@ export default class Explore extends React.Component {
                         <Ingredients array={recipes} filter={this.handleIngredientsFilter}/>
                         
                         <div id="reset" onClick={()=> this.setState({clicked: true})}> 
-                            <a href="/Results">RESET</a>
+                            <a href="/Results">Reset</a>
                         </div>
                     </div>
                 </div>
@@ -311,7 +312,7 @@ export class FilterOpen extends React.Component {
                 {item.map((checkBox, i) => {
                     return checkBox
                 })} 
-                <div id="filter-done-button" onClick={()=> this.done()}> DONE </div>
+                <div id="filter-done-button" onClick={()=> this.done()}> Done </div>
             </div>
         );
     }
