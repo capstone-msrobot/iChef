@@ -22,7 +22,7 @@ export default class Profile extends React.Component {
                             <div class="col-md-3">
                                 <div class="profile-sidebar">
                                     <div class="profile-userpic">
-                                        <img src={user} alt="users profile picture" />
+                                        <img src={user} alt="user" />
                                     </div>
                                     <div class="profile-usertitle">
                                         <div class="profile-usertitle-name">
@@ -72,5 +72,6 @@ export default class Profile extends React.Component {
                     </div>
                 <Footer />
             </div>
-        )}
+        )
+    }
 }

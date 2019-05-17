@@ -26,7 +26,7 @@ export default class SignUp extends React.Component {
             <div>
                 <Navigation />
                 <div id="image-pancakes-signup">
-                    <img className="img-fluid signup-image" src={signup} alt="pancake image on signup" />
+                    <img className="img-fluid signup-image" src={signup} alt="pancakes" />
                 </div>
                     <div id="body-signup">
                         <form id="signup-form">

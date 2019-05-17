@@ -7,7 +7,7 @@ import './Login.css';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { ROUTES } from './constants';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 export default class Login extends React.Component {
@@ -73,7 +73,7 @@ export default class Login extends React.Component {
             <div>
                 <Navigation loggedIn={this.state.loggedIn} user={this.state.user} />
                 <div id="image-pancakes-login">
-                    <img className="img-fluid login-image" src={login} alt="pancake image on login" />
+                    <img className="img-fluid login-image" src={login} alt="pancakes" />
                 </div>
                     <div id="body-login">
                         <form id="login-form">
