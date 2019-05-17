@@ -18,8 +18,8 @@ export default class Profile extends React.Component {
             <div>
                 <Navigation />
                     <div class="container">
-                        <div class="row profile">
-                            <div class="col-md-3">
+                        {/* <div class="row profile"> */}
+                            <div class="col-md-3" id="column">
                                 <div class="profile-sidebar">
                                     <div class="profile-userpic">
                                         <img src={user} alt="user" />
@@ -57,21 +57,28 @@ export default class Profile extends React.Component {
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            {/* </div> */}
                         </div>
-                    </div>
-
-                    <div id="profile-info">
-                        <div id="show-content">
-                            <div id="page-label">
-                                Recipes??
-                                <img src={recipesIconSelected} alt="recipes" />
-                            </div>
-                        </div>
-                        
+                        <Recipes />
                     </div>
                 <Footer />
             </div>
+        )
+    }
+}
+
+export class Recipes extends React.Component {
+    render() {
+        return (
+            <div id="profile-info">
+            <div id="show-content">
+                <div id="page-label">
+                    Recipes??
+                    <img src={recipesIconSelected} alt="recipes" />
+                </div>
+            </div>
+            
+        </div>
         )
     }
 }

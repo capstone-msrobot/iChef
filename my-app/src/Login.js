@@ -7,7 +7,7 @@ import './Login.css';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { ROUTES } from './constants';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 
 export default class Login extends React.Component {
@@ -100,8 +100,16 @@ export default class Login extends React.Component {
                                     value={this.state.password} 
                                     onInput={(event) => { this.handleChange(event) }}/>
                             </div>
+                            <div id="signIn" onClick={() => this.handleSignIn()}>
+                            {/* <div className="save" onClick={() => this.updatesignup()}> */}
+                                <Link to={ROUTES.Profile}>Sign In</Link>
+                            </div>
+                            <div id="signUp">
+                            {/* <div className="save" onClick={() => this.updatesignup()}> */}
+                                <Link to={ROUTES.SignUp}>Sign Up</Link>
+                            </div>
                             {/* <button type="button" class="btn btn-primary"><Link to={ROUTES.SignUp}></Link>Sign Up</button> */}
-                            <button type="button" class="btn btn-info" onClick={() => this.handleSignIn()}>Login</button>
+                            {/* <button type="button" class="btn btn-info" onClick={() => this.handleSignIn()}>Login</button> */}
                         </form>
                     </div>
 

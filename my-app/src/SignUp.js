@@ -78,7 +78,7 @@ export default class SignUp extends React.Component {
                             </div>
                             <div id="save">
                             {/* <div className="save" onClick={() => this.updatesignup()}> */}
-                                <Link to={ROUTES.Home}>Create Account</Link>
+                                <Link to={ROUTES.Profile}>Create Account</Link>
                             </div>
                             {/* <div id="cancel" onClick={() => this.cancel() }>
                                 <Link to={ROUTES.Home}>CANCEL</Link>

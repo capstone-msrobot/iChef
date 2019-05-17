@@ -20,6 +20,30 @@
     width: 100vw;
    height: 90vh;
 }
-/* #body-login {
-    margin-bottom: 2%;
-}  */
+
+#signIn {
+    background-color: #5EB003;
+    margin-top: 5%;
+    padding: 1%;
+    width: 40%;
+    text-align: center;
+    align-content: center;
+    border: 2px solid #5EB003;
+    border-radius: 8px;
+    float: left;
+}
+
+#signUp {
+    margin-top: 5%;
+    float: right;
+    padding: 1%;
+    width: 40%;
+    text-align: center;
+    align-content: center;
+    border: 2px solid #5EB003;
+    border-radius: 8px;
+}
+
+#signIn > a{
+    color: white;
+}
