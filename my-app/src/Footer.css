@@ -1,6 +1,8 @@
 footer {
     background-color: #F4C557;
     height: 10%;
+    position: relative;
+    clear: both;
 }
 
 #contactText {

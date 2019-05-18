@@ -8,5 +8,6 @@ export const ROUTES = {
     Explore: "/Explore",
     Login: "/Login",
     SignUp: "/SignUp",
-    Profile: "/Profile"
+    Profile: "/Profile",
+    Upload: "/Upload"
 }

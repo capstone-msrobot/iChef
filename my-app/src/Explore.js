@@ -129,7 +129,6 @@ export default class Explore extends React.Component {
                             </div>
 
                             {/* If clicked without a word in search --> should link back to Explore page with ALL of the recipes showing */}
-
                             <h5 className="results-card-title">{d.name}</h5>
                             {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
                             <p className="card-text" id="card-text">{d.time} Minutes</p>
@@ -308,7 +307,7 @@ export class FilterOpen extends React.Component {
             )
         })
         return (
-            <div id="checkBoxes" className="post_options">
+            <div id="checkBoxes" className="post_options col-md-4">
                 {item.map((checkBox, i) => {
                     return checkBox
                 })} 

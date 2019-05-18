@@ -9,6 +9,11 @@ Licensed under MIT
     padding: 0%;
     display: inline-block;
 }
+
+#profile-body {
+    height: 100%;
+    overflow: hidden; 
+}
   
   /* Profile sidebar */
 .profile-sidebar {
@@ -17,7 +22,10 @@ Licensed under MIT
     box-shadow: 0px 0px 15px lightgray;
     /* transition: 0.4s; */
     width: 25vw;
-    height: 100vh;
+    /* height: 100vh; */
+    display: inline-block;
+    margin-bottom: -5000px; /* any large number will do */
+    padding-bottom: 5000px;
 }
 
 .profile-userpic img {
@@ -39,24 +47,20 @@ Licensed under MIT
 
 .profile-usertitle {
     text-align: center;
-    margin-top: 20px;
     font-weight: bold;
+    font-size: 25px;
+    margin-top: 3%;
 }
 
 .profile-usermenu {
     margin-top: 30px;
     text-align: center;
+    height: 80vh;
 }
 
 .profile-usermenu ul li {
     margin: 2%;
     width: 100%;
-}
-
-.profile-usermenu ul li a {
-    color: #93a3b5;
-    font-size: 14px;
-    font-weight: 400;
 }
 
 .profile-usermenu ul li a i {
@@ -71,26 +75,44 @@ Licensed under MIT
     min-height: 460px;
 }
 
-.profile-usermenu ul li > img {
+.profile-usermenu ul li > img, .profile-usermenu ul li a > img  {
     width: 35px;
     height: auto;
     margin-right: 8%;
 }
 
-#profile-info {
-    margin: 0%;
-    padding: 0%;
-    display: inline-block;
+#show-content {
+    width: 74vw;
     float: right;
+    padding-left: 4%;
+    display: block;
+    padding-right: 5%;
 }
 
 #column {
     padding: 0;
+    margin: 0;
 }
 
-/* #show-content {
-    width: 75vw;
-    height: 100vh;
-    float: right;
-} */
 
+#page-label {
+    margin-bottom: 4%;
+}
+
+.title {
+    text-align: left;
+    display: inline;
+    border-bottom: 5px solid #5EB003;
+    padding-bottom: 0.5%;
+    font-size: 25px;
+}
+
+.title-icon {
+    width: 4%;
+    height: 6%;
+    margin-left: 3%;
+}
+
+#recipe-list {
+    margin-left: 0;
+}

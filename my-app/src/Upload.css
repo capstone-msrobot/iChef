@@ -1,0 +1,36 @@
+
+#title {
+    margin-bottom: 3%;
+    margin-top: 2%;
+    text-align: center;
+}
+
+.title-upload {
+    display: inline;
+    border-bottom: 5px solid #5EB003;
+    padding-bottom: 0.5%;
+    font-size: 25px;
+}
+#upload-content {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.col-md-5 {
+    width: 25%;
+    margin-right: auto;
+    margin-left: auto
+}
+
+#recipeName, #cookingTime, #steps, #equipmentInput, #ingredientsInput {
+    width: 40%;
+}
+
+/* 
+#cookingTime {
+    display: inline-BLOCK;
+} */
+
+#cookingTime :last-child {
+    display:inline-block;
+}
