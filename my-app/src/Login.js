@@ -79,7 +79,7 @@ export default class Login extends React.Component {
                         <form id="login-form">
                             <div className="form-group">
                                 <label>Email Address</label>
-                                <input type="emait" 
+                                <input type="email" 
                                     className="form-control" 
                                     id="email" 
                                     aria-describedby="email" 
