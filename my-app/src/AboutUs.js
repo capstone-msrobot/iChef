@@ -3,6 +3,10 @@ import Navigation from "./Navigation"
 import Footer from "./Footer"
 import "./AboutUs.css"
 import aboutUsPurpose from "./img/aboutUs-purpose.jpg";
+import neha from "./img/neha.png";
+import echo from "./img/echo.png";
+import juan from "./img/juan.png";
+import soobin from "./img/soobin.png";
 
 export default class AboutUs extends React.Component {
     render() {
@@ -40,59 +44,99 @@ export default class AboutUs extends React.Component {
                             a passion to help others, and with this product, we hope to make other students want to cook under 
                             limited ingredients, budgets, and time.</p> 
                     </div>
-                    <div>
-                        <div className="card-group">
-                            <div className="card firstCard">
-                                {/* <img className="card-img-top" src={snacks} alt="Neha" /> */}
-                                <div className="card-body">
-                                    <h5 className="card-title">Neha Yadav</h5>
-                                    <h6 className="card-subtitle mb-2 text-muted">Project Manager &amp; Developer</h6>
-                                    <div className="card-text">
-                                        <ul>
-                                            <li>Coding: Go, Java, SQL, R, React, HTML/CSS/JS, Firebase, Swift</li>
-                                            <li>Design: Some experience </li>
-                                            <li>Experienced in full-stack development</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                    <div id="container">
+                        <div class="card-container" >
+                            <img class="round" id="pic" src={neha} alt="user" />
+                            <h3 id="card-title">Neha Yadav</h3>
+                            <h6>Custom Track <br/> Focused in Software Dev.</h6>
+                            <p>PM / Developer</p>
+                            <div class="skills">
+                                <h6 id="skill-title">Skills</h6>
+                                <ul>
+                                    <li>Java</li>
+                                    <li>Back End Development</li>
+                                    <li>HTML</li>
+                                    <li>CSS</li>
+                                    <li>JavaScript</li>
+                                    <li>React</li>
+                                    <li>SQL</li>
+                                    <li>R</li>
+                                    <li>Swift</li>
+                                    <li>Firebase</li>
+                                    <li>Full Stack Development</li>
+                                    <li>Paper Prototypes</li>
+                                </ul>
                             </div>
-                            <div className="card">
-                                {/* <img className="card-img-top" src={snacks}  alt="Soobin" />    */}
-                                <div className="card-body">
-                                    <h5 className="card-title">Soobin Kwon</h5>
-                                    <h6 className="card-subtitle mb-2 text-muted">Developer</h6>
-                                    <div className="card-text">
-                                        <ul>
-                                            <li>Coding: Go, Java, SQL, R, React, Firebase, HTML/CSS/JS</li>
-                                            <li>Design: UX, Prototypes, Usability Research, and Interviews</li>
-                                            <li>Experienced in full-stack development and design</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="card-container">
+                            <img class="round" id="pic" src={soobin} alt="user" />
+                            <h3 id="card-title">Soobin Kwon</h3>
+                            <h6>Custom Track <br/> Focused in HCI</h6>
+                            <p>Developer</p>
+                            <div class="skills">
+                                <h6 id="skill-title">Skills</h6>
+                                <ul>
+                                <li>Java</li>
+                                    <li>HTML</li>
+                                    <li>CSS</li>
+                                    <li>JavaScript</li>
+                                    <li>React</li>
+                                    <li>SQL</li>
+                                    <li>R</li>
+                                    <li>Firebase</li>
+                                    <li>Full Stack Development</li>
+                                    <li>UI / UX</li>
+                                    <li>Prototypes</li>
+                                    <li>Usability Research</li>
+                                    <li>Interviews</li>
+                                </ul>
                             </div>
-                            <div className="card">
-                                {/* <img className="card-img-top" src={snacks} alt="Ju An" /> */}
-                                <div className="card-body">
-                                    <h5 className="card-title">Ju An Oh</h5>
-                                    <h6 className="card-subtitle mb-2 text-muted">Developer</h6>
-                                    <div className="card-text">
-                                        <ul>
-                                            <li>Coding: Go, Java, SQL, R, React, HTML/CSS/JS, Swift </li>
-                                            <li>Research: Inductive Coding Analysis</li>
-                                            <li>Experienced in full-stack development</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="card-container">
+                            <img class="round" id="pic" src={juan} alt="user" />
+                            <h3 id="card-title">Ju An Oh</h3>
+                            <h6>Custom Track <br/> Focused in Software Dev.</h6>
+                            <p>Developer</p>
+                            <div class="skills">
+                                <h6 id="skill-title">Skills</h6>
+                                <ul>
+                                    <li>Java</li>
+                                    <li>Back End Development</li>
+                                    <li>HTML</li>
+                                    <li>CSS</li>
+                                    <li>JavaScript</li>
+                                    <li>React</li>
+                                    <li>SQL</li>
+                                    <li>R</li>
+                                    <li>Swift</li>
+                                    <li>Firebase</li>
+                                    <li>Full Stack Development</li>
+                                    <li>Inductive Coding Analysis</li>
+                                </ul>
                             </div>
-                            <div className="card lastCard">
-                                {/* <img className="card-img-top" src={snacks} alt="Echo" /> */}
-                                <div className="card-body">
-                                    <h5 className="card-title">Echo Zhang</h5>
-                                    <h6 className="card-subtitle mb-2 text-muted">Designer</h6>
-                                    <div className="card-text"><ul>
-                                            <li>Design: User Research, Prototypes, Interviews, Usability Test, UX/UI Design)</li>
-                                        </ul></div>
-                                </div> 
+                        </div>
+                        <div class="card-container">
+                            <img class="round" id="pic" src={echo} alt="user" />
+                            <h3 id="card-title">Echo Zhang</h3>
+                            <h6>Human Centered Interaction <br/> Track</h6>
+                            <p>Designer</p>
+                            <div class="skills">
+                                <h6 id="skill-title">Skills</h6>
+                                <ul>
+                                    <li>User Research</li>
+                                    <li>Interviews</li>
+                                    <li>Prototypes</li>
+                                    <li>Usability Testing</li>
+                                    <li>UI / UX</li>
+                                    <li>Responsiveness</li>
+                                    <li>Java</li>
+                                    <li>HTML</li>
+                                    <li>CSS</li>
+                                    <li>JavaScript</li>
+                                    <li>React</li>
+                                    <li>SQL</li>
+                                    <li>R</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
