@@ -11,12 +11,55 @@ import settingsIcon from "./img/settingsIcon.png";
 import logoutIcon from "./img/logoutIcon.png";
 
 import users from "./img/pasta.jpg";
-
+import firebase from 'firebase';
 import { ROUTES } from './constants';
 import { Link } from 'react-router-dom';
 
 // https://bootsnipp.com/snippets/M48pA
 export default class Profile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: this.props.user,
+            loggedIn: this.props.loggedIn,
+            recipes: [],
+            equipment: [],
+            ingredients: [],
+            email: '',
+            password: '',
+            username: '',
+            recipeClicked: false,
+            equipClicked: false,
+            ingredClicked: false,
+            setting: false,
+        };
+    }
+
+    componentWillMount() {
+        this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({
+                    email: user.email,
+                    subEmail: user.email.substr(0, user.email.indexOf('@'))
+                })
+
+                let reference = firebase.database().ref('users/' + this.state.subEmail + '/Author');
+                reference.on('value', (snapshot) => {
+                    let settings = snapshot.val();
+
+                    if (settings != null) {
+                        this.setState({
+                            email: settings.email,
+                            password: settings.password,
+                            username: settings.username,
+                        })
+                    }
+
+                })
+            }
+        })
+    }
+
     render() {
         return (
             <div id="profile-body">
@@ -31,19 +74,22 @@ export default class Profile extends React.Component {
                         <img src={user} alt="user" />
                     </div>
                     <div className="profile-usertitle">
-                        <div className="profile-usertitle-name">
-                            Soobinsoo
-                                        </div>
+                        <div className="profile-usertitle-name">{this.state.username}</div>
 
                     </div>
                     <div className="profile-usermenu">
                         <ul className="nav">
-                            <li className="active">
-                                {/* <a href="#"> */}
-                                {/* check state and change image depending on if user is on recipes */}
-                                <img src={recipesIconSelected} alt="recipes" />
-                                Recipes
-                            </li>
+                            <a href="Recipes">
+                                <li id="li-test" className="link" onClick={() => this.state.recipeClicked = true}>
+                                    <div onClick={() => this.state.recipeClicked = true}>
+                                        <img src={recipesIconSelected} alt="recipes" />
+                                        Recipes
+
+                                    </div>
+                                </li>
+                            </a>
+
+
                             <li>
                                 {/* <a href="#"> */}
                                 {/* check state and change image depending on if user is on recipes */}
@@ -71,7 +117,11 @@ export default class Profile extends React.Component {
                 {/* </div> */}
 
 
-                <Equipment />
+                {(this.recipeClicked) &&
+                    console.log("here 2")
+                    // <Recipes />
+                }
+                {/* <Recipes /> */}
                 {/* </div> */}
                 <Footer />
             </div>
@@ -81,6 +131,8 @@ export default class Profile extends React.Component {
 
 export class Recipes extends React.Component {
     render() {
+        console.log("here");
+        // this.recipeClicked = ;
         return (
             <div id="show-content">
                 <div id="page-label">
