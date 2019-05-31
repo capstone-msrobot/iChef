@@ -4,6 +4,7 @@ import Footer from "./Footer"
 import "./Results.css"
 import firebase from 'firebase/app';
 import 'firebase/database';
+
 export default class Explore extends React.Component {
     constructor(props) {
         super(props);
@@ -113,7 +114,6 @@ export default class Explore extends React.Component {
                             </div>
 
                             {/* If clicked without a word in search --> should link back to Explore page with ALL of the recipes showing */}
-
                             <h5 className="results-card-title">{d.name}</h5>
                             {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
                             <p className="card-text" id="card-text">{d.time} Minutes</p>
@@ -164,7 +164,7 @@ export default class Explore extends React.Component {
                         <Ingredients array={recipes} />
                         
                         <div id="reset" onClick={()=> this.setState({clicked: true})}> 
-                            <a href="/Results">RESET</a>
+                            <a href="/Results">Reset</a>
                         </div>
                     </div>:<div></div>} */}
                     {/* Have to Fix */}
@@ -173,7 +173,7 @@ export default class Explore extends React.Component {
                         <Ingredients array={recipes} filter={this.handleIngredientsFilter}/>
                         
                         <div id="reset" onClick={()=> this.setState({clicked: true})}> 
-                            <a href="/Results">RESET</a>
+                            <a href="/Results">Reset</a>
                         </div>
                     </div>
                 </div>
@@ -314,11 +314,11 @@ export class FilterOpen extends React.Component {
             )
         })
         return (
-            <div id="checkBoxes" className="post_options">
+            <div id="checkBoxes" className="post_options col-md-4">
                 {item.map((checkBox, i) => {
                     return checkBox
                 })} 
-                <div id="filter-done-button" onClick={()=> this.done()}> DONE </div>
+                <div id="filter-done-button" onClick={()=> this.done()}> Done </div>
             </div>
         );
     }

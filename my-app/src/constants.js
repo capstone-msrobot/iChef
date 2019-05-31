@@ -5,5 +5,9 @@ export const ROUTES = {
     Footer: "/Footer",
     Results: "/Results",
     ShowRecipe: "/ShowRecipe",
-    Explore: "/Explore"
+    Explore: "/Explore",
+    Login: "/Login",
+    SignUp: "/SignUp",
+    Profile: "/Profile",
+    Upload: "/Upload"
 }

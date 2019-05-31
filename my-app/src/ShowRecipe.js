@@ -32,10 +32,10 @@ export default class ShowRecipe extends React.Component {
                                 <div className="card" id="show-card">
                                     <div className="card-body" id="showRecipe-card-body">
                                         <h5 className="showRecipe-card-title">{this.props.location.state.recipe.name}</h5>
-                                        <div className="row">
-                                            <p className="col-sm-4" id="card-text-1">{this.props.location.state.recipe.time} <br /> Minutes</p>
-                                            <p className="col-sm-4" id="show-card-text">{this.props.location.state.recipe.equipment.length} <br /> Equipments</p>
-                                            <p className="col-sm-4" id="show-card-text">{this.props.location.state.recipe.ingredients.length} <br /> Ingredients</p>
+                                        <div id="card-row">
+                                            <p id="card-text-1">Minutes<br /> {this.props.location.state.recipe.time}</p>
+                                            <p id="show-card-text">Equipment<br /> {this.props.location.state.recipe.equipment.length}</p>
+                                            <p id="show-card-text">Ingredients<br /> {this.props.location.state.recipe.ingredients.length}</p>
                                         </div>
                                     </div>
                                 </div>  
