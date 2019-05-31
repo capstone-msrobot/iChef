@@ -1,5 +1,6 @@
 footer {
-    background-color: #F4C557;
+    background-color: rgba(242, 247, 144, 0.51);
+    /* background-color: #F4C557; */
     height: 10%;
     position: relative;
     clear: both;

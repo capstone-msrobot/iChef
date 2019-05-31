@@ -43,7 +43,7 @@ export default class Login extends React.Component {
 
     
     pass() {
-        return <Redirect to={ROUTES.Home}/>
+        return <Redirect to={ROUTES.Profile}/>
     }
 
     handleSignIn() {
@@ -67,7 +67,7 @@ export default class Login extends React.Component {
 
     render() {
         if (this.state.loggedIn === true) {
-            return <Redirect to={ROUTES.Home} />
+            return <Redirect to={ROUTES.Profile} />
         }
         return(
             <div>
@@ -79,7 +79,7 @@ export default class Login extends React.Component {
                         <form id="login-form">
                             <div className="form-group">
                                 <label>Email Address</label>
-                                <input type="emait" 
+                                <input type="email" 
                                     className="form-control" 
                                     id="email" 
                                     aria-describedby="email" 
@@ -100,9 +100,9 @@ export default class Login extends React.Component {
                                     value={this.state.password} 
                                     onInput={(event) => { this.handleChange(event) }}/>
                             </div>
-                            <div id="signIn" onClick={() => this.handleSignIn()}>
+                            <div id="signIn" onClick={() => this.handleSignIn()}> Sign In
                             {/* <div className="save" onClick={() => this.updatesignup()}> */}
-                                <Link to={ROUTES.Profile}>Sign In</Link>
+                                {/* <Link to={ROUTES.Profile}>Sign In</Link> */}
                             </div>
                             <div id="signUp">
                             {/* <div className="save" onClick={() => this.updatesignup()}> */}

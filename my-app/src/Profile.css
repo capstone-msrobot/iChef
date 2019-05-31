@@ -4,6 +4,10 @@ A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themefores
 Licensed under MIT
 ***/
 
+#li-test {
+    display: block;
+}
+
 .container {
     margin: 0%;
     padding: 0%;

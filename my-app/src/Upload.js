@@ -3,9 +3,64 @@ import Navigation from "./Navigation"
 import Footer from "./Footer"
 import add from "./img/addIcon.png";
 import upload from "./img/uploadIcon.png";
-import "./Upload.css"
+import "./Upload.css";
+import firebase from 'firebase';
 
 export default class Upload extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: this.props.user,
+            loggedIn: this.props.loggedIn,
+            email: '',
+            subEmail: '',
+            username: '',
+            recipeName: '',
+
+        };
+    }
+
+    componentWillMount() {
+        this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({
+                    email: user.email,
+                    subEmail: user.email.substr(0, user.email.indexOf('@'))
+                })
+
+                let reference = firebase.database().ref('users/' + this.state.subEmail + '/Author');
+                reference.on('value', (snapshot) => {
+                    let settings = snapshot.val();
+
+                    if (settings != null) {
+                        this.setState({
+                            username: settings.username,
+                        })
+                    }
+
+                })
+            }
+        })
+    }
+
+    addRecipe() {
+        let subEmail = this.state.email.substr(0, this.state.email.indexOf('@'));
+        let reference = firebase.database().ref('users' + this.subEmail + '/Recipes');
+        let newData = {
+            Author: {
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password,
+                recipes: null,
+                equipment: null,
+                ingredients: null,
+            }
+        }
+        reference.child(subEmail).set(newData)
+    }
+
     handleChange(event) {
         //         console.log(event);
         let field = event.target.name; // which input
@@ -47,9 +102,9 @@ export default class Upload extends React.Component {
                                     placeholder="ex: 25"
                                     name="recipeName"
                                     value={null}
-                                    onInput={(event) => { this.handleChange(event) }} /> 
-                                    <p id="min-label">Minutes</p>
-                        </div>
+                                    onInput={(event) => { this.handleChange(event) }} />
+                                <p id="min-label">Minutes</p>
+                            </div>
                         </div>
                         <div className="col-md-5">
                             <div id="ingredients-input" className="form-group">
@@ -94,6 +149,11 @@ export default class Upload extends React.Component {
                         </div>
                     </div>
                 </div>
+                {/* <div id="save" onClick={() => {
+                    this.addRecipe();
+                }}>
+                    <Link to={ROUTES.Explore}>Upload Recipe</Link>
+                </div> */}
 
                 <Footer />
             </div>
