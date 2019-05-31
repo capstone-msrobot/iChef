@@ -10,7 +10,8 @@ export default class Explore extends React.Component {
         this.state = {
             result:[],
             filter: [],
-            oldResult: []
+            oldResult: [],
+            result2:[]
         }
     }
     
@@ -69,6 +70,7 @@ export default class Explore extends React.Component {
 
     componentDidMount() {
         let arr = [];
+        let arr2 = [];
         var query = firebase.database().ref("recipes").orderByKey();
         query.once("value")
         .then(function(snapshot) {
@@ -81,44 +83,27 @@ export default class Explore extends React.Component {
                 oldResult: arr
             })
         });
+
+        var query2 = firebase.database().ref("recipesFinal").orderByKey();
+        query2.once("value")
+        .then(function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                arr2.push(childSnapshot.val());
+            });
+        }).then(()=>{
+            this.setState({
+                result2: arr2,
+            })
+        });
     }
 
     render() {
-        {console.log(this.state.filter)}
         /* import each recipe, name, image src, equipment, and ingredients from firebase - parse through equipment and ingredients, etc. to save as separate item into an array*/
         let recipes = this.state.result;
-        // let recipes = [{ imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
-        //     time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
-        //     steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
-        //     "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
-        //     "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
-        //     "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
-        //     "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] },
-        //     { imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
-        //     time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
-        //     steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
-        //     "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
-        //     "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
-        //     "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
-        //     "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] },
-        //     { imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
-        //     time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
-        //     steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
-        //     "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
-        //     "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
-        //     "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
-        //     "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] }, 
-        //     { imageSrc: "https://www.thechunkychef.com/wp-content/uploads/2017/08/One-Pot-Chicken-Parmesan-Pasta-2.jpg", name: "One Pot Chicken Parmesan Pasta", 
-        //     time: "28", equipments: ["Pan", "Pot", "Blender"], ingredients: ["2-3 boneless skinless chicken breasts", "1 tsp Italian seasoning", "1/2 tsp garlic powder", "1 medium yellow onion, minced"], 
-        //     steps: ["To a large pot or skillet (I used my dutch oven), add a drizzle of olive oil and heat over MED-HIGH heat.  Add chicken, season with salt, pepper, Italian seasoning and garlic powder. Cook about 5 minutes, until chicken is most of the way cooked through.  Remove to a plate.",
-        //     "Add onion and garlic to the pot and cook about 2-3 minutes, until soft.  Pour in marinara sauce, fill up empty sauce jar with water and add to the pot.  Bring to a boil, then reduce to a strong simmer.",
-        //     "Add chicken and pasta, stir, then cover and cook for 10-15 minutes, until pasta is cooked to your liking.  Stir in parmesan cheese and 1/4 cup of the mozzarella cheese.",
-        //     "Sprinkle remaining 3/4 cup mozzarella cheese on top of the dish and cook another 2-3 minutes, until cheese is melted and gooey.",
-        //     "Sprinkle with additional Italian seasoning if desired, and garnish with parsley or basil."] }]
-
-        let array = recipes.map((recipes) => {
-            console.log(recipes)
-            return (recipes.map((d, i) => {
+        let recipes2 = this.state.result2;
+        console.log(this.state.result2);
+        console.log(this.state.result);
+        let array = recipes2.map((d, i) => {
             return  (
                 <div id="recipe" className="col-md-3" key={i}>
                     <div className="card results-card" onClick={()=> this.ShowRecipe(d)}>
@@ -138,8 +123,30 @@ export default class Explore extends React.Component {
                     </div>
                 </div>
             )
-        }))
-    })
+        })
+    //     let array = recipes.map((recipes) => {
+    //         return (recipes.map((d, i) => {
+    //         return  (
+    //             <div id="recipe" className="col-md-3" key={i}>
+    //                 <div className="card results-card" onClick={()=> this.ShowRecipe(d)}>
+    //                     <div className="card-body" id="results-card-body">
+    //                         <div className="card-img-top recipe-image">
+    //                             <img className={"img-fluid card-img-top results-card-image"} src={d.imageURL} alt="food" />
+    //                         </div>
+
+    //                         {/* If clicked without a word in search --> should link back to Explore page with ALL of the recipes showing */}
+
+    //                         <h5 className="results-card-title">{d.name}</h5>
+    //                         {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
+    //                         <p className="card-text" id="card-text">{d.time} Minutes</p>
+    //                         <p className="card-text" id="card-text">{d.equipment.length} Equipment</p>
+    //                         <p className="card-text" id="card-text">{d.ingredients.length} Ingredients</p>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         )
+    //     }))
+    // })
 
         return (      
             <div>

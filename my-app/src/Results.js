@@ -109,13 +109,6 @@ export default class Results extends React.Component {
             filtering = filtering + ' AND ' + "ingredientsList" + value[i].toLowerCase();
         }
         index.search({
-            facetFilters: [
-                "ingredientsList:chicken"
-            ]
-        }).then(res => {
-            console.log(res.hits);
-        })
-        index.search({
             query: (this.props.location.state.search).toLowerCase(),
             facetFilters: [
                 filtering,
@@ -151,7 +144,7 @@ export default class Results extends React.Component {
                 if (err) throw err;
                 hits.map((f) => {
                     console.log(f.name);
-                    var food = firebase.database().ref("recipe");
+                    var food = firebase.database().ref("recipesFinal");
                     food.on("child_added", (data, prevChildKey) => {
                         // console.log(data.key);
                         // console.log(f);
