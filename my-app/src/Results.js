@@ -4,16 +4,19 @@ import Footer from "./Footer"
 import "./Results.css"
 import firebase from 'firebase/app';
 import 'firebase/database';
-import { Redirect } from 'react-router-dom';
-import { ROUTES } from './constants';
-
+import algoliasearch from 'algoliasearch'
+import id from './algoliaConfig'
+import config from './algoliaConfigVal'
+// import index from 'algoliaConfig/index'
+const client = algoliasearch(id, config);
+const index = client.initIndex('contacts');
 export default class Results extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             search: this.props.location.state.search,
-            result: [],
-            filter: [],
+            result:[],
+            filter: "",
             oldResult: []
         }
     }
@@ -32,129 +35,136 @@ export default class Results extends React.Component {
     }
 
     handleEquipmentFilter = (value) => {
-        // this.setState({filter: value, result: this.state.oldResult})
-        let val = this.state.result;
-        let erase = []
-        val.map((recipe, i) => {
-            for (let j = 0; j < value.length; j++) {
-                if (!recipe.equipmentList.includes(value[j].toLowerCase())) {
-                    // this.state.result.splice(i, 1)
-                    // let arr = this.state.result;
-                    // this.setState({
-                    //     result: arr
-                    // })
-                    erase.push(i)
-                    // console.log(erase)
-
-                }
-            }
-        })
-        for (let i = erase.length - 1; i >= 0; i--) {
-            console.log(erase[i])
-            val.splice(erase[i], 1);
-            // console.log(val)
-            // console.log(erase)
-        }
-        this.setState({
-            result: val
-        })
-
+        this.setState({result: this.state.oldResult})
         // let val = this.state.result;
-        // console.log(value)
+        // let erase = []
         // val.map((recipe, i) => {
-        //     console.log(this.state.result)
         //     for (let j = 0; j < value.length; j++) {
         //         if (!recipe.equipmentList.includes(value[j].toLowerCase())) {
-        //             this.state.result.splice(i, 1)
-        //             let arr = this.state.result;
-        //             this.setState({
-        //                 result: arr
-        //             })
-        //             console.log("I am here")
+        //             erase.push(i)
 
         //         }
         //     }
         // })
-        // for (let i = 0; i < this.state.result.length; i++) {
-        //     for (let j = 0; j < this.state.result[i].equipmentList.length; j++) {
-        //         for (let k = 0; k < value.length; k++) {
-        //             console.log(this.state.result[i])
-        //             console.log(this.state.result.length)
-        //             if (!this.state.result[i].equipmentList.includes(value[k].toLowerCase())) {
-        //                 console.log(this.state.result[i])
-        //                 // console.log(delete this.state.result[i])
-        //                 break;
-        //                 // this.setState({
-        //                 //     result: this.state.result.splice(i,1)
-        //                 // })
-        //                 // break;
-        //             }
-        //         }
-        //     }
+        // for (let i = erase.length - 1; i >= 0; i--) {
+        //     console.log(erase[i])
+        //     val.splice(erase[i], 1);
         // }
+        // this.setState({
+        //     result: val
+        // })
+        // index.search('harry', {
+        //     filters: 'categories:politics AND store:Gibert Joseph Saint-Michel'
+        //   });
+        var filtering = 'equipmentList:' + value[0].toLowerCase();
+        for (let i = 1; i < value.length; i++) {
+            filtering = filtering + ' AND ' + "equipmentList" + value[i].toLowerCase();
+        }
+        // console.log(filtering)
+        index.search({
+            query: (this.props.location.state.search).toLowerCase(),
+            facetFilters: [
+                filtering,
+                this.state.filter
+            ]
+          }).then(res => {
+              console.log(this.state.filter)
+            console.log(res.hits);
+            this.setState({
+                result: res.hits,
+                filter: this.state.filter == "" ? filtering : this.state.filter + " AND " + filtering
+            })
+        });
     }
 
     handleIngredientsFilter = (value) => {
-        // this.setState({filter: value, result: this.state.oldResult})
-        let val = this.state.result;
-        let erase = []
-        val.map((recipe, i) => {
-            for (let j = 0; j < value.length; j++) {
-                if (!recipe.ingredientsList.includes(value[j].toLowerCase())) {
-                    // this.state.result.splice(i, 1)
-                    // let arr = this.state.result;
-                    // this.setState({
-                    //     result: arr
-                    // })
-                    erase.push(i)
-                    // console.log(erase)
+        this.setState({result: this.state.oldResult})
+        // let val = this.state.result;
+        // let erase = []
+        // val.map((recipe, i) => {
+        //     for (let j = 0; j < value.length; j++) {
+        //         if (!recipe.ingredientsList.includes(value[j].toLowerCase())) {
+        //             // this.state.result.splice(i, 1)
+        //             // let arr = this.state.result;
+        //             // this.setState({
+        //             //     result: arr
+        //             // })
+        //             erase.push(i)
+        //             // console.log(erase)
 
-                }
-            }
-        })
-        for (let i = erase.length - 1; i >= 0; i--) {
-            console.log(erase[i])
-            val.splice(erase[i], 1);
-            // console.log(val)
-            // console.log(erase)
-        }
-        this.setState({
-            result: val
-        })
-        // for (let i = 0; i < this.state.result.length; i++) {
-        //     for (let j = 0; j < this.state.result[i].ingredientsList.length; j++) {
-        //         for (let k = 0; k < value.length; k++) {
-        //             if (!this.state.result[i].ingredientsList.includes(value[k].toLowerCase())) {
-        //                 this.setState({
-        //                     result: this.state.result.slice(i,i)
-        //                 })
-        //                 console.log(value[k])
-        //                 break;
-        //             }
         //         }
         //     }
+        // })
+        // for (let i = erase.length - 1; i >= 0; i--) {
+        //     console.log(erase[i])
+        //     val.splice(erase[i], 1);
+        //     // console.log(val)
+        //     // console.log(erase)
         // }
+        // this.setState({
+        //     result: val
+        // })
+        var filtering = 'ingredientsList:' + value[0].toLowerCase();
+        for (let i = 1; i < value.length; i++) {
+            filtering = filtering + ' AND ' + "ingredientsList" + value[i].toLowerCase();
+        }
+        index.search({
+            query: (this.props.location.state.search).toLowerCase(),
+            facetFilters: [
+                filtering,
+                this.state.filter
+            ]
+          }).then(res => {
+            console.log(res.hits);
+            this.setState({
+                result: res.hits,
+                filter: this.state.filter == "" ? filtering : this.state.filter + " AND " + filtering
+            })
+        });
     }
 
     componentDidMount() {
         let name = (this.props.location.state.search).toLowerCase();
         let arr = [];
-        var food = firebase.database().ref("recipes/" + name + "/");
-        food.on("child_added", (data, prevChildKey) => {
-            arr.push(data.val());
-            this.setState({
-                result: arr,
-                oldResult: arr
-            })
-        })
+        // var food = firebase.database().ref("recipes/"+name);
+        // food.on("child_added", (data, prevChildKey) => {
+        //     arr.push(data.val());
+        //     this.setState({
+        //         result: arr,
+        //         oldResult: arr
+        //     })
+        //     console.log(data.val());
+        // })
+        index.search({
+            query: name,
+            attributesToRetrieve: ['name'],
+              hitsPerPage: 50,
+            },
+            (err, { hits } = {}) => {
+                if (err) throw err;
+                hits.map((f) => {
+                    console.log(f.name);
+                    var food = firebase.database().ref("recipesFinal");
+                    food.on("child_added", (data, prevChildKey) => {
+                        // console.log(data.key);
+                        // console.log(f);
+                        if (f.name == data.val().name) {
+                            arr.push(data.val());
+                            this.setState({
+                                result: arr,
+                                oldResult: arr
+                            })
+                        }
+                    })
+                })
+            }
+          );
+        // index.search({ query: name }).then(res => {
+        //     console.log(res);
+        //   });
     }
 
     render() {
-        if (this.state.search === null || this.state.search === "" || this.state.search === undefined) {
-            return <Redirect to={ROUTES.Home} />
-        }
-
-        // {console.log(this.state.result)}
         /* import each recipe, name, image src, equipment, and ingredients from firebase - parse through equipment and ingredients, etc. to save as separate item into an array*/
         let recipes = this.state.result;
 
@@ -192,14 +202,6 @@ export default class Results extends React.Component {
                             {/* ^No filters but should link to all of the results again */}
                         </div>
                     </div>
-                    {/* {this.state.result.length != 0 ? <div id="filter-options">
-                        <Equipments array={recipes} filter={this.handleFilter}/>
-                        <Ingredients array={recipes} />
-                        
-                        <div id="reset" onClick={()=> this.setState({clicked: true})}> 
-                            <a href="/Results">Reset</a>
-                        </div>
-                    </div>:<div></div>} */}
                     {/* Have to Fix */}
                     <div id="filter-options">
                         <Equipments array={recipes} filter={this.handleEquipmentFilter} />

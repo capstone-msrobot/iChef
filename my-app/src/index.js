@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/storage'
 
 var config = {
     apiKey: "AIzaSyA1L3NCoat-aFkaFs7A3BkYV2jx5h8bUAc",
@@ -16,6 +17,5 @@ var config = {
     messagingSenderId: "915810040724"
   };
 firebase.initializeApp(config);
-
 ReactDOM.render(<App />, document.getElementById('root'));
 serviceWorker.unregister();
