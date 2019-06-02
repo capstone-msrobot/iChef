@@ -16,6 +16,9 @@ export default class Upload extends React.Component {
             subEmail: '',
             username: '',
             recipeName: '',
+            file: [],
+            imagePreviewUrl: [],
+            downloadURL: ''
 
         };
     }
@@ -43,6 +46,73 @@ export default class Upload extends React.Component {
         })
     }
 
+    _handleSubmit(e) {
+        e.preventDefault();
+        // TODO: do something with -> this.state.file
+        // console.log('handle uploading-', this.state.file);
+        for (var i = 0; i < this.state.file.length; i++) {
+            var imageFile = this.state.file[i];
+    
+            this.uploadImageAsPromise(imageFile);
+        }
+      }
+    
+    _handleImageChange(e) {
+        e.preventDefault();
+        let fileList = this.state.file;
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        fileList.push(file);
+
+        reader.onloadend = () => {
+            let urls = this.state.imagePreviewUrl;
+            urls.push(reader.result);
+            console.log(urls);
+            this.setState({
+                file: fileList,
+                imagePreviewUrl: urls
+            });
+        }
+
+        reader.readAsDataURL(file)
+    }
+
+    uploadImageAsPromise(imageFile) {
+        let recipeName = this.state.recipeName
+        return new Promise(() => {
+            var storageRef = firebase.storage().ref(recipeName+"/"+imageFile.name);
+    
+            //Upload file
+            var task = storageRef.put(imageFile);
+    
+            //Update progress bar
+            task.on('state_changed',
+                function progress(snapshot){
+                    var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+                    // uploader.value = percentage;
+                },
+                function error(err){
+    
+                },
+                function complete(){
+                    task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                        //grabUrl(downloadURL);
+                        console.log('File available at', downloadURL);
+                      });
+                    // var downloadURL = task.snapshot.ref.getDownloadUrl();
+                    // console.log(downloadURL);
+                }
+            );
+        });
+    }
+
+    // grabUrl(url) {
+    //     this.setState({
+    //         downloadURL: url
+    //     })
+    //     console.log(this.state.downloadURL)
+    // }
+
     addRecipe() {
         let subEmail = this.state.email.substr(0, this.state.email.indexOf('@'));
         let reference = firebase.database().ref('users' + this.subEmail + '/Recipes');
@@ -62,16 +132,21 @@ export default class Upload extends React.Component {
     }
 
     handleChange(event) {
-        //         console.log(event);
         let field = event.target.name; // which input
         let value = event.target.value; // what value
-        // console.log(field);
         let changes = {}; // object to hold changes
         changes[field] = value; // change this field
         this.setState(changes); // update state
     }
 
     render() {
+        // let {imagePreviewUrl} = this.state;
+        // let $imagePreview = null;
+        // if (imagePreviewUrl) {
+        //   $imagePreview = (<img src={imagePreviewUrl} />);
+        // } else {
+        //   $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+        // }
         return (
             <div>
                 <Navigation />
@@ -147,6 +222,32 @@ export default class Upload extends React.Component {
                     <img src={add} alt="add" /> */}
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div className="previewComponent">
+                    <form onSubmit={(e)=>this._handleSubmit(e)}>
+                    <input className="fileInput" 
+                        type="file" 
+                        onChange={(e)=>this._handleImageChange(e)} />
+                    <button className="submitButton" 
+                        type="submit" 
+                        onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
+                    </form>
+                    <div className="imgPreview">
+                    {this.state.imagePreviewUrl[0] == undefined ? <div className="previewText">Please select an Image for Preview</div>:<img src={this.state.imagePreviewUrl[0]} />}
+                    </div>
+                </div>
+                <div className="previewComponent">
+                    <form onSubmit={(e)=>this._handleSubmit(e)}>
+                    <input className="fileInput" 
+                        type="file" 
+                        onChange={(e)=>this._handleImageChange(e)} />
+                    <button className="submitButton" 
+                        type="submit" 
+                        onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
+                    </form>
+                    <div className="imgPreview">
+                    {this.state.imagePreviewUrl[1] == undefined ? <div className="previewText">Please select an Image for Preview</div>:<img src={this.state.imagePreviewUrl[1]} />}
                     </div>
                 </div>
                 {/* <div id="save" onClick={() => {
