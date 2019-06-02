@@ -5,7 +5,9 @@ import add from "./img/addIcon.png";
 import upload from "./img/uploadIcon.png";
 import "./Upload.css";
 import firebase from 'firebase';
-
+import algoliasearch from 'algoliasearch'
+import id from './algoliaConfig'
+import config from './algoliaAdminConfigVal'
 export default class Upload extends React.Component {
     constructor(props) {
         super(props);
@@ -18,7 +20,8 @@ export default class Upload extends React.Component {
             recipeName: '',
             file: [],
             imagePreviewUrl: [],
-            downloadURL: ''
+            downloadURL: [],
+            objectKey: ''
 
         };
     }
@@ -46,15 +49,138 @@ export default class Upload extends React.Component {
         })
     }
 
+    putURLs() {
+        // return Promise.resolve().then(() => {
+        //     for (var i = 0; i < this.state.file.length; i++) {
+        //         var imageFile = this.state.file[i];
+        
+        //         this.uploadImageAsPromise(imageFile);
+        //     }
+        // }).then(() => {
+        //     console.log(2)
+        // })
+        return new Promise((resolve, reject) => {
+            for (var i = 0; i < this.state.file.length; i++) {
+                var imageFile = this.state.file[i];
+        
+                this.uploadImageAsPromise(imageFile);
+            }
+            setTimeout(() => {
+                resolve("resolved");
+            }, 4000)
+        })
+    }
+
     _handleSubmit(e) {
+        const database = firebase.database();
         e.preventDefault();
         // TODO: do something with -> this.state.file
         // console.log('handle uploading-', this.state.file);
-        for (var i = 0; i < this.state.file.length; i++) {
-            var imageFile = this.state.file[i];
+        // for (var i = 0; i < this.state.file.length; i++) {
+        //     var imageFile = this.state.file[i];
     
-            this.uploadImageAsPromise(imageFile);
-        }
+        //     this.uploadImageAsPromise(imageFile);
+        // }
+        // this.putURLs()
+        console.log("clicked");
+        console.log("here")
+        this.putURLs()
+        .then(() => {
+            console.log(this.state.downloadURL);
+            let keyRef = database.ref('/recipesFinal').push({
+                name: this.state.recipeName,
+                ingredients: [
+                    "4 ounces linguine pasta",
+                    "2 boneless, skinless chicken breast halves, sliced into thin strips",
+                    "2 teaspoons Cajun seasoning",
+                    "2 tablespoons butter",
+                    "1 green bell pepper, chopped",
+                    "1/2 ed bell pepper, chopped",
+                    "4 fresh mushrooms, sliced",
+                    "1 green onion, minced",
+                    "1 1/2 cups heavy cream",
+                    "1/4 teaspoon dried basil",
+                    "1/4 teaspoon lemon pepper",
+                    "1/4 teaspoon teaspoon salt",
+                    "1/8 teaspoon garlic powder",
+                    "1/8 teaspoon ground black pepper",
+                    "2 tablespoons grated Parmesan cheese"
+                ],
+                ingredientsList: ["pasta", "chicken", "cajun seasoning", "butter", "green bell pepper", "bell pepper", "mushrooms", "onion", "heavy cream", "basil", "lemon pepper", "salt", "garlic powder", "black pepper", "parmesan cheese"],
+                time: "30",
+                steps: [
+                    "Bring a large pot of lightly salted water to a boil. Add linguini pasta, and cook for 8 to 10 minutes, or until al dente; drain.",
+                    "Meanwhile, place chicken and Cajun seasoning in a bowl, and toss to coat.",
+                    "In a large skillet over medium heat, saute chicken in butter until no longer pink and juices run clear, about 5 to 7 minutes. Add green and red bell peppers, sliced mushrooms and green onions; cook for 2 to 3 minutes. Reduce heat, and stir in heavy cream. Season the sauce with basil, lemon pepper, salt, garlic powder and ground black pepper, and heat through.",
+                    "In a large bowl, toss linguini with sauce. Sprinkle with grated Parmesan cheese."
+                ],
+                equipment: [
+                    "1 pan"
+                ],
+                equipmentList:["pan"],
+                imageURL: "https://images.unsplash.com/photo-1473093226795-af9932fe5856?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1585&q=80",
+                originalURL: "https://www.allrecipes.com/recipe/12009/creamy-cajun-chicken-pasta/?internalSource=hub%20recipe&referringContentType=Search",
+                stepsURL: this.state.downloadURL.length == 0 ? '' : this.state.downloadURL
+                })
+                this.setState({
+                    objectKey: keyRef.getKey()
+                })
+
+                // let subEmail = this.state.email.substr(0, this.state.email.indexOf('@'));
+                // let reference = firebase.database().ref('users' + subEmail + '/Recipes');
+                // let newData = {
+                //     Author: {
+                //         firstName: this.state.firstName,
+                //         lastName: this.state.lastName,
+                //         username: this.state.username,
+                //         email: this.state.email,
+                //         password: this.state.password,
+                //         recipes: null,
+                //         equipment: null,
+                //         ingredients: null,
+                //     }
+                // }
+                // reference.push(newData);
+        }).then(() => {
+            const client = algoliasearch(id, config);
+              console.log(this.state.objectKey);
+              const index = client.initIndex('contacts');
+        
+              //const index = algolia.initIndex(process.env.ALGOLIA_INDEX_NAME);
+              database.ref('/recipesFinal/' + this.state.objectKey).once('value', recipe => {
+                // Build an array of all records to push to Algolia
+                // const records = [];
+                // recipe.forEach(contact => {
+                //   // get the key and data from the snapshot
+                //   const childKey = contact.key;
+                //   const childData = contact.val();
+                //   // We set the Algolia objectID as the Firebase .key
+                //   childData.objectID = childKey;
+                //   // Add object for indexing
+                //   records.push(childData);
+                // });
+              
+                // Add or update new objects
+                
+                let content = recipe.val();
+                content.objectID = this.state.objectKey;
+                console.log(recipe.val());
+                index.saveObject(content, (err, content) => {
+                    console.log(content);
+                    console.log(err);
+                });
+                // index
+                //   .saveObjects(recipe)
+                //   .then(() => {
+                //     console.log('recipe imported into Algolia');
+                //   })
+                //   .catch(error => {
+                //     console.error('Error when importing contact into Algolia', error);
+                //     //process.exit(1);
+                //   });
+              });
+        });
+        // }
       }
     
     _handleImageChange(e) {
@@ -67,7 +193,6 @@ export default class Upload extends React.Component {
         reader.onloadend = () => {
             let urls = this.state.imagePreviewUrl;
             urls.push(reader.result);
-            console.log(urls);
             this.setState({
                 file: fileList,
                 imagePreviewUrl: urls
@@ -79,7 +204,8 @@ export default class Upload extends React.Component {
 
     uploadImageAsPromise(imageFile) {
         let recipeName = this.state.recipeName
-        return new Promise(() => {
+
+        return new Promise((resolve, reject) => {
             var storageRef = firebase.storage().ref(recipeName+"/"+imageFile.name);
     
             //Upload file
@@ -87,16 +213,21 @@ export default class Upload extends React.Component {
     
             //Update progress bar
             task.on('state_changed',
-                function progress(snapshot){
+                (snapshot) =>{
                     var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
                     // uploader.value = percentage;
                 },
-                function error(err){
+                (err) => {
     
                 },
-                function complete(){
-                    task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                        //grabUrl(downloadURL);
+                () =>{
+                    task.snapshot.ref.getDownloadURL().then((downloadURL) =>{
+                        let url = this.state.downloadURL
+                        url.push(downloadURL)
+                        this.setState({
+                            downloadURL: url
+                        })
+                        console.log(this.state.downloadURL);
                         console.log('File available at', downloadURL);
                       });
                     // var downloadURL = task.snapshot.ref.getDownloadUrl();

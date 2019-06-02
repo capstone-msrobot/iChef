@@ -26,3 +26,4 @@ yarn-error.log*
 .env
 algoliaConfig.js
 algoliaConfigVal.js
+algoliaAdminConfigVal.js
