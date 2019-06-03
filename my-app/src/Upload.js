@@ -5,9 +5,10 @@ import add from "./img/addIcon.png";
 import upload from "./img/uploadIcon.png";
 import "./Upload.css";
 import firebase from 'firebase';
-import algoliasearch from 'algoliasearch'
-import id from './algoliaConfig'
-import config from './algoliaAdminConfigVal'
+import ReactDOM from 'react-dom'
+import List from './List';
+import TodoItems from "./TodoItems";
+
 export default class Upload extends React.Component {
     constructor(props) {
         super(props);
@@ -18,12 +19,13 @@ export default class Upload extends React.Component {
             subEmail: '',
             username: '',
             recipeName: '',
-            file: [],
-            imagePreviewUrl: [],
-            downloadURL: [],
-            objectKey: ''
-
+            equipment: [],
+            term: '',
+            items: []
         };
+
+        this.add = this.add.bind(this);
+        // this.addItem = this.addItem.bind(this);
     }
 
     componentWillMount() {
@@ -49,201 +51,6 @@ export default class Upload extends React.Component {
         })
     }
 
-    putURLs() {
-        // return Promise.resolve().then(() => {
-        //     for (var i = 0; i < this.state.file.length; i++) {
-        //         var imageFile = this.state.file[i];
-        
-        //         this.uploadImageAsPromise(imageFile);
-        //     }
-        // }).then(() => {
-        //     console.log(2)
-        // })
-        return new Promise((resolve, reject) => {
-            for (var i = 0; i < this.state.file.length; i++) {
-                var imageFile = this.state.file[i];
-        
-                this.uploadImageAsPromise(imageFile);
-            }
-            setTimeout(() => {
-                resolve("resolved");
-            }, 4000)
-        })
-    }
-
-    _handleSubmit(e) {
-        const database = firebase.database();
-        e.preventDefault();
-        // TODO: do something with -> this.state.file
-        // console.log('handle uploading-', this.state.file);
-        // for (var i = 0; i < this.state.file.length; i++) {
-        //     var imageFile = this.state.file[i];
-    
-        //     this.uploadImageAsPromise(imageFile);
-        // }
-        // this.putURLs()
-        console.log("clicked");
-        console.log("here")
-        this.putURLs()
-        .then(() => {
-            console.log(this.state.downloadURL);
-            let keyRef = database.ref('/recipesFinal').push({
-                name: this.state.recipeName,
-                ingredients: [
-                    "4 ounces linguine pasta",
-                    "2 boneless, skinless chicken breast halves, sliced into thin strips",
-                    "2 teaspoons Cajun seasoning",
-                    "2 tablespoons butter",
-                    "1 green bell pepper, chopped",
-                    "1/2 ed bell pepper, chopped",
-                    "4 fresh mushrooms, sliced",
-                    "1 green onion, minced",
-                    "1 1/2 cups heavy cream",
-                    "1/4 teaspoon dried basil",
-                    "1/4 teaspoon lemon pepper",
-                    "1/4 teaspoon teaspoon salt",
-                    "1/8 teaspoon garlic powder",
-                    "1/8 teaspoon ground black pepper",
-                    "2 tablespoons grated Parmesan cheese"
-                ],
-                ingredientsList: ["pasta", "chicken", "cajun seasoning", "butter", "green bell pepper", "bell pepper", "mushrooms", "onion", "heavy cream", "basil", "lemon pepper", "salt", "garlic powder", "black pepper", "parmesan cheese"],
-                time: "30",
-                steps: [
-                    "Bring a large pot of lightly salted water to a boil. Add linguini pasta, and cook for 8 to 10 minutes, or until al dente; drain.",
-                    "Meanwhile, place chicken and Cajun seasoning in a bowl, and toss to coat.",
-                    "In a large skillet over medium heat, saute chicken in butter until no longer pink and juices run clear, about 5 to 7 minutes. Add green and red bell peppers, sliced mushrooms and green onions; cook for 2 to 3 minutes. Reduce heat, and stir in heavy cream. Season the sauce with basil, lemon pepper, salt, garlic powder and ground black pepper, and heat through.",
-                    "In a large bowl, toss linguini with sauce. Sprinkle with grated Parmesan cheese."
-                ],
-                equipment: [
-                    "1 pan"
-                ],
-                equipmentList:["pan"],
-                imageURL: "https://images.unsplash.com/photo-1473093226795-af9932fe5856?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1585&q=80",
-                originalURL: "https://www.allrecipes.com/recipe/12009/creamy-cajun-chicken-pasta/?internalSource=hub%20recipe&referringContentType=Search",
-                stepsURL: this.state.downloadURL.length == 0 ? '' : this.state.downloadURL
-                })
-                this.setState({
-                    objectKey: keyRef.getKey()
-                })
-
-                // let subEmail = this.state.email.substr(0, this.state.email.indexOf('@'));
-                // let reference = firebase.database().ref('users' + subEmail + '/Recipes');
-                // let newData = {
-                //     Author: {
-                //         firstName: this.state.firstName,
-                //         lastName: this.state.lastName,
-                //         username: this.state.username,
-                //         email: this.state.email,
-                //         password: this.state.password,
-                //         recipes: null,
-                //         equipment: null,
-                //         ingredients: null,
-                //     }
-                // }
-                // reference.push(newData);
-        }).then(() => {
-            const client = algoliasearch(id, config);
-              console.log(this.state.objectKey);
-              const index = client.initIndex('contacts');
-        
-              //const index = algolia.initIndex(process.env.ALGOLIA_INDEX_NAME);
-              database.ref('/recipesFinal/' + this.state.objectKey).once('value', recipe => {
-                // Build an array of all records to push to Algolia
-                // const records = [];
-                // recipe.forEach(contact => {
-                //   // get the key and data from the snapshot
-                //   const childKey = contact.key;
-                //   const childData = contact.val();
-                //   // We set the Algolia objectID as the Firebase .key
-                //   childData.objectID = childKey;
-                //   // Add object for indexing
-                //   records.push(childData);
-                // });
-              
-                // Add or update new objects
-                
-                let content = recipe.val();
-                content.objectID = this.state.objectKey;
-                console.log(recipe.val());
-                index.saveObject(content, (err, content) => {
-                    console.log(content);
-                    console.log(err);
-                });
-                // index
-                //   .saveObjects(recipe)
-                //   .then(() => {
-                //     console.log('recipe imported into Algolia');
-                //   })
-                //   .catch(error => {
-                //     console.error('Error when importing contact into Algolia', error);
-                //     //process.exit(1);
-                //   });
-              });
-        });
-        // }
-      }
-    
-    _handleImageChange(e) {
-        e.preventDefault();
-        let fileList = this.state.file;
-        let reader = new FileReader();
-        let file = e.target.files[0];
-        fileList.push(file);
-
-        reader.onloadend = () => {
-            let urls = this.state.imagePreviewUrl;
-            urls.push(reader.result);
-            this.setState({
-                file: fileList,
-                imagePreviewUrl: urls
-            });
-        }
-
-        reader.readAsDataURL(file)
-    }
-
-    uploadImageAsPromise(imageFile) {
-        let recipeName = this.state.recipeName
-
-        return new Promise((resolve, reject) => {
-            var storageRef = firebase.storage().ref(recipeName+"/"+imageFile.name);
-    
-            //Upload file
-            var task = storageRef.put(imageFile);
-    
-            //Update progress bar
-            task.on('state_changed',
-                (snapshot) =>{
-                    var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
-                    // uploader.value = percentage;
-                },
-                (err) => {
-    
-                },
-                () =>{
-                    task.snapshot.ref.getDownloadURL().then((downloadURL) =>{
-                        let url = this.state.downloadURL
-                        url.push(downloadURL)
-                        this.setState({
-                            downloadURL: url
-                        })
-                        console.log(this.state.downloadURL);
-                        console.log('File available at', downloadURL);
-                      });
-                    // var downloadURL = task.snapshot.ref.getDownloadUrl();
-                    // console.log(downloadURL);
-                }
-            );
-        });
-    }
-
-    // grabUrl(url) {
-    //     this.setState({
-    //         downloadURL: url
-    //     })
-    //     console.log(this.state.downloadURL)
-    // }
-
     addRecipe() {
         let subEmail = this.state.email.substr(0, this.state.email.indexOf('@'));
         let reference = firebase.database().ref('users' + this.subEmail + '/Recipes');
@@ -263,26 +70,42 @@ export default class Upload extends React.Component {
     }
 
     handleChange(event) {
+        //         console.log(event);
         let field = event.target.name; // which input
         let value = event.target.value; // what value
+        // console.log(field);
         let changes = {}; // object to hold changes
         changes[field] = value; // change this field
         this.setState(changes); // update state
     }
 
+    add(event) {
+        console.log("here")
+        let welcome = React.createElement('input',{id:'#add'})
+        ReactDOM.render(welcome,document.getElementById('equipment-input'))
+    }
+
+    onChange = (event) => {
+        this.setState({term: event.target.value});
+    }
+
+    onSubmit = (event) => {
+        event.preventDefault()
+        this.setState({
+          term: '',
+          items: [...this.state.items, this.state.term]
+        });
+      }
+
+    //   this.state._inputElement = document.getElementById("equipment-input");
+      
+
     render() {
-        // let {imagePreviewUrl} = this.state;
-        // let $imagePreview = null;
-        // if (imagePreviewUrl) {
-        //   $imagePreview = (<img src={imagePreviewUrl} />);
-        // } else {
-        //   $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
-        // }
         return (
             <div id="upload-content">
                 <Navigation />
                 <div id="title">
-                    <p className="title-upload">Your Recipes</p>
+                    <p className="title-upload">Your Recipe</p>
                 </div>
 
                 <div id="upload-content">
@@ -316,6 +139,9 @@ export default class Upload extends React.Component {
                             <img src={upload} id="upload-image" alt="upload" /> Upload Photo *
                         </div>
                     </div>
+                    
+
+
                     <div>
                         <label>Equipment *</label>
                         <div id="equipment-input" className="form-group">
@@ -325,9 +151,16 @@ export default class Upload extends React.Component {
                                 id="equipmentInput"
                                 placeholder="ex: 1 pot"
                                 name="recipeName"
-                                value={null}
-                                onInput={(event) => { this.handleChange(event) }} />
-                            <img src={add} alt="add" id="add" />
+                                value={this.state.term}
+                                // onInput={(event) => { this.handleChange(event) }} 
+                                onChange={this.onChange}/>
+                            <div onClick={this.onSubmit}><img src={add}
+                                alt="add" 
+                                // onClick={this.add}
+                                
+                                id="add" /></div>
+                            <List items={this.state.items} />
+                            {/* <TodoItems entries={this.state.items}/> */}
                         </div>
                     </div>
                     <div>
@@ -357,32 +190,6 @@ export default class Upload extends React.Component {
                         </div>
                     </div>
 
-                </div>
-                <div className="previewComponent">
-                    <form onSubmit={(e)=>this._handleSubmit(e)}>
-                    <input className="fileInput" 
-                        type="file" 
-                        onChange={(e)=>this._handleImageChange(e)} />
-                    <button className="submitButton" 
-                        type="submit" 
-                        onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
-                    </form>
-                    <div className="imgPreview">
-                    {this.state.imagePreviewUrl[0] == undefined ? <div className="previewText">Please select an Image for Preview</div>:<img src={this.state.imagePreviewUrl[0]} />}
-                    </div>
-                </div>
-                <div className="previewComponent">
-                    <form onSubmit={(e)=>this._handleSubmit(e)}>
-                    <input className="fileInput" 
-                        type="file" 
-                        onChange={(e)=>this._handleImageChange(e)} />
-                    <button className="submitButton" 
-                        type="submit" 
-                        onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
-                    </form>
-                    <div className="imgPreview">
-                    {this.state.imagePreviewUrl[1] == undefined ? <div className="previewText">Please select an Image for Preview</div>:<img src={this.state.imagePreviewUrl[1]} />}
-                    </div>
                 </div>
                 {/* <div id="save" onClick={() => {
                     this.addRecipe();
