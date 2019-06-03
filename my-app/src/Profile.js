@@ -15,6 +15,7 @@ import firebase from 'firebase';
 import { ROUTES } from './constants';
 import { Link } from 'react-router-dom';
 
+
 // https://bootsnipp.com/snippets/M48pA
 export default class Profile extends React.Component {
     constructor(props) {
@@ -74,55 +75,50 @@ export default class Profile extends React.Component {
                         <img src={user} alt="user" />
                     </div>
                     <div className="profile-usertitle">
-                        <div className="profile-usertitle-name">{this.state.username}</div>
+                        <div className="profile-usertitle-name">
+                            Soobinsoo
+                                        </div>
 
                     </div>
                     <div className="profile-usermenu">
                         <ul className="nav">
-                            <a href="Recipes">
-                                <li id="li-test" className="link" onClick={() => this.state.recipeClicked = true}>
-                                    <div onClick={() => this.state.recipeClicked = true}>
-                                        <img src={recipesIconSelected} alt="recipes" />
-                                        Recipes
-
-                                    </div>
-                                </li>
-                            </a>
-
-
-                            <li>
+                            <li className="active">
                                 {/* <a href="#"> */}
                                 {/* check state and change image depending on if user is on recipes */}
-                                <img src={equipmentIconNotSelected} alt="equipment" />
-                                Equipment
+                                <img src={recipesIconSelected} alt="recipes" />
+                                Recipes
                             </li>
                             <li>
-                                {/* <a href="#"> */}
-                                {/* check state and change image depending on if user is on recipes */}
-                                <img src={equipmentIconNotSelected} alt="equipment" />
-                                Ingredients
+                                <a href="./ProfileEquipment">
+                                    {/* check state and change image depending on if user is on recipes */}
+                                    <img src={equipmentIconNotSelected} alt="equipment" />
+                                    Equipment
+                                </a>
                             </li>
                             <li>
-                                <a href="./Settings"><img src={settingsIcon} alt="settings" /></a>
+                                <a href="./ProfileIngred">
+                                    {/* check state and change image depending on if user is on recipes */}
+                                    <img src={equipmentIconNotSelected} alt="equipment" />
+                                    Ingredients
+
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./Settings">
+                                    <img src={settingsIcon} alt="settings" />
+                                </a>
                                 {/* <Link to={ROUTES.Settings}>Settings</Link> */}
                             </li>
-                            <li>
+                            {/* <li>
                                 <a href="./Home"><img src={logoutIcon} alt="sign out" /></a>
                                 <Link to={ROUTES.Home}>Sign Out</Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>
-                {/* </div> */}
-                {/* </div> */}
 
 
-                {(this.recipeClicked) &&
-                    console.log("here 2")
-                    // <Recipes />
-                }
-                {/* <Recipes /> */}
-                {/* </div> */}
+                <Recipes />
                 <Footer />
             </div>
         )
@@ -263,112 +259,6 @@ export class Recipes extends React.Component {
                 </div>
             </div>
 
-        )
-    }
-}
-
-export class Equipment extends React.Component {
-    render() {
-        return (
-            <div id="show-content">
-                <div id="page-label">
-                    <p className="title">Your Equipment</p>
-                    <img src={equipmentIconSelected} alt="recipes" className="title-icon" />
-                </div>
-
-                <div class="container">
-                    <div class="row">
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Frying Pan
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Frying Pan
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Frying Pan
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Frying Pan
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Frying Pan
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Frying Pan
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Frying Pan
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-}
-
-export class Ingredients extends React.Component {
-    render() {
-        return (
-            <div id="show-content">
-                <div id="page-label">
-                    <p className="title">Your Ingredients</p>
-                    {/* <img src={ingredientIconSelected} alt="recipes" className="title-icon" /> */}
-                </div>
-
-                <div class="container">
-                    <div class="row">
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Carrots
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Carrots
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Carrots
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Carrots
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Carrots
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Carrots
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Carrots
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         )
     }
 }
