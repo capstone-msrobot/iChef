@@ -12,9 +12,15 @@ import Explore from "./Explore"
 import SignUp from "./SignUp"
 import Profile from "./Profile"
 import Upload from "./Upload"
+<<<<<<< HEAD
 import ProfileEquipment from "./ProfileEquipment"
 import ProfileIngred from "./ProfileIngred"
 import Settings from "./Settings"
+=======
+import Settings from "./Settings"
+import ProfileEquipment from "./ProfileEquipment"
+import ProfileIngred from "./ProfileIngred"
+>>>>>>> 1ce0af95bbd9a9529b1551f3f098a45dd27407e6
 
 class App extends Component {
   constructor(props){
