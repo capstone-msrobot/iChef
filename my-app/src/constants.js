@@ -11,4 +11,6 @@ export const ROUTES = {
     Profile: "/Profile",
     Upload: "/Upload",
     Settings: "/Settings"
+    ProfileEquipment: "/ProfileEquipment",
+    ProfileIngred: "/ProfileIngred",
 }

@@ -9,6 +9,7 @@ import ReactDOM from 'react-dom'
 import List from './List';
 import ListSteps from "./ListSteps";
 import TodoItems from "./TodoItems";
+import { domainToASCII } from 'url';
 
 export default class Upload extends React.Component {
     constructor(props) {
@@ -26,7 +27,10 @@ export default class Upload extends React.Component {
             termSteps: '',
             itemsEquip: [],
             itemsIngred: [],
-            itemsSteps: []
+            itemsSteps: [],
+            file: '',
+            imagePreviewUrl: '',
+            imageViews: []
         };
 
         // this.add = this.add.bind(this);
@@ -124,9 +128,57 @@ export default class Upload extends React.Component {
 
     //   this.state._inputElement = document.getElementById("equipment-input");
 
+    _handleSubmit(e) {
+        e.preventDefault();
+        // TODO: do something with -> this.state.file
+        
+        console.log('handle uploading-', this.state.file);
+      }
+    
+      _handleImageChange(e) {
+        e.preventDefault();
+    
+        let reader = new FileReader();
+        let file = e.target.files[0];
+    
+        reader.onloadend = () => {
+          this.setState({
+            file: file,
+            imagePreviewUrl: reader.result
+          });
+        }
+    
+        reader.readAsDataURL(file)
+      }
 
+      handleClick = () => {
+        let img = this.state.imageViews
+        // img.push(<addRecipe/>)
+        this.setState({
+            imageViews:[...img, <div className="previewComponent">
+            <form onSubmit={(e)=>this._handleSubmit(e)}>
+            <input className="fileInput" 
+                type="file" 
+                onChange={(e)=>this._handleImageChange(e)} />
+            <button className="submitButton" 
+                type="submit" 
+                onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
+            </form>
+            <div className="imgPreview">
+            </div>
+        </div>]
+        })
+      }
 
     render() {
+        let {imagePreviewUrl} = this.state;
+        let $imagePreview = null;
+        if (imagePreviewUrl) {
+          $imagePreview = (<img src={imagePreviewUrl} />);
+        } else {
+          $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+        }
+        let map = this.state.imageViews
         return (
             <div id="upload-content">
                 <Navigation />
@@ -162,7 +214,19 @@ export default class Upload extends React.Component {
                             </div>
                         </div>
                         <div id="upload-button" className="col-md-6">
-                            <img src={upload} id="upload-image" alt="upload" /> Upload Photo *
+                        <div className="previewComponent">
+                            <form onSubmit={(e)=>this._handleSubmit(e)}>
+                            <input className="fileInput" 
+                                type="file" 
+                                onChange={(e)=>this._handleImageChange(e)} />
+                            <button className="submitButton" 
+                                type="submit" 
+                                onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
+                            </form>
+                            <div className="imgPreview">
+                            {$imagePreview}
+                            </div>
+                        </div>
                         </div>
                     </div>
 
@@ -230,6 +294,15 @@ export default class Upload extends React.Component {
                                 id="add-steps" />
                             <ListSteps items={this.state.itemsSteps} />
                         </div>
+                        <label>Steps Picture*</label>
+                        <img src={add}
+                                alt="add"
+                                onClick={this.handleClick}
+
+                                id="add-stepsURL" />
+                        <div id="stepsPic">
+                            {this.state.imageViews.map(child => child)}
+                        </div> 
                     </div>
 
                 </div>
@@ -241,6 +314,14 @@ export default class Upload extends React.Component {
 
                 <Footer />
             </div>
+        )
+    }
+}
+
+class addPictures extends React.Component {
+    render() {
+        return(
+            <div>im here</div>
         )
     }
 }

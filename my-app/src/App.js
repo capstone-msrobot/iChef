@@ -13,6 +13,8 @@ import SignUp from "./SignUp"
 import Profile from "./Profile"
 import Upload from "./Upload"
 import Settings from "./Settings"
+import ProfileEquipment from "./ProfileEquipment"
+import ProfileIngred from "./ProfileIngred"
 
 class App extends Component {
   constructor(props){
@@ -63,7 +65,12 @@ class App extends Component {
           <Route exact path={ROUTES.SignUp} component={SignUp} />
           <Route exact path={ROUTES.Profile} component={Profile} />
           <Route exact path={ROUTES.Upload} component={Upload} />
+<<<<<<< HEAD
           <Route exact path={ROUTES.Settings} component={Settings} />
+=======
+          <Route exact path={ROUTES.ProfileEquipment} component={ProfileEquipment} />
+          <Route exact path={ROUTES.ProfileIngred} component={ProfileIngred} />
+>>>>>>> 2df1e0aec85bca34b90adf81ab3c9c145715f206
           <Redirect to={ROUTES.Home} />
         </Switch>
       </BrowserRouter>
