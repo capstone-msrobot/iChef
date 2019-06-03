@@ -7,6 +7,7 @@ import "./Upload.css";
 import firebase from 'firebase';
 import ReactDOM from 'react-dom'
 import List from './List';
+import ListSteps from "./ListSteps";
 import TodoItems from "./TodoItems";
 
 export default class Upload extends React.Component {
@@ -20,11 +21,15 @@ export default class Upload extends React.Component {
             username: '',
             recipeName: '',
             equipment: [],
-            term: '',
-            items: []
+            termEquip: '',
+            termIngred: '',
+            termSteps: '',
+            itemsEquip: [],
+            itemsIngred: [],
+            itemsSteps: []
         };
 
-        this.add = this.add.bind(this);
+        // this.add = this.add.bind(this);
         // this.addItem = this.addItem.bind(this);
     }
 
@@ -79,26 +84,47 @@ export default class Upload extends React.Component {
         this.setState(changes); // update state
     }
 
-    add(event) {
-        console.log("here")
-        let welcome = React.createElement('input',{id:'#add'})
-        ReactDOM.render(welcome,document.getElementById('equipment-input'))
-    }
+    // add(event) {
+    //     console.log("here")
+    //     let welcome = React.createElement('input',{id:'#add'})
+    //     ReactDOM.render(welcome,document.getElementById('equipment-input'))
+    // }
 
     onChange = (event) => {
-        this.setState({term: event.target.value});
+        this.setState({ term: event.target.value });
     }
 
-    onSubmit = (event) => {
+    onSubmitEquip = (event) => {
         event.preventDefault()
         this.setState({
-          term: '',
-          items: [...this.state.items, this.state.term]
+            termEquip: '',
+            itemsEquip: [...this.state.itemsEquip, this.state.termEquip]
         });
-      }
+    }
 
     //   this.state._inputElement = document.getElementById("equipment-input");
-      
+
+    onSubmitIngred = (event) => {
+        event.preventDefault()
+        this.setState({
+            termIngred: '',
+            itemsIngred: [...this.state.itemsIngred, this.state.termIngred]
+        });
+    }
+
+    //   this.state._inputElement = document.getElementById("equipment-input");
+
+    onSubmitSteps = (event) => {
+        event.preventDefault()
+        this.setState({
+            termSteps: '',
+            itemsSteps: [...this.state.itemsSteps, this.state.termSteps]
+        });
+    }
+
+    //   this.state._inputElement = document.getElementById("equipment-input");
+
+
 
     render() {
         return (
@@ -139,7 +165,7 @@ export default class Upload extends React.Component {
                             <img src={upload} id="upload-image" alt="upload" /> Upload Photo *
                         </div>
                     </div>
-                    
+
 
 
                     <div>
@@ -151,15 +177,15 @@ export default class Upload extends React.Component {
                                 id="equipmentInput"
                                 placeholder="ex: 1 pot"
                                 name="recipeName"
-                                value={this.state.term}
+                                value={this.state.termEquip}
                                 // onInput={(event) => { this.handleChange(event) }} 
-                                onChange={this.onChange}/>
-                            <div onClick={this.onSubmit}><img src={add}
-                                alt="add" 
+                                onChange={this.onChange} />
+                            <img src={add}
+                                alt="add"
                                 // onClick={this.add}
-                                
-                                id="add" /></div>
-                            <List items={this.state.items} />
+                                onClick={this.onSubmitEquip}
+                                id="add" />
+                            <List items={this.state.itemsEquip} />
                             {/* <TodoItems entries={this.state.items}/> */}
                         </div>
                     </div>
@@ -171,22 +197,38 @@ export default class Upload extends React.Component {
                                 id="ingredientsInput"
                                 placeholder="ex: 2 tablespoons of butter"
                                 name="recipeName"
-                                value={null}
-                                onInput={(event) => { this.handleChange(event) }} />
-                            <img src={add} alt="add" id="add" />
+                                value={this.state.termIngred}
+                                // onInput={(event) => { this.handleChange(event) }} 
+                                onChange={this.onChange} />
+                            <img src={add}
+                                alt="add"
+                                // onClick={this.add}
+                                onClick={this.onSubmitIngred}
+                                id="add" />
+                            <List items={this.state.itemsIngred} />
                         </div>
                     </div>
                     <div>
                         <label>Steps*</label>
                         <div id="steps" className="form-group">
-                            <text area type="recipeName"
+                            <textarea type="recipeName"
                                 className="form-control"
                                 id="stepsInput"
                                 placeholder="Pour 250mL water into the pot"
                                 name="recipeName"
-                                value={null}
-                                onInput={(event) => { this.handleChange(event) }} />
-                            <img src={add} alt="add" id="add" />
+
+                                // value={null}
+                                // onInput={(event) => { this.handleChange(event) }} />
+                                value={this.state.termSteps}
+                                // onInput={(event) => { this.handleChange(event) }} 
+                                onChange={this.onChange} />
+                            <img src={add}
+                                alt="add"
+                                onClick={this.onSubmitSteps}
+                                // onClick={this.add}
+
+                                id="add-steps" />
+                            <ListSteps items={this.state.itemsSteps} />
                         </div>
                     </div>
 

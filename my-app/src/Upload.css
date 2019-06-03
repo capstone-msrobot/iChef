@@ -26,13 +26,14 @@
     margin-left: auto
 }
 
-#recipeName, #cookingTime, #steps {
-    width: 95%;
+#recipeName, #cookingTime, #equipmentInput, #ingredientsInput  {
+    width: 90%;
     display: inline;
 }
 
-#equipmentInput, #ingredientsInput, #stepsInput {
-    width: 92%;
+#stepsInput {
+    width: 90%;
+    height: 150px;  
     display: inline;
 }
 
@@ -53,6 +54,11 @@
 
 #add {
     height: 30px;
-    display: inline;
     margin-left: 2%;
+}
+
+#add-steps {
+    height: 30px;
+    margin-left: 2%;
+    margin-top: -5%;
 }

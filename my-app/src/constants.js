@@ -9,5 +9,6 @@ export const ROUTES = {
     Login: "/Login",
     SignUp: "/SignUp",
     Profile: "/Profile",
-    Upload: "/Upload"
+    Upload: "/Upload",
+    Settings: "/Settings"
 }
