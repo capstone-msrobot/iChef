@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#algolia
+.env
+algoliaConfig.js
+algoliaConfigVal.js
+algoliaAdminConfigVal.js

@@ -1,0 +1,220 @@
+[{
+    "name": "Butter Chicken",
+    "ingredients": [
+        "1/2kg Bonless Chicken",
+        "200 gram Yogurt",
+        "2 teaspoon Red chilli powder",
+        "to tast Salt", 
+        "2 teaspoon Ginger-garlic paste",
+        "2 1/2 teaspoon Dry fenugreek leaves",
+        "2 teaspoon Lemon juice",
+        "2 Onion",
+        "1/2 teaspoon Cumin seeds",
+        "3 Green chilli",
+        "3 Tomatoes",
+        "1 teaspoon Coriander powder",
+        "1/4cup Fresh cream(Amul)",
+        "1 small Coal Pieces",
+        "1/2 cup Butter",
+        "1 Bay leaf",
+        "small pinch Food color"
+    ],
+    "ingredientsList": [
+        "Chicken",
+        "Yogurt",
+        "Red chilli powder",
+        "Salt",
+        "Ginger garlic paste",
+        "Dry genugreek leaces",
+        "Lemon juice",
+        "Onion",
+        "Cumin seeds",
+        "Green chilli",
+        "Tomatoes",
+        "Coriander powder",
+        "Fresh cream(Amul)",
+        "Coal Pieces",
+        "Butter",
+        "Bay leaf",
+        "Food color"
+    ],
+    "equipments": [
+        "1 pan",
+        "1 bowl"
+    ],
+    "equipmentsList": [
+        "pan",
+        "bowl"
+    ],
+    "steps": [
+        "To prepare the ingredients, finely dice/mince the Onion, garlic, ginger, chili pepper, cilantro & Tomatoes",
+        "Heat a pan on medium high & melt a generous 2 tbsp of ghee or butter in the pan",
+        "Add the diced onion and saute for 2-3 minutes until, soft & translucent",
+        "Add the minced garlic, ginger, and finely sliced thai chili peppr and s"
+    ],
+    "time": 30,
+    "imageURL": "https://firebasestorage.googleapis.com/v0/b/capstone-msrobot.appspot.com/o/butter%20chicken%2FfinalLook.jpg?alt=media&token=20049470-451c-4983-913b-306836e1a359",
+    "originalURL": "",
+    "stepsURL": {
+        "1":"https://firebasestorage.googleapis.com/v0/b/capstone-msrobot.appspot.com/o/butter%20chicken%2Fstep1.png?alt=media&token=5124649d-c56b-4ae7-bc9d-0bfa99601dcb",
+        "2":"https://firebasestorage.googleapis.com/v0/b/capstone-msrobot.appspot.com/o/butter%20chicken%2Fstep2.png?alt=media&token=6d476d83-23ee-4809-b9b9-02cbedf18b97",
+        "3:":"https://firebasestorage.googleapis.com/v0/b/capstone-msrobot.appspot.com/o/butter%20chicken%2Fstep3.png?alt=media&token=92b8c6d0-507a-4cd7-81e9-0ebbf5aeab36",
+        "4":"https://firebasestorage.googleapis.com/v0/b/capstone-msrobot.appspot.com/o/butter%20chicken%2Fstep4.jpg?alt=media&token=ce4da7fe-e5c7-41ab-8899-8e9ee7d605d6",
+        "5":"https://firebasestorage.googleapis.com/v0/b/capstone-msrobot.appspot.com/o/butter%20chicken%2Fstep5.jpg?alt=media&token=fab43a10-54c0-4cf0-836e-dc94b1f5b0af",
+        "6":"https://firebasestorage.googleapis.com/v0/b/capstone-msrobot.appspot.com/o/butter%20chicken%2Fstep6.jpg?alt=media&token=f39c82ec-e248-4e3b-b972-3d98501586cf",
+        "7":"https://firebasestorage.googleapis.com/v0/b/capstone-msrobot.appspot.com/o/butter%20chicken%2Fstep7.jpg?alt=media&token=ffd1ab32-9c26-475f-a557-c1ec43e98d23",
+        "8":"https://firebasestorage.googleapis.com/v0/b/capstone-msrobot.appspot.com/o/butter%20chicken%2Fstep8.jpg?alt=media&token=298531a6-d597-4fe0-8c85-ece99ccfa7f3",
+        "9":"https://firebasestorage.googleapis.com/v0/b/capstone-msrobot.appspot.com/o/butter%20chicken%2Fstep9.jpg?alt=media&token=470d2d0b-7417-488c-81b3-bf9a17a7d3cb",
+        "10":"https://firebasestorage.googleapis.com/v0/b/capstone-msrobot.appspot.com/o/butter%20chicken%2Fstep10.jpg?alt=media&token=ebb9f3e4-78ef-478e-959c-0019baf3687a"
+    }
+},{
+    "name": "Creamy Cajun Chicken Pasta",
+    "ingredients": [
+      "4 ounces linguine pasta",
+      "2 boneless, skinless chicken breast halves, sliced into thin strips",
+      "2 teaspoons Cajun seasoning",
+      "2 tablespoons butter",
+      "1 green bell pepper, chopped",
+      "1/2 ed bell pepper, chopped",
+      "4 fresh mushrooms, sliced",
+      "1 green onion, minced",
+      "1 1/2 cups heavy cream",
+      "1/4 teaspoon dried basil",
+      "1/4 teaspoon lemon pepper",
+      "1/4 teaspoon teaspoon salt",
+      "1/8 teaspoon garlic powder",
+      "1/8 teaspoon ground black pepper",
+      "2 tablespoons grated Parmesan cheese"
+    ],
+    "ingredientsList": ["pasta", "chicken", "cajun seasoning", "butter", "green bell pepper", "bell pepper", "mushrooms", "onion", "heavy cream", "basil", "lemon pepper", "salt", "garlic powder", "black pepper", "parmesan cheese"],
+    "time": "30",
+    "steps": [
+      "Bring a large pot of lightly salted water to a boil. Add linguini pasta, and cook for 8 to 10 minutes, or until al dente; drain.",
+      "Meanwhile, place chicken and Cajun seasoning in a bowl, and toss to coat.",
+      "In a large skillet over medium heat, saute chicken in butter until no longer pink and juices run clear, about 5 to 7 minutes. Add green and red bell peppers, sliced mushrooms and green onions; cook for 2 to 3 minutes. Reduce heat, and stir in heavy cream. Season the sauce with basil, lemon pepper, salt, garlic powder and ground black pepper, and heat through.",
+      "In a large bowl, toss linguini with sauce. Sprinkle with grated Parmesan cheese."
+    ],
+    "equipment": [
+      "1 pan"
+    ],
+    "equipmentList":["pan"],
+    "stepsURL":"",
+    "imageURL": "https://images.unsplash.com/photo-1473093226795-af9932fe5856?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1585&q=80",
+    "originalURL": "https://www.allrecipes.com/recipe/12009/creamy-cajun-chicken-pasta/?internalSource=hub%20recipe&referringContentType=Search"
+  },
+  {
+    "name": "One-Pot Bacon Cheeseburger Pasta",
+    "ingredients": [
+      "8 bacon strips, chopped",
+      "2 pounds ground beef",
+      "1/2 large red onion, chopped",
+      "12 ounces uncooked spiral pasta",
+      "4 cups chicken broth",
+      "2 cans (15 ounces each) crushed tomatoes",
+      "1 can (8 ounces) tomato sauce",
+      "1 cup water",
+      "1/4 cup ketchup",
+      "3 tablespoons prepared mustard",
+      "2 tablespoons Worcestershire sauce",
+      "1/4 teaspoon salt",
+      "1/4 teaspoon pepper",
+      "1/3 cup chopped dill pickle",
+      "Chopped tomatoes, shredded lettuce, sliced pickles and sliced red onion, optional"
+    ],
+    "ingredientsList": ["bacon", "ground beef", "red onion", "pasta", "chicken broth", "tomatos", "tomato sauce", "water", "ketchub", "mustard", "Worcestershire sauce", "salt", "pepper", "pickle", "lettuce", "pickle", "red onion"],
+    "time": "30",
+    "steps": [
+      "In a 6-quart stockpot, cook bacon over medium heat, stirring occasionally, until crisp, 6-8 minutes. Remove with a slotted spoon; drain on paper towels. Discard drippings.",
+      "In the same pot, cook ground beef and onion over medium heat until meat is no longer pink, breaking into crumbles, 6-8 minutes; drain. Add the next 10 ingredients; bring to a boil. Reduce heat; simmer, covered, until pasta is al dente, stirring occasionally, about 10 minutes.",
+      "Stir in 1 cup cheese, pickle and bacon; cook and stir until cheese is melted. Serve with remaining cheese and, if desired, tomatoes, lettuce, pickles and red onions."
+    ],
+    "equipment": [
+      "1 pot"
+    ],
+    "equipmentList":["pot"],
+    "stepsURL":"",
+    "imageURL": "https://www.tasteofhome.com/wp-content/uploads/2018/06/One-Pot-Bacon-Cheeseburger-Pasta_EXPS_BFBZ19_212580_B01_17_4b-696x696.jpg",
+    "originalURL": "https://www.tasteofhome.com/recipes/one-pot-bacon-cheeseburger-pasta/"
+  },
+  {
+    "name": "Skinny Fettucine Alfredo",
+    "ingredients": [
+      "8 ounces fettuccine",
+      "2 tablespoons all-purpose flour",
+      "1/2 large red onion, chopped",
+      "1 1/4 cups 2% milk, or more, as needed",
+      "2 tablespoons heavy cream",
+      "1/4 teaspoon garlic powder",
+      "2 ounces Neufchatel cheese, cubed",
+      "1/4 cup freshly grated Parmesan cheese",
+      "Kosher salt and freshly ground black pepper, to taste",
+      "2 tablespoons chopped fresh parsley leaves"
+    ],
+    "ingredientsList": ["fettuccine", "flour", "red onion", "milk", "cream", "garlic powder", "cheese", "parmesan cheese", "black pepper", "parsley"],
+    "time": "30",
+    "steps": [
+      "In a large pot of boiling salted water, cook pasta according to package instructions; drain well.",
+      "Melt butter in a saucepan over medium heat. Whisk in flour until lightly browned, about 1 minute. Gradually whisk in milk, and cook, whisking constantly, until incorporated, about 1-2 minutes. Stir in heavy cream and garlic powder until slightly thickened, about 1 minute.",
+      "Stir in cheeses until melted, about 1-2 minutes. If the mixture is too thick, add more milk as needed; season with salt and pepper, to taste.",
+      "Stir in pasta and gently toss to combine.",
+      "Serve immediately, garnished with parsley, if desired."
+    ],
+    "equipment": [
+      "1 pan"
+    ],
+    "equipmentList":["pan"],
+    "stepsURL":"",
+    "imageURL": "https://s23209.pcdn.co/wp-content/uploads/2014/01/IMG_3203edit-360x360.jpg",
+    "originalURL": "https://damndelicious.net/2014/01/24/skinny-fettuccine-alfredo/"
+  },{
+    "name": "Kimchi Fried Rice",
+    "ingredients": [
+      "1 tablespoon canola oil",
+      "1/4 cup ground beef",
+      "1 green onion, sliced, white and green parts separated",
+      "1 cup kimchi, drained and chopped",
+      "1 tablespoon gochujang (Korean hot pepper paste), or to taste (optional)",
+      "3 cups cooked short-grain rice",
+      "1 teaspoon sesame oil",
+      "1 teaspoon butter",
+      "1 egg"
+    ],
+    "ingredientsList":["canola oil", "ground beef", "green onion", "kimchi", "gochujang", "short-grain rice", "sesame oil", "butter"],
+    "time": "25",
+    "steps": [
+      "Heat canola oil in large skillet over high heat. Stir ground beef and white parts of green onion into skillet and reduce heat to medium. Cook and stir beef and green onion until meat is browned and onion is fragrant, 1 to 2 minutes.",
+      "Stir kimchi and gochujang into meat mixture and cook until warmed through and fragrant, 2 to 4 minutes. Add rice; cook and stir until rice is heated through and coated with gochujang, 3 to 5 minutes more.",
+      "Drizzle sesame oil over rice mixture and stir to coat. Garnish with green parts of green onion.",
+      "Melt 1 teaspoon butter in a skillet over medium-high heat. Crack egg into the pan and cook until white is completely set and yolk is thick, 3 to 4 minutes. Place egg over fried rice."
+    ],
+    "equipment": [
+      "1 pan"
+    ],
+    "equipmentList":["pan"],
+    "imageURL": "https://www.maangchi.com/wp-content/uploads/2008/03/fried-rice.jpg",
+    "stepsURL":"",
+    "originalURL": "https://www.allrecipes.com/recipe/237053/kimchi-fried-rice-kimchi-bokkeumbap/?internalSource=hub%20recipe&referringContentType=Search"
+  },{
+    "name": "Breakfast Burritos",
+    "ingredients": [
+      "1 pound bacon",
+      "10 eggs",
+      "1 (16 ounce) can refried beans",
+      "8 ounces shredded Cheddar cheese",
+      "10 (10 inch) flour tortillas"
+    ],
+    "ingredientsList": ["bacon", "eggs", "beans", "cheddar cheese", "tortillas"],
+    "time": "25",
+    "steps": [
+      "Place bacon in a large, deep skillet. Cook over medium high heat until evenly brown. Drain, and set aside. Wrap the tortillas in foil and warm in the oven.",
+      "Fry the eggs in a greased skillet until firm. In a small sauce pan heat the refried beans.",
+      "Top each tortilla with refried beans, 2 strips of bacon, 1 egg and a little cheese. Roll tortillas into burritos and serve."
+    ],
+    "stepsURL":"",
+    "equipment": [
+      "1 pan"
+    ],
+    "equipmentList":["pan"],
+    "imageURL": "https://i0.wp.com/www.improvoven.com/wp-content/uploads/2015/06/bacon-egg-breakfast-wrap1.jpg?w=640",
+    "originalURL": "https://www.allrecipes.com/recipe/21368/breakfast-burritos/?internalSource=hub%20recipe&referringContentType=Search"
+}]

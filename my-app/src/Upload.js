@@ -5,6 +5,10 @@ import add from "./img/addIcon.png";
 import upload from "./img/uploadIcon.png";
 import "./Upload.css";
 import firebase from 'firebase';
+import ReactDOM from 'react-dom'
+import List from './List';
+import ListSteps from "./ListSteps";
+import TodoItems from "./TodoItems";
 
 export default class Upload extends React.Component {
     constructor(props) {
@@ -16,8 +20,17 @@ export default class Upload extends React.Component {
             subEmail: '',
             username: '',
             recipeName: '',
-
+            equipment: [],
+            termEquip: '',
+            termIngred: '',
+            termSteps: '',
+            itemsEquip: [],
+            itemsIngred: [],
+            itemsSteps: []
         };
+
+        // this.add = this.add.bind(this);
+        // this.addItem = this.addItem.bind(this);
     }
 
     componentWillMount() {
@@ -71,17 +84,59 @@ export default class Upload extends React.Component {
         this.setState(changes); // update state
     }
 
+    // add(event) {
+    //     console.log("here")
+    //     let welcome = React.createElement('input',{id:'#add'})
+    //     ReactDOM.render(welcome,document.getElementById('equipment-input'))
+    // }
+
+    onChange = (event) => {
+        this.setState({ term: event.target.value });
+    }
+
+    onSubmitEquip = (event) => {
+        event.preventDefault()
+        this.setState({
+            termEquip: '',
+            itemsEquip: [...this.state.itemsEquip, this.state.termEquip]
+        });
+    }
+
+    //   this.state._inputElement = document.getElementById("equipment-input");
+
+    onSubmitIngred = (event) => {
+        event.preventDefault()
+        this.setState({
+            termIngred: '',
+            itemsIngred: [...this.state.itemsIngred, this.state.termIngred]
+        });
+    }
+
+    //   this.state._inputElement = document.getElementById("equipment-input");
+
+    onSubmitSteps = (event) => {
+        event.preventDefault()
+        this.setState({
+            termSteps: '',
+            itemsSteps: [...this.state.itemsSteps, this.state.termSteps]
+        });
+    }
+
+    //   this.state._inputElement = document.getElementById("equipment-input");
+
+
+
     render() {
         return (
-            <div>
+            <div id="upload-content">
                 <Navigation />
                 <div id="title">
-                    <p className="title-upload">Your Recipes</p>
+                    <p className="title-upload">Your Recipe</p>
                 </div>
 
                 <div id="upload-content">
                     <div className="row">
-                        <div className="col-md-5">
+                        <div className="col-md-6">
                             <div id="recipe-name" className="form-group">
                                 <label>Recipe Name *</label>
                                 <input type="recipeName"
@@ -93,9 +148,9 @@ export default class Upload extends React.Component {
                                     onInput={(event) => { this.handleChange(event) }} />
                             </div>
                         </div>
-                        <div className="col-md-5">
+                        <div className="col-md-6">
                             <div id="cooking-time" className="form-group">
-                                <label>Cooking Time *</label>
+                                <label>Cooking Time (Minutes) *</label>
                                 <input type="recipeName"
                                     className="form-control"
                                     id="cookingTime"
@@ -103,51 +158,80 @@ export default class Upload extends React.Component {
                                     name="recipeName"
                                     value={null}
                                     onInput={(event) => { this.handleChange(event) }} />
-                                <p id="min-label">Minutes</p>
-                            </div>
-                        </div>
-                        <div className="col-md-5">
-                            <div id="ingredients-input" className="form-group">
-                                <label>Ingredients *</label>
-                                <input type="recipeName"
-                                    className="form-control"
-                                    id="ingredientsInput"
-                                    placeholder="ex: 2 tablespoons of butter"
-                                    name="recipeName"
-                                    value={null}
-                                    onInput={(event) => { this.handleChange(event) }} />
-                                {/* <img src={add} alt="add" /> */}
-                            </div>
 
-                            <img src={upload} alt="upload" /> Upload Background Photo *
-                        </div>
-                        <div className="col-md-5">
-                            <div id="equipment-input" className="form-group">
-                                <label>Equipment *</label>
-                                <input type="recipeName"
-                                    className="form-control"
-                                    id="equipmentInput"
-                                    placeholder="ex: 1 pot"
-                                    name="recipeName"
-                                    value={null}
-                                    onInput={(event) => { this.handleChange(event) }} />
-                                {/* <img src={add} alt="add" /> */}
                             </div>
                         </div>
-                        <div className="col-md-5">
-                            <div id="steps" className="form-group">
-                                <label>Steps*</label>
-                                {/* <text area type="recipeName"
-                        className="form-control"
-                        id="recipeName"
-                        placeholder="ex: 1 pot"
-                        name="recipeName"
-                        value={null}
-                        onInput={(event) => { this.handleChange(event) }} />
-                    <img src={add} alt="add" /> */}
-                            </div>
+                        <div id="upload-button" className="col-md-6">
+                            <img src={upload} id="upload-image" alt="upload" /> Upload Photo *
                         </div>
                     </div>
+
+
+
+                    <div>
+                        <label>Equipment *</label>
+                        <div id="equipment-input" className="form-group">
+
+                            <input type="recipeName"
+                                className="form-control"
+                                id="equipmentInput"
+                                placeholder="ex: 1 pot"
+                                name="recipeName"
+                                value={this.state.termEquip}
+                                // onInput={(event) => { this.handleChange(event) }} 
+                                onChange={this.onChange} />
+                            <img src={add}
+                                alt="add"
+                                // onClick={this.add}
+                                onClick={this.onSubmitEquip}
+                                id="add" />
+                            <List items={this.state.itemsEquip} />
+                            {/* <TodoItems entries={this.state.items}/> */}
+                        </div>
+                    </div>
+                    <div>
+                        <label>Ingredients *</label>
+                        <div id="ingredients-input" className="form-group">
+                            <input type="recipeName"
+                                className="form-control"
+                                id="ingredientsInput"
+                                placeholder="ex: 2 tablespoons of butter"
+                                name="recipeName"
+                                value={this.state.termIngred}
+                                // onInput={(event) => { this.handleChange(event) }} 
+                                onChange={this.onChange} />
+                            <img src={add}
+                                alt="add"
+                                // onClick={this.add}
+                                onClick={this.onSubmitIngred}
+                                id="add" />
+                            <List items={this.state.itemsIngred} />
+                        </div>
+                    </div>
+                    <div>
+                        <label>Steps*</label>
+                        <div id="steps" className="form-group">
+                            <textarea type="recipeName"
+                                className="form-control"
+                                id="stepsInput"
+                                placeholder="Pour 250mL water into the pot"
+                                name="recipeName"
+
+                                // value={null}
+                                // onInput={(event) => { this.handleChange(event) }} />
+                                value={this.state.termSteps}
+                                // onInput={(event) => { this.handleChange(event) }} 
+                                onChange={this.onChange} />
+                            <img src={add}
+                                alt="add"
+                                onClick={this.onSubmitSteps}
+                                // onClick={this.add}
+
+                                id="add-steps" />
+                            <ListSteps items={this.state.itemsSteps} />
+                        </div>
+                    </div>
+
                 </div>
                 {/* <div id="save" onClick={() => {
                     this.addRecipe();

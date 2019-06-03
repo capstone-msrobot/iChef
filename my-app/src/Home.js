@@ -30,14 +30,6 @@ export default class Home extends React.Component {
             <div>
                 <div id="image" className="img-fluid" alt ="home cover"> 
                     <Navigation />
-                     {/* <div id="searchBox">
-                     <form onSubmit={()=>this.state.search.length > 0 ? this.ShowResults(): this.props.history.push({pathname: "Explore"})}>
-                        <input id="search" type="text" placeholder="Search for a Recipe..." onInput={evt=>this.setState({search: evt.target.value})}/>
-                        <div id="buttonSearch"> 
-                            <a className="searchIcon"><i className="fas fa-search"></i></a>
-                        </div>
-                    </form>
-                    </div>  */}
 
                     <div id="searchBox">
                     <form className="d-flex" onSubmit={()=>this.state.search.length > 0 ? this.ShowResults(): this.props.history.push({pathname: "Explore"})}>

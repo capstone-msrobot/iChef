@@ -14,6 +14,7 @@ import Profile from "./Profile"
 import Upload from "./Upload"
 import ProfileEquipment from "./ProfileEquipment"
 import ProfileIngred from "./ProfileIngred"
+import Settings from "./Settings"
 
 class App extends Component {
   constructor(props){
@@ -66,6 +67,7 @@ class App extends Component {
           <Route exact path={ROUTES.Upload} component={Upload} />
           <Route exact path={ROUTES.ProfileEquipment} component={ProfileEquipment} />
           <Route exact path={ROUTES.ProfileIngred} component={ProfileIngred} />
+          <Route exact path={ROUTES.Settings} component={Settings} />
           <Redirect to={ROUTES.Home} />
         </Switch>
       </BrowserRouter>

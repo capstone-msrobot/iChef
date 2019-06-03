@@ -1,3 +1,7 @@
+#upload-content {
+    width: 80%;
+}
+
 
 #title {
     margin-bottom: 3%;
@@ -17,13 +21,20 @@
 }
 
 .col-md-5 {
-    width: 25%;
+    /* width: 25%; */
     margin-right: auto;
     margin-left: auto
 }
 
-#recipeName, #cookingTime, #steps, #equipmentInput, #ingredientsInput {
-    width: 40%;
+#recipeName, #cookingTime, #equipmentInput, #ingredientsInput  {
+    width: 90%;
+    display: inline;
+}
+
+#stepsInput {
+    width: 90%;
+    height: 150px;  
+    display: inline;
 }
 
 /* 
@@ -32,5 +43,22 @@
 } */
 
 #cookingTime :last-child {
-    display:inline-block;
+    display: inline-block;
+}
+
+#upload-image {
+    height: 60px;
+    margin-right: 10%;
+    margin-bottom: 2%;
+}
+
+#add {
+    height: 30px;
+    margin-left: 2%;
+}
+
+#add-steps {
+    height: 30px;
+    margin-left: 2%;
+    margin-top: -5%;
 }
