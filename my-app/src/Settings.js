@@ -58,6 +58,16 @@ export default class Profile extends React.Component {
         })
     }
 
+    handleChange(event) {
+        //         console.log(event);
+        let field = event.target.name; // which input
+        let value = event.target.value; // what value
+        // console.log(value);
+        let changes = {}; // object to hold changes
+        changes[field] = value; // change this field
+        this.setState(changes); // update state
+    }
+
     render() {
         return (
             <div id="profile-body">
