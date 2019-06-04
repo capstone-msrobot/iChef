@@ -94,27 +94,18 @@ export default class ShowRecipe extends React.Component {
                             })}
                         </ul>
                     </div>
-                    <div className="col">
-                        <h3>Directions</h3>
-                        <ol id="customlist">
-                            {this.props.location.state.recipe.steps.map((step, i) => {
-                                // console.log(this.props.location.state.recipe.stepsURL[i + 1])
-                                return (
-                                    <div>
-
-                                        {(this.props.location.state.recipe.stepsURL !== "" && this.props.location.state.recipe.stepsURL[i + 1] !== undefined || this.props.location.state.recipe.stepsURL[i + 1] !== "" ? <div><img src={this.props.location.state.recipe.stepsURL[i + 1]}></img></div> : "bye")}
-                                        {/* {this.props.location.state.recipe.stepsURL !== "" && this.props.location.state.recipes.stepsURL[i + 1] !== undefined || this.props.location.state.recipes.stepsURL[i + 1] !== "" ? <img src={this.props.location.state.recipes.stepsURL[i + 1]} alt="steps" height="42" width="42"></img>:""} */}
-                                        <div>
-                                            <ol>
-                                                <li onClick={(event) => { this.strike(event) }} key={i}>{step}</li>
-                                            </ol>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </ol>
-                    </div>
-                </div>
+                    
+                        <div className="col">
+                            <h3>Directions</h3>
+                            <ol id="customlist">
+                                {this.props.location.state.recipe.steps.map((step, i) => {
+                                    return (
+                                        <li id="step-list" onClick={(event) => { this.strike(event) }} key={i}>{step}</li>
+                                    )
+                                })} 
+                            </ol>
+                        </div>
+                    </div> 
                 <Footer />
             </div>
         )
