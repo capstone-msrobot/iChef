@@ -2,13 +2,10 @@ import React from 'react';
 import Navigation from "./Navigation"
 import Footer from "./Footer"
 import add from "./img/addIcon.png";
-import upload from "./img/uploadIcon.png";
 import "./Upload.css";
 import firebase from 'firebase';
-import ReactDOM from 'react-dom'
 import List from './List';
 import ListSteps from "./ListSteps";
-import { domainToASCII } from 'url';
 import algoliasearch from 'algoliasearch'
 import id from './algoliaConfig'
 import config from './algoliaAdminConfigVal'
@@ -81,12 +78,21 @@ export default class Upload extends React.Component {
         // }
         // reference.child(subEmail).set(newData)'
         var postData = {
-            recipes: this.state.objectKey
+            equipment: this.state.itemsEquip,
+            equipmentList: this.state.itemsEquip,
+            imageURL: this.state.downloadURL,
+            ingredients: this.state.itemsIngred,
+            ingredientsList: this.state.itemsIngred,
+            name: this.state.recipeName,
+            originalURL: this.state.username,
+            steps: this.state.itemsSteps,
+            stepsURL: '',
+            time: this.state.time
         };
-        var newPostKey = firebase.database().ref().child('users/'+subEmail+'/Author').push().key;
-        console.log(newPostKey);
+        // var newPostKey = firebase.database().ref().child('users/'+subEmail+'/Author').push().key;
+        // console.log(newPostKey);
         var updates = {};
-        updates['/users/'+subEmail+'/Recipes/' + newPostKey] = postData;
+        updates['/users/'+subEmail+'/Recipes/' + this.state.objectKey] = postData;
         return firebase.database().ref().update(updates);
     }
 
@@ -228,7 +234,7 @@ export default class Upload extends React.Component {
                 steps: this.state.itemsSteps,
                 equipment: this.state.itemsEquip,
                 equipmentList:this.state.itemsEquip,
-                imageURL: this.state.downloadURL.length == 0 ? '' : this.state.downloadURL,
+                imageURL: this.state.downloadURL.length === 0 ? '' : this.state.downloadURL,
                 originalURL: this.state.username,
                 stepsURL: ''
                 })
@@ -252,6 +258,7 @@ export default class Upload extends React.Component {
         }).then(() => {
             this.addRecipe();
         });
+        // this.addRecipe();
       }
     
     // _handleImageChange(e) {
@@ -285,11 +292,11 @@ export default class Upload extends React.Component {
             //Update progress bar
             task.on('state_changed',
                 (snapshot) =>{
-                    var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+                    //var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
                     // uploader.value = percentage;
                 },
                 (err) => {
-    
+                    // console.log(err)
                 },
                 () =>{
                     task.snapshot.ref.getDownloadURL().then((downloadURL) =>{
@@ -310,11 +317,10 @@ export default class Upload extends React.Component {
         let {imagePreviewUrl} = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
-          $imagePreview = (<img src={imagePreviewUrl} />);
+          $imagePreview = (<img src={imagePreviewUrl} alt="preview"/>);
         } else {
           $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
         }
-        let map = this.state.imageViews
         return (
             <div id="upload-content">
                 <Navigation />
@@ -447,14 +453,6 @@ export default class Upload extends React.Component {
 
                 <Footer />
             </div>
-        )
-    }
-}
-
-class addPictures extends React.Component {
-    render() {
-        return(
-            <div>im here</div>
         )
     }
 }

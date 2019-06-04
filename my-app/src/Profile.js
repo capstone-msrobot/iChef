@@ -4,9 +4,9 @@ import Footer from "./Footer"
 import "./Profile.css"
 import user from "./img/user.jpg";
 import recipesIconSelected from "./img/recipesIcon-selected.png";
-// import recipesIconNotSelected from "./img/ingredientIcon-notSelected.png";
-import equipmentIconSelected from "./img/equipmentIcon-selected.png";
-import equipmentIconNotSelected from "./img/equipmentIcon-notSelected.png";
+
+import equipIconNotSelected from "./img/equipment 2.png";
+import ingredIconNotSelected from "./img/ingredient.png";
 import settingsIcon from "./img/settingsIcon.png";
 
 import users from "./img/pasta.jpg";
@@ -88,14 +88,14 @@ export default class Profile extends React.Component {
                             <li>
                                 <a href="./ProfileEquipment">
                                     {/* check state and change image depending on if user is on recipes */}
-                                    <img src={equipmentIconNotSelected} alt="equipment" />
+                                    <img src={equipIconNotSelected} alt="equipment" />
                                     Equipment
                                 </a>
                             </li>
                             <li>
                                 <a href="./ProfileIngred">
                                     {/* check state and change image depending on if user is on recipes */}
-                                    <img src={equipmentIconNotSelected} alt="equipment" />
+                                    <img src={ingredIconNotSelected} alt="equipment" />
                                     Ingredients
 
                                 </a>

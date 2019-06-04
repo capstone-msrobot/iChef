@@ -17,7 +17,8 @@ export default class Results extends React.Component {
             search: this.props.location.state.search,
             result:[],
             filter: "",
-            oldResult: []
+            oldResult: [],
+            clicked: false
         }
     }
 
@@ -30,6 +31,29 @@ export default class Results extends React.Component {
             pathname: "/Results", // should be queried to correct recipe page
             state: {
                 search: this.state.search
+            }
+        })
+    }
+
+
+    componentWillMount() {
+        this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({
+                    email: user.email,
+                    subEmail: user.email.substr(0, user.email.indexOf('@'))
+                })
+
+                let reference = firebase.database().ref('users/' + this.state.subEmail + '/Equipment');
+                reference.on('value', (snapshot) => {
+                    // let settings = snapshot.val();
+                    let equipment = snapshot.val();
+                    if (equipment != null) {
+                        this.handleEquipmentFilter(equipment);
+                    }
+                    console.log(snapshot.val())
+
+                })
             }
         })
     }
@@ -58,21 +82,18 @@ export default class Results extends React.Component {
         //   });
         var filtering = 'equipmentList:' + value[0].toLowerCase();
         for (let i = 1; i < value.length; i++) {
-            filtering = filtering + ' AND ' + "equipmentList" + value[i].toLowerCase();
+            filtering = filtering + ' OR equipmentList:' + value[i].toLowerCase();
         }
         // console.log(filtering)
         index.search({
             query: (this.props.location.state.search).toLowerCase(),
-            facetFilters: [
-                filtering,
-                this.state.filter
-            ]
+            filters: filtering
           }).then(res => {
-              console.log(this.state.filter)
+            console.log(this.state.filter)
             console.log(res.hits);
             this.setState({
                 result: res.hits,
-                filter: this.state.filter == "" ? filtering : this.state.filter + " AND " + filtering
+                filter: this.state.filter === "" ? filtering : this.state.filter + " OR " + filtering
             })
         });
     }
@@ -106,7 +127,7 @@ export default class Results extends React.Component {
         // })
         var filtering = 'ingredientsList:' + value[0].toLowerCase();
         for (let i = 1; i < value.length; i++) {
-            filtering = filtering + ' AND ' + "ingredientsList" + value[i].toLowerCase();
+            filtering = filtering + ' AND ingredientsList' + value[i].toLowerCase();
         }
         index.search({
             query: (this.props.location.state.search).toLowerCase(),
@@ -118,7 +139,7 @@ export default class Results extends React.Component {
             console.log(res.hits);
             this.setState({
                 result: res.hits,
-                filter: this.state.filter == "" ? filtering : this.state.filter + " AND " + filtering
+                filter: this.state.filter === "" ? filtering : this.state.filter + " AND " + filtering
             })
         });
     }
@@ -148,7 +169,7 @@ export default class Results extends React.Component {
                     food.on("child_added", (data, prevChildKey) => {
                         // console.log(data.key);
                         // console.log(f);
-                        if (f.name == data.val().name) {
+                        if (f.name === data.val().name) {
                             arr.push(data.val());
                             this.setState({
                                 result: arr,
@@ -215,7 +236,7 @@ export default class Results extends React.Component {
 
                 <div id="results">
                     <h4>Results</h4>
-                    {array != 0 ? <div className="row">
+                    {array !== 0 ? <div className="row">
                         {array.map((recipe, i) => {
                             return recipe
                         })}
