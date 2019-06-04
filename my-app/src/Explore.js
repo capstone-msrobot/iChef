@@ -322,7 +322,6 @@ export class FilterOpen extends React.Component {
             document.getElementById("checkBoxes").style.display = "none";
             document.getElementById("results").style.filter = "blur(0px)";
             this.props.filter(this.state.filter)
-
         }
 
     }
