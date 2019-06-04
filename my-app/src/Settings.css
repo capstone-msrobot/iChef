@@ -1,0 +1,33 @@
+#page-label {
+    margin-bottom: 4%;
+}
+
+.title {
+    text-align: left;
+    display: inline;
+    border-bottom: 5px solid #5EB003;
+    padding-bottom: 0.5%;
+    font-size: 25px;
+}
+
+.title-icon {
+    width: 4%;
+    height: 6%;
+    margin-left: 2%;
+}
+
+#show-content {
+    width: 74vw;
+    float: right;
+    padding-left: 3%;
+    display: block;
+    padding-right: 5%;
+    position: relative;
+    top: 80px;
+}
+
+#signup-form-settings {
+    width: 20%;
+    margin-right: auto;
+    margin-left: auto;
+}

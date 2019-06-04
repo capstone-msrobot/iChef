@@ -17,7 +17,7 @@
 }
 
 #tabLink-home, #tabLink-about, #tabLink-explore, #tabLink-signup, #tabLink-LogOut {
-    padding-right: 8rem;
+    padding-right: 2rem;
     padding-left: 3rem;
     margin-right: auto;
     margin-left: auto;
@@ -29,12 +29,13 @@
 
 #tabLink-logo {
     padding-left: 3rem;
+    margin-right: 0;
 }
 
-/* ///// */
-/* #tabLink-logo {
-    padding-left: 3%;
-} */
+#tabLink-logo {
+    text-align:center;
+    padding-left: 2%;
+}
 
 #logo {
     max-width: 70%;

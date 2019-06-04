@@ -2,6 +2,10 @@
     width: 80%;
 }
 
+.fileInput {
+    margin-bottom: 3%;
+    
+}
 
 #title {
     margin-bottom: 3%;
@@ -27,12 +31,12 @@
 }
 
 #recipeName, #cookingTime, #equipmentInput, #ingredientsInput  {
-    width: 90%;
+    width: 93%;
     display: inline;
 }
 
 #stepsInput {
-    width: 90%;
+    width: 93%;
     height: 150px;  
     display: inline;
 }
@@ -61,4 +65,21 @@
     height: 30px;
     margin-left: 2%;
     margin-top: -5%;
+}
+
+.submitButton {
+    margin-bottom: 5%;
+    background-color: #5EB003;
+    margin-top: 5%;
+    padding: 1%;
+    width: 50%;
+    text-align: center;
+    align-content: center;
+    border: 2px solid #5EB003;
+    border-radius: 8px;
+    color: white;
+}
+
+#final-button {
+    text-align: center;
 }
