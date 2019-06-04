@@ -3,13 +3,11 @@ import Navigation from "./Navigation"
 import Footer from "./Footer"
 import "./Profile.css"
 import user from "./img/user.jpg";
-import recipesIconSelected from "./img/recipesIcon-selected.png";
 import recipesIconNotSelected from "./img/recipesIcon-notSelected.png";
 import equipmentSelected from "./img/equipment-selected.png";
 import equipmentIconSelected from "./img/equipmentIcon-selected.png";
 import equipmentIconNotSelected from "./img/equipmentIcon-notSelected.png";
 import settingsIcon from "./img/settingsIcon.png";
-import logoutIcon from "./img/logoutIcon.png";
 
 // import users from "./img/pasta.jpg";
 import firebase from 'firebase';

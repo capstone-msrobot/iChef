@@ -7,8 +7,6 @@ import recipesIcon from "./img/recipesIcon-notSelected.png";
 import equipmentIconNotSelected from "./img/equipmentIcon-notSelected.png";
 import settingsIcon from "./img/settingsIcon-selected.png";
 import logoutIcon from "./img/logoutIcon.png";
-
-import users from "./img/pasta.jpg";
 import firebase from 'firebase';
 import { ROUTES } from './constants';
 import { Link } from 'react-router-dom';
