@@ -225,9 +225,10 @@ export class Equipment extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div id="signIn" onClick={() => this.handleEquipment()}> Save
-                    {/* <div className="save" onClick={() => this.updatesignup()}> */}
-                    {/* <Link to={ROUTES.Profile}>Sign In</Link> */}
+                <div id="final-button">
+                    <button className="submitButton"
+                        type="submit"
+                        onClick={() => this.handleEquipment()}> Save </button>
                 </div>
             </div>
         )
