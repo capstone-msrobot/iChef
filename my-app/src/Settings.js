@@ -5,7 +5,9 @@ import "./Profile.css"
 import user from "./img/user.jpg";
 import recipesIconNotSelected from "./img/menu grey.png";
 import recipesIcon from "./img/recipesIcon-notSelected.png";
-import equipmentIconNotSelected from "./img/equipment grayyyyy.png";
+import equipIconNotSelected from "./img/equipment 2.png";
+import ingredIconNotSelected from "./img/ingredient.png";
+// import equipmentIconNotSelected from"./img/equipment-notSelected.png";
 import settingsIcon from "./img/settingsIcon-selected.png";
 import logoutIcon from "./img/logoutIcon.png";
 import firebase from 'firebase';
@@ -95,16 +97,18 @@ export default class Profile extends React.Component {
                             </li>
 
                             <li>
-                                {/* <a href="#"> */}
-                                {/* check state and change image depending on if user is on recipes */}
-                                <img src={equipmentIconNotSelected} alt="equipment" />
-                                Equipment
+                                <a href="./ProfileEquipment">
+                                    {/* check state and change image depending on if user is on recipes */}
+                                    <img src={equipIconNotSelected} alt="equipment" />
+                                    Equipment
+                                </a>
                             </li>
                             <li>
-                                {/* <a href="#"> */}
-                                {/* check state and change image depending on if user is on recipes */}
-                                <img src={equipmentIconNotSelected} alt="equipment" />
-                                Ingredients
+                                <a href="./ProfileIngred">
+                                    {/* check state and change image depending on if user is on recipes */}
+                                    <img src={ingredIconNotSelected} alt="equipment" />
+                                    Ingredients
+                                </a>
                             </li>
                             <li className="active">
                                 <a href="./Settings"><img src={settingsIcon} alt="settings" />Settings</a>
@@ -112,10 +116,18 @@ export default class Profile extends React.Component {
                             </li>
                         </ul>
                     </div>
+                
+                <div id="page-label">
+                    <p className="title">Settings</p>
+                    <img src={settingsIcon} alt="recipes" className="title-icon" />
                 </div>
-
-                <div>
-                <form id="signup-form">
+           
+                {/* <div id="page-label">
+                    <p className="title">Settings</p>
+                    <img src={settingsIcon} alt="recipes" className="title-icon" />
+                </div> */}
+                
+                    <form id="signup-form">
                         <div className="form-group">
                             <label>New Email Address</label>
                             <input type="email"

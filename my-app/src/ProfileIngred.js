@@ -6,7 +6,10 @@ import user from "./img/user.jpg";
 
 import recipesIconNotSelected from "./img/recipesIcon-notSelected.png";
 import equipmentIconSelected from "./img/equipmentIcon-selected.png";
-import equipmentIconNotSelected from "./img/equipmentIcon-notSelected.png";
+
+import equipIconNotSelected from "./img/equipment 2.png";
+import ingredIconNotSelected from "./img/ingredient.png";
+import ingredIconSelected from "./img/ingredient green.png";
 import settingsIcon from "./img/settingsIcon.png";
 
 import firebase from 'firebase';
@@ -89,14 +92,14 @@ export default class Profile extends React.Component {
                             <li>
                                 <a href="./ProfileEquipment">
                                     {/* check state and change image depending on if user is on recipes */}
-                                    <img src={equipmentIconNotSelected} alt="equipment" />
+                                    <img src={equipIconNotSelected} alt="equipment" />
                                     Equipment
                                 </a>
                             </li>
                             <li className="active">
                                 {/* <a href="#"> */}
                                 {/* check state and change image depending on if user is on recipes */}
-                                <img src={equipmentIconSelected} alt="ingredient" />
+                                <img src={ingredIconSelected} alt="ingredient" />
                                 Ingredients
                             </li>
                             <li>
@@ -104,7 +107,6 @@ export default class Profile extends React.Component {
                                     <img src={settingsIcon} alt="settings" /> 
                                     Settings
                                 </a>
-                                Settings
                                 {/* <Link to={ROUTES.Settings}>Settings</Link> */}
                             </li>
                             {/* <li>
@@ -165,7 +167,7 @@ export class Ingredients extends React.Component {
             <div id="show-content">
                 <div id="page-label">
                     <p className="title">Your Ingredients</p>
-                    {/* <img src={ingredientIconSelected} alt="recipes" className="title-icon" /> */}
+                    <img src={ingredIconSelected} alt="recipes" className="title-icon" />
                 </div>
 
                 <div class="container">
@@ -177,12 +179,22 @@ export class Ingredients extends React.Component {
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="pasta" onClick={(event) => { this.handleChange(event) }}/>Pasta
+                                <input class="form-check-input" type="checkbox" value="beef" onClick={(event) => { this.handleChange(event) }}/>Beef
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="pork" onClick={(event) => { this.handleChange(event) }}/>Pork
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="cilantro" onClick={(event) => { this.handleChange(event) }}/>Cilantro
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="basil" onClick={(event) => { this.handleChange(event) }}/>Basil
                             </div>
                         </div>
                         <div className="col-md-4">
@@ -193,6 +205,56 @@ export class Ingredients extends React.Component {
                         <div className="col-md-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="garlic" onClick={(event) => { this.handleChange(event) }}/>Garlic
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="flour" onClick={(event) => { this.handleChange(event) }}/>Flour
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="butter" onClick={(event) => { this.handleChange(event) }}/>Butter
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="sugar" onClick={(event) => { this.handleChange(event) }}/>Sugar
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="eggs" onClick={(event) => { this.handleChange(event) }}/>Eggs
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="salt" onClick={(event) => { this.handleChange(event) }}/>Salt
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="pepper" onClick={(event) => { this.handleChange(event) }}/>Pepper
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="beans" onClick={(event) => { this.handleChange(event) }}/>Beans
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="avocado" onClick={(event) => { this.handleChange(event) }}/>Avocado
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="bacon" onClick={(event) => { this.handleChange(event) }}/>Bacon
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="sour cream" onClick={(event) => { this.handleChange(event) }}/>Sour Cream
                             </div>
                         </div>
                     </div>
