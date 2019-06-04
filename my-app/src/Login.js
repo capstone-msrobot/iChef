@@ -56,14 +56,14 @@ export default class Login extends React.Component {
 
 
     pass() {
-        return <Redirect to=
-            {{
+        console.log("here")
+        return this.props.history.push
+            ({
                 pathname: './Profile',
                 state: {
                     user: this.state.user
                 }
-            }} />
-
+            })
     }
 
     handleSignIn() {

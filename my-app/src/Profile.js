@@ -69,6 +69,7 @@ export default class Profile extends React.Component {
     }
 
     render() {
+        console.log("herreeeeeezeeee")
         return (
             <div id="profile-body">
                 <Navigation />

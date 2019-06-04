@@ -325,7 +325,7 @@ export default class Upload extends React.Component {
             <div>
                 <Navigation />
                 <div id="title">
-                    <p className="title-upload">Upload A Recipe</p>
+                    <p className="title-upload">Upload Recipe</p>
                 </div>
 
                 <div id="upload-content">
@@ -356,6 +356,7 @@ export default class Upload extends React.Component {
                             </div>
                         </div>
                         <div id="upload-button" className="col-md-6">
+                            <label id="fixed-label">Add Recipe Image *</label>
                             <div className="previewComponent">
                                 <form className="image-upload" onSubmit={(e) => this._handleSubmit(e)}>
                                     {/* <label for="file-input">
