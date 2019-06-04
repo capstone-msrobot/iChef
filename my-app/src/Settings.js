@@ -3,8 +3,11 @@ import Navigation from "./Navigation"
 import Footer from "./Footer"
 import "./Profile.css"
 import user from "./img/user.jpg";
+import recipesIconNotSelected from "./img/menu grey.png";
 import recipesIcon from "./img/recipesIcon-notSelected.png";
-import equipmentIconNotSelected from "./img/equipmentIcon-notSelected.png";
+import equipIconNotSelected from "./img/equipment 2.png";
+import ingredIconNotSelected from "./img/ingredient.png";
+// import equipmentIconNotSelected from"./img/equipment-notSelected.png";
 import settingsIcon from "./img/settingsIcon-selected.png";
 import logoutIcon from "./img/logoutIcon.png";
 import firebase from 'firebase';
@@ -85,43 +88,46 @@ export default class Profile extends React.Component {
                     </div>
                     <div className="profile-usermenu">
                         <ul className="nav">
-                            <a href="Recipes">
-                                <li id="li-test" className="link" onClick={() => this.state.recipeClicked = true}>
-                                    <div onClick={() => this.state.recipeClicked = true}>
-                                        <img src={recipesIcon} alt="recipes" />
-                                        Recipes
-
-                                    </div>
-                                </li>
-                            </a>
-
+                            <li >
+                                <a href="./Profile">
+                                    {/* check state and change image depending on if user is on recipes */}
+                                    <img src={recipesIconNotSelected} alt="recipes" />
+                                    Recipes
+                                </a>
+                            </li>
 
                             <li>
-                                {/* <a href="#"> */}
-                                {/* check state and change image depending on if user is on recipes */}
-                                <img src={equipmentIconNotSelected} alt="equipment" />
-                                Equipment
+                                <a href="./ProfileEquipment">
+                                    {/* check state and change image depending on if user is on recipes */}
+                                    <img src={equipIconNotSelected} alt="equipment" />
+                                    Equipment
+                                </a>
                             </li>
                             <li>
-                                {/* <a href="#"> */}
-                                {/* check state and change image depending on if user is on recipes */}
-                                <img src={equipmentIconNotSelected} alt="equipment" />
-                                Ingredients
+                                <a href="./ProfileIngred">
+                                    {/* check state and change image depending on if user is on recipes */}
+                                    <img src={ingredIconNotSelected} alt="equipment" />
+                                    Ingredients
+                                </a>
                             </li>
-                            <li>
-                                <a href="./Settings"><img src={settingsIcon} alt="settings" /></a>
+                            <li className="active">
+                                <a href="./Settings"><img src={settingsIcon} alt="settings" />Settings</a>
                                 {/* <Link to={ROUTES.Settings}>Settings</Link> */}
-                            </li>
-                            <li>
-                                <a href="./Home"><img src={logoutIcon} alt="sign out" /></a>
-                                <Link to={ROUTES.Home}>Sign Out</Link>
                             </li>
                         </ul>
                     </div>
+                
+                <div id="page-label">
+                    <p className="title">Settings</p>
+                    <img src={settingsIcon} alt="recipes" className="title-icon" />
                 </div>
-
-                <div>
-                <form id="signup-form">
+           
+                {/* <div id="page-label">
+                    <p className="title">Settings</p>
+                    <img src={settingsIcon} alt="recipes" className="title-icon" />
+                </div> */}
+                
+                    <form id="signup-form">
                         <div className="form-group">
                             <label>New Email Address</label>
                             <input type="email"

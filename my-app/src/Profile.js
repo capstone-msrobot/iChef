@@ -4,16 +4,13 @@ import Footer from "./Footer"
 import "./Profile.css"
 import user from "./img/user.jpg";
 import recipesIconSelected from "./img/recipesIcon-selected.png";
-// import recipesIconNotSelected from "./img/ingredientIcon-notSelected.png";
-import equipmentIconSelected from "./img/equipmentIcon-selected.png";
-import equipmentIconNotSelected from "./img/equipmentIcon-notSelected.png";
+
+import equipIconNotSelected from "./img/equipment 2.png";
+import ingredIconNotSelected from "./img/ingredient.png";
 import settingsIcon from "./img/settingsIcon.png";
-import logoutIcon from "./img/logoutIcon.png";
 
 import users from "./img/pasta.jpg";
 import firebase from 'firebase';
-import { ROUTES } from './constants';
-import { Link } from 'react-router-dom';
 
 
 // https://bootsnipp.com/snippets/M48pA
@@ -91,14 +88,14 @@ export default class Profile extends React.Component {
                             <li>
                                 <a href="./ProfileEquipment">
                                     {/* check state and change image depending on if user is on recipes */}
-                                    <img src={equipmentIconNotSelected} alt="equipment" />
+                                    <img src={equipIconNotSelected} alt="equipment" />
                                     Equipment
                                 </a>
                             </li>
                             <li>
                                 <a href="./ProfileIngred">
                                     {/* check state and change image depending on if user is on recipes */}
-                                    <img src={equipmentIconNotSelected} alt="equipment" />
+                                    <img src={ingredIconNotSelected} alt="equipment" />
                                     Ingredients
 
                                 </a>
@@ -106,6 +103,7 @@ export default class Profile extends React.Component {
                             <li>
                                 <a href="./Settings">
                                     <img src={settingsIcon} alt="settings" />
+                                    Settings
                                 </a>
                                 {/* <Link to={ROUTES.Settings}>Settings</Link> */}
                             </li>
