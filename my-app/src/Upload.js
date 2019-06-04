@@ -66,20 +66,28 @@ export default class Upload extends React.Component {
 
     addRecipe() {
         let subEmail = this.state.email.substr(0, this.state.email.indexOf('@'));
-        let reference = firebase.database().ref('users' + this.subEmail + '/Recipes');
-        let newData = {
-            Author: {
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                username: this.state.username,
-                email: this.state.email,
-                password: this.state.password,
-                recipes: null,
-                equipment: null,
-                ingredients: null,
-            }
-        }
-        reference.child(subEmail).set(newData)
+        // let reference = firebase.database().ref('users' + this.subEmail + '/Recipes');
+        // let newData = {
+        //     Author: {
+        //         firstName: this.state.firstName,
+        //         lastName: this.state.lastName,
+        //         username: this.state.username,
+        //         email: this.state.email,
+        //         password: this.state.password,
+        //         recipes: null,
+        //         equipment: null,
+        //         ingredients: null,
+        //     }
+        // }
+        // reference.child(subEmail).set(newData)'
+        var postData = {
+            recipes: this.state.objectKey
+        };
+        var newPostKey = firebase.database().ref().child('users/'+subEmail+'/Author').push().key;
+        console.log(newPostKey);
+        var updates = {};
+        updates['/users/'+subEmail+'/Recipes/' + newPostKey] = postData;
+        return firebase.database().ref().update(updates);
     }
 
     handleChange(event) {
@@ -204,7 +212,6 @@ export default class Upload extends React.Component {
     //         }, 4000)
     //     })
     // }
-
     _handleSubmit(e) {
         const database = firebase.database();
         e.preventDefault();
@@ -242,6 +249,8 @@ export default class Upload extends React.Component {
                     console.log(err);
                 });
               });
+        }).then(() => {
+            this.addRecipe();
         });
       }
     
@@ -330,7 +339,7 @@ export default class Upload extends React.Component {
                         <div className="col-md-6">
                             <div id="cooking-time" className="form-group">
                                 <label>Cooking Time (Minutes) *</label>
-                                <input type="time"
+                                <input type="recipeName"
                                     className="form-control"
                                     id="time"
                                     placeholder="ex: 25"
