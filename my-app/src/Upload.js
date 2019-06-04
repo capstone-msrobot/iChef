@@ -257,6 +257,10 @@ export default class Upload extends React.Component {
                 });
             }).then(() => {
                 this.addRecipe();
+            }).then(() => {
+                this.props.history.push({
+                    pathname: "/Profile", // should be queried to correct recipe page
+                })
             });
         // this.addRecipe();
     }
