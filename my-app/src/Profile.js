@@ -73,8 +73,8 @@ export default class Profile extends React.Component {
                     </div>
                     <div className="profile-usertitle">
                         <div className="profile-usertitle-name">
-                            Soobinsoo
-                                        </div>
+                            {this.state.username}
+                        </div>
 
                     </div>
                     <div className="profile-usermenu">
