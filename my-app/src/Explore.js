@@ -298,7 +298,7 @@ export class FilterOpen extends React.Component {
         // GET FROM JSON LIST WE CREATE!!!! or should we create it and add by looping through all the recipe equipments and adding it into an array??
         let list = []
         if (this.props.ingredientClick) {
-            list = ["Chicken", "Pasta", "Cilantro", "Lemon", "Garlic"]
+            list = ["Chicken", "Beef", "Pork", "Cilantro", "Basil", "Lemon", "Garlic", "Flour", "Butter", "Sugar", "Eggs", "Salt", "Pepper", "Beans", "Avocados", "Bacon", "Sour Cream"]
         } else if (this.props.equipmentClick) {
             list = ["Pan", "Pot", "Blender", "Fryer", "Grinder"]
         }
