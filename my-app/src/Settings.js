@@ -3,12 +3,11 @@ import Navigation from "./Navigation"
 import Footer from "./Footer"
 import "./Profile.css"
 import user from "./img/user.jpg";
+import recipesIconNotSelected from "./img/menu grey.png";
 import recipesIcon from "./img/recipesIcon-notSelected.png";
-import equipmentIconNotSelected from "./img/equipmentIcon-notSelected.png";
+import equipmentIconNotSelected from "./img/equipment grayyyyy.png";
 import settingsIcon from "./img/settingsIcon-selected.png";
 import logoutIcon from "./img/logoutIcon.png";
-
-import users from "./img/pasta.jpg";
 import firebase from 'firebase';
 import { ROUTES } from './constants';
 import { Link } from 'react-router-dom';
@@ -58,6 +57,16 @@ export default class Profile extends React.Component {
         })
     }
 
+    handleChange(event) {
+        //         console.log(event);
+        let field = event.target.name; // which input
+        let value = event.target.value; // what value
+        // console.log(value);
+        let changes = {}; // object to hold changes
+        changes[field] = value; // change this field
+        this.setState(changes); // update state
+    }
+
     render() {
         return (
             <div id="profile-body">
@@ -77,16 +86,13 @@ export default class Profile extends React.Component {
                     </div>
                     <div className="profile-usermenu">
                         <ul className="nav">
-                            <a href="Recipes">
-                                <li id="li-test" className="link" onClick={() => this.state.recipeClicked = true}>
-                                    <div onClick={() => this.state.recipeClicked = true}>
-                                        <img src={recipesIcon} alt="recipes" />
-                                        Recipes
-
-                                    </div>
-                                </li>
-                            </a>
-
+                            <li >
+                                <a href="./Profile">
+                                    {/* check state and change image depending on if user is on recipes */}
+                                    <img src={recipesIconNotSelected} alt="recipes" />
+                                    Recipes
+                                </a>
+                            </li>
 
                             <li>
                                 {/* <a href="#"> */}
@@ -100,13 +106,9 @@ export default class Profile extends React.Component {
                                 <img src={equipmentIconNotSelected} alt="equipment" />
                                 Ingredients
                             </li>
-                            <li>
-                                <a href="./Settings"><img src={settingsIcon} alt="settings" /></a>
+                            <li className="active">
+                                <a href="./Settings"><img src={settingsIcon} alt="settings" />Settings</a>
                                 {/* <Link to={ROUTES.Settings}>Settings</Link> */}
-                            </li>
-                            <li>
-                                <a href="./Home"><img src={logoutIcon} alt="sign out" /></a>
-                                <Link to={ROUTES.Home}>Sign Out</Link>
                             </li>
                         </ul>
                     </div>

@@ -100,6 +100,17 @@ export default class Navigation extends React.Component {
                             </a>
 
                             {/* Change this to be Upload a Recipe page IF THEY ARE LOGGED IN  */}
+                            
+                            {(this.state.user && this.state.loggedIn) && 
+                                <a
+                                    className="nav-item nav-link"
+                                    id="tabLink-signup"
+                                    href="./Upload"
+                                >
+                                    Upload Recipe
+                                </a>
+                            }
+
                             {(!this.state.user && !this.state.loggedIn) && 
                                 <a
                                     className="nav-item nav-link"

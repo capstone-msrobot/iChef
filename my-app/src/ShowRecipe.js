@@ -2,7 +2,7 @@ import React from "react";
 import Navigation from "./Navigation"
 import Footer from "./Footer"
 import "./ShowRecipe.css"
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
 import "firebase/storage"
 import { PassThrough } from "stream";
 export default class ShowRecipe extends React.Component {

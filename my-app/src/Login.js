@@ -43,7 +43,12 @@ export default class Login extends React.Component {
 
     
     pass() {
-        return <Redirect to={ROUTES.Profile}/>
+        return <Redirect to={{pathname: '/Profile',
+                            state: {
+                                user: this.state.user
+                            }
+
+                }}/>
     }
 
     handleSignIn() {
