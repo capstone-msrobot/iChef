@@ -65,12 +65,12 @@ export default class Explore extends React.Component {
                 this.state.filter
             ]
           }).then(res => {
-              console.log(this.state.filter)
-            console.log(res.hits);
-            this.setState({
-                result2: res.hits,
-                filter: this.state.filter === "" ? filtering : this.state.filter + " AND " + filtering
-            })
+                console.log(this.state.filter)
+                console.log(res.hits);
+                this.setState({
+                    result2: res.hits,
+                    filter: this.state.filter === "" ? filtering : this.state.filter + " AND " + filtering
+                })
         });
     }
 
