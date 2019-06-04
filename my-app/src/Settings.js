@@ -4,12 +4,10 @@ import Footer from "./Footer"
 import "./Profile.css"
 import user from "./img/user.jpg";
 import recipesIconNotSelected from "./img/menu grey.png";
-import recipesIcon from "./img/recipesIcon-notSelected.png";
 import equipIconNotSelected from "./img/equipment 2.png";
 import ingredIconNotSelected from "./img/ingredient.png";
 // import equipmentIconNotSelected from"./img/equipment-notSelected.png";
 import settingsIcon from "./img/settingsIcon-selected.png";
-import logoutIcon from "./img/logoutIcon.png";
 import firebase from 'firebase';
 import { ROUTES } from './constants';
 import { Link } from 'react-router-dom';
@@ -116,43 +114,42 @@ export default class Profile extends React.Component {
                             </li>
                         </ul>
                     </div>
-                
-                <div id="page-label">
-                    <p className="title">Settings</p>
-                    <img src={settingsIcon} alt="recipes" className="title-icon" />
                 </div>
-           
-                {/* <div id="page-label">
-                    <p className="title">Settings</p>
-                    <img src={settingsIcon} alt="recipes" className="title-icon" />
-                </div> */}
-                
-                    <form id="signup-form">
-                        <div className="form-group">
-                            <label>New Email Address</label>
-                            <input type="email"
-                                className="form-control"
-                                name="email"
-                                placeholder="Email Address"
-                                onChange={(event) => { this.handleChange(event) }}>
-                            </input>
-                        </div>
 
-                        <div className="form-group">
-                            <label>New Password</label>
-                            <input type="password"
-                                className="form-control"
-                                name="password"
-                                placeholder="Password"
-                                onChange={(event) => { this.handleChange(event) }}>
-                            </input>
-                        </div>
-                        <div id="save" onClick={() => {
-                            this.handleSignUp(this.state.email, this.state.password);
-                        }}>
-                            <Link to={ROUTES.Profile}>Save</Link>
-                        </div>
-                    </form>
+                <div id="show-content">
+                    <div id="page-label">
+                        <p className="title">Settings</p>
+                        <img src={settingsIcon} alt="recipes" className="title-icon" />
+                    </div>
+
+                    <div class="container">
+                        <form id="signup-form-settings">
+                            <div className="form-group">
+                                <label>New Email Address</label>
+                                <input type="email"
+                                    className="form-control"
+                                    name="email"
+                                    placeholder="Email Address"
+                                    onChange={(event) => { this.handleChange(event) }}>
+                                </input>
+                            </div>
+
+                            <div className="form-group">
+                                <label>New Password</label>
+                                <input type="password"
+                                    className="form-control"
+                                    name="password"
+                                    placeholder="Password"
+                                    onChange={(event) => { this.handleChange(event) }}>
+                                </input>
+                            </div>
+                            <div id="save" onClick={() => {
+                                this.handleSignUp(this.state.email, this.state.password);
+                            }}>
+                                <Link to={ROUTES.Profile}>Save</Link>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <Footer />
             </div>

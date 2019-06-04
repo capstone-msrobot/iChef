@@ -14,11 +14,13 @@ export default class Results extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: this.props.location.state.search,
+            search: this.props.search,
             result:[],
             filter: "",
             oldResult: [],
-            clicked: false
+            clicked: false,
+            equipment: [],
+            ingredients: []
         }
     }
 
@@ -36,27 +38,44 @@ export default class Results extends React.Component {
     }
 
 
-    componentWillMount() {
-        this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.setState({
-                    email: user.email,
-                    subEmail: user.email.substr(0, user.email.indexOf('@'))
-                })
+    // componentWillMount() {
+    //     this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
+    //         if (user) {
+    //             this.setState({
+    //                 email: user.email,
+    //                 subEmail: user.email.substr(0, user.email.indexOf('@'))
+    //             })
 
-                let reference = firebase.database().ref('users/' + this.state.subEmail + '/Equipment');
-                reference.on('value', (snapshot) => {
-                    // let settings = snapshot.val();
-                    let equipment = snapshot.val();
-                    if (equipment != null) {
-                        this.handleEquipmentFilter(equipment);
-                    }
-                    console.log(snapshot.val())
+    //             let reference = firebase.database().ref('users/' + this.state.subEmail + '/Equipment');
+    //             reference.on('value', (snapshot) => {
+    //                 // let settings = snapshot.val();
+    //                 let equipment = snapshot.val();
+    //                 this.setState({
+    //                     equipment: equipment
+    //                 })
+    //                 if (equipment != null) {
+    //                     this.handleEquipmentFilter(equipment);
+    //                 }
+    //                 console.log("equi", snapshot.val())
 
-                })
-            }
-        })
-    }
+    //             })
+
+    //             let reference_ing = firebase.database().ref('users/' + this.state.subEmail + '/Ingredients');
+    //             reference_ing.on('value', (snapshot) => {
+    //                 // let settings = snapshot.val();
+    //                 let ingredients = snapshot.val();
+    //                 this.setState({
+    //                     ingredients: ingredients
+    //                 })
+    //                 if (ingredients != null) {
+    //                     this.handleIngredientsFilter(ingredients);
+    //                 }
+    //                 console.log("ing: ",snapshot.val())
+
+    //             })
+    //         }
+    //     })
+    // }
 
     handleEquipmentFilter = (value) => {
         this.setState({result: this.state.oldResult})
@@ -89,8 +108,6 @@ export default class Results extends React.Component {
             query: (this.props.location.state.search).toLowerCase(),
             filters: filtering
           }).then(res => {
-            console.log(this.state.filter)
-            console.log(res.hits);
             this.setState({
                 result: res.hits,
                 filter: this.state.filter === "" ? filtering : this.state.filter + " OR " + filtering
@@ -131,12 +148,8 @@ export default class Results extends React.Component {
         }
         index.search({
             query: (this.props.location.state.search).toLowerCase(),
-            facetFilters: [
-                filtering,
-                this.state.filter
-            ]
+            filters: filtering
           }).then(res => {
-            console.log(res.hits);
             this.setState({
                 result: res.hits,
                 filter: this.state.filter === "" ? filtering : this.state.filter + " AND " + filtering
@@ -145,41 +158,75 @@ export default class Results extends React.Component {
     }
 
     componentDidMount() {
-        let name = (this.props.location.state.search).toLowerCase();
-        let arr = [];
-        // var food = firebase.database().ref("recipes/"+name);
-        // food.on("child_added", (data, prevChildKey) => {
-        //     arr.push(data.val());
-        //     this.setState({
-        //         result: arr,
-        //         oldResult: arr
-        //     })
-        //     console.log(data.val());
-        // })
-        index.search({
-            query: name,
-            attributesToRetrieve: ['name'],
-              hitsPerPage: 50,
-            },
-            (err, { hits } = {}) => {
-                if (err) throw err;
-                hits.map((f) => {
-                    console.log(f.name);
-                    var food = firebase.database().ref("recipesFinal");
-                    food.on("child_added", (data, prevChildKey) => {
-                        // console.log(data.key);
-                        // console.log(f);
-                        if (f.name === data.val().name) {
-                            arr.push(data.val());
-                            this.setState({
-                                result: arr,
-                                oldResult: arr
-                            })
-                        }
-                    })
+          this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({
+                    email: user.email,
+                    subEmail: user.email.substr(0, user.email.indexOf('@'))
                 })
+
+                let reference = firebase.database().ref('users/' + this.state.subEmail + '/Equipment');
+                reference.on('value', (snapshot) => {
+                    // let settings = snapshot.val();
+                    let equipment = snapshot.val();
+                    this.setState({
+                        equipment: equipment
+                    })
+                    if (equipment != null) {
+                        this.handleEquipmentFilter(equipment);
+                    }
+                    console.log("equi", snapshot.val())
+
+                })
+
+                let reference_ing = firebase.database().ref('users/' + this.state.subEmail + '/Ingredients');
+                reference_ing.on('value', (snapshot) => {
+                    // let settings = snapshot.val();
+                    let ingredients = snapshot.val();
+                    this.setState({
+                        ingredients: ingredients
+                    })
+                    if (ingredients != null) {
+                        this.handleIngredientsFilter(ingredients);
+                    }
+                    console.log("ing: ",snapshot.val())
+
+                })
+            } else {
+                let name = (this.props.location.state.search).toLowerCase();
+                let arr = [];
+                // var food = firebase.database().ref("recipes/"+name);
+                // food.on("child_added", (data, prevChildKey) => {
+                //     arr.push(data.val());
+                //     this.setState({
+                //         result: arr,
+                //         oldResult: arr
+                //     })
+                //     console.log(data.val());
+                // })
+                index.search({
+                    query: name,
+                    attributesToRetrieve: ['name'],
+                    hitsPerPage: 50,
+                    },
+                    (err, { hits } = {}) => {
+                        if (err) throw err;
+                        hits.forEach((f) => {
+                            var food = firebase.database().ref("recipesFinal");
+                            food.on("child_added", (data, prevChildKey) => {
+                                if (f.name === data.val().name) {
+                                    arr.push(data.val());
+                                    this.setState({
+                                        result: arr,
+                                        oldResult: arr
+                                    })
+                                }
+                            })
+                        })
+                    }
+                );
             }
-          );
+        })
         // index.search({ query: name }).then(res => {
         //     console.log(res);
         //   });

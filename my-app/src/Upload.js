@@ -92,7 +92,7 @@ export default class Upload extends React.Component {
         // var newPostKey = firebase.database().ref().child('users/'+subEmail+'/Author').push().key;
         // console.log(newPostKey);
         var updates = {};
-        updates['/users/'+subEmail+'/Recipes/' + this.state.objectKey] = postData;
+        updates['/users/' + subEmail + '/Recipes/' + this.state.objectKey] = postData;
         return firebase.database().ref().update(updates);
     }
 
@@ -111,7 +111,7 @@ export default class Upload extends React.Component {
     //     let welcome = React.createElement('input',{id:'#add'})
     //     ReactDOM.render(welcome,document.getElementById('equipment-input'))
     // }
-    
+
     onChangeEquip = (event) => {
         this.setState({ termEquip: event.target.value });
     }
@@ -158,25 +158,25 @@ export default class Upload extends React.Component {
     //     e.preventDefault();
     //     // TODO: do something with -> this.state.file
     //     this.putURLs();
-        
+
     //     console.log('handle uploading-', this.state.file);
     //   }
-    
-      _handleImageChange(e) {
+
+    _handleImageChange(e) {
         e.preventDefault();
-    
+
         let reader = new FileReader();
         let file = e.target.files[0];
-    
+
         reader.onloadend = () => {
-          this.setState({
-            file: file,
-            imagePreviewUrl: reader.result
-          });
+            this.setState({
+                file: file,
+                imagePreviewUrl: reader.result
+            });
         }
-    
+
         reader.readAsDataURL(file)
-      }
+    }
 
     //   handleClick = () => {
     //     let img = this.state.imageViews
@@ -210,7 +210,7 @@ export default class Upload extends React.Component {
     //     return new Promise((resolve, reject) => {
     //         for (var i = 0; i < this.state.file.length; i++) {
     //             var imageFile = this.state.file[i];
-        
+
     //             this.uploadImageAsPromise(imageFile);
     //         }
     //         setTimeout(() => {
@@ -224,43 +224,43 @@ export default class Upload extends React.Component {
         console.log("clicked");
         console.log("here")
         this.putURLs()
-        .then(() => {
-            console.log(this.state.downloadURL);
-            let keyRef = database.ref('/recipesFinal').push({
-                name: this.state.recipeName,
-                ingredients: this.state.itemsIngred,
-                ingredientsList: this.state.itemsIngred,
-                time: this.state.time,
-                steps: this.state.itemsSteps,
-                equipment: this.state.itemsEquip,
-                equipmentList:this.state.itemsEquip,
-                imageURL: this.state.downloadURL.length === 0 ? '' : this.state.downloadURL,
-                originalURL: this.state.username,
-                stepsURL: ''
+            .then(() => {
+                console.log(this.state.downloadURL);
+                let keyRef = database.ref('/recipesFinal').push({
+                    name: this.state.recipeName,
+                    ingredients: this.state.itemsIngred,
+                    ingredientsList: this.state.itemsIngred,
+                    time: this.state.time,
+                    steps: this.state.itemsSteps,
+                    equipment: this.state.itemsEquip,
+                    equipmentList: this.state.itemsEquip,
+                    imageURL: this.state.downloadURL.length === 0 ? '' : this.state.downloadURL,
+                    originalURL: this.state.username,
+                    stepsURL: ''
                 })
                 this.setState({
                     objectKey: keyRef.getKey()
                 })
-        }).then(() => {
-            const client = algoliasearch(id, config);
-              console.log(this.state.objectKey);
-              const index = client.initIndex('contacts');
-              database.ref('/recipesFinal/' + this.state.objectKey).once('value', recipe => {
-                
-                let content = recipe.val();
-                content.objectID = this.state.objectKey;
-                console.log(recipe.val());
-                index.saveObject(content, (err, content) => {
-                    console.log(content);
-                    console.log(err);
+            }).then(() => {
+                const client = algoliasearch(id, config);
+                console.log(this.state.objectKey);
+                const index = client.initIndex('contacts');
+                database.ref('/recipesFinal/' + this.state.objectKey).once('value', recipe => {
+
+                    let content = recipe.val();
+                    content.objectID = this.state.objectKey;
+                    console.log(recipe.val());
+                    index.saveObject(content, (err, content) => {
+                        console.log(content);
+                        console.log(err);
+                    });
                 });
-              });
-        }).then(() => {
-            this.addRecipe();
-        });
+            }).then(() => {
+                this.addRecipe();
+            });
         // this.addRecipe();
-      }
-    
+    }
+
     // _handleImageChange(e) {
     //     e.preventDefault();
     //     let fileList = this.state.file;
@@ -284,28 +284,28 @@ export default class Upload extends React.Component {
         let recipeName = this.state.recipeName
 
         return new Promise((resolve, reject) => {
-            var storageRef = firebase.storage().ref(recipeName+"/"+imageFile.name);
-    
+            var storageRef = firebase.storage().ref(recipeName + "/" + imageFile.name);
+
             //Upload file
             var task = storageRef.put(imageFile);
-    
+
             //Update progress bar
             task.on('state_changed',
-                (snapshot) =>{
+                (snapshot) => {
                     //var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
                     // uploader.value = percentage;
                 },
                 (err) => {
                     // console.log(err)
                 },
-                () =>{
-                    task.snapshot.ref.getDownloadURL().then((downloadURL) =>{
+                () => {
+                    task.snapshot.ref.getDownloadURL().then((downloadURL) => {
                         this.setState({
                             downloadURL: downloadURL
                         })
                         console.log(this.state.downloadURL);
                         console.log('File available at', downloadURL);
-                      });
+                    });
                     // var downloadURL = task.snapshot.ref.getDownloadUrl();
                     // console.log(downloadURL);
                 }
@@ -314,18 +314,18 @@ export default class Upload extends React.Component {
     }
 
     render() {
-        let {imagePreviewUrl} = this.state;
-        let $imagePreview = null;
-        if (imagePreviewUrl) {
-          $imagePreview = (<img src={imagePreviewUrl} alt="preview"/>);
-        } else {
-          $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
-        }
+        // let { imagePreviewUrl } = this.state;
+        // let $imagePreview = null;
+        // if (imagePreviewUrl) {
+        //     $imagePreview = (<img src={imagePreviewUrl} alt="preview" />);
+        // } else {
+        //     $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+        // }
         return (
-            <div id="upload-content">
+            <div>
                 <Navigation />
                 <div id="title">
-                    <p className="title-upload">Your Recipe</p>
+                    <p className="title-upload">Upload A Recipe</p>
                 </div>
 
                 <div id="upload-content">
@@ -356,16 +356,21 @@ export default class Upload extends React.Component {
                             </div>
                         </div>
                         <div id="upload-button" className="col-md-6">
-                        <div className="previewComponent">
-                            <form onSubmit={(e)=>this._handleSubmit(e)}>
-                            <input className="fileInput" 
-                                type="file" 
-                                onChange={(e)=>this._handleImageChange(e)} />
-                            </form>
-                            <div className="imgPreview">
-                            {$imagePreview}
+                            <div className="previewComponent">
+                                <form className="image-upload" onSubmit={(e) => this._handleSubmit(e)}>
+                                    {/* <label for="file-input">
+                                        <img src={upload} />
+                                    </label> */}
+
+                                    <input className="fileInput"
+                                        // id="file-input"
+                                        type="file"
+                                        onChange={(e) => this._handleImageChange(e)} />
+                                </form>
+                                {/* <div className="imgPreview">
+                                    {$imagePreview}
+                                </div> */}
                             </div>
-                        </div>
                         </div>
                     </div>
 
@@ -441,9 +446,11 @@ export default class Upload extends React.Component {
                             {this.state.imageViews.map(child => child)}
                         </div>  */}
                     </div>
-                    <button className="submitButton" 
-                                type="submit" 
-                                onClick={(e)=>this._handleSubmit(e)}>Upload Recipe</button>
+                    <div id="final-button">
+                        <button className="submitButton"
+                            type="submit"
+                            onClick={(e) => this._handleSubmit(e)}>Upload Recipe</button>
+                    </div>
                 </div>
                 {/* <div id="save" onClick={() => {
                     this.addRecipe();
