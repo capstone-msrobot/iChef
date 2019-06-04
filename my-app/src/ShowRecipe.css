@@ -110,7 +110,7 @@ hr {
 
 #customlist>li:before {
     /* print out "Element " followed by the current counter value */
-    content: counter(elementcounter) ": ";
+    content: "Step " counter(elementcounter) ": ";
     /* increment counter */
     counter-increment: elementcounter;
     font-weight: bold;
@@ -144,6 +144,6 @@ ul {
     padding-top: 3%;
 }
 
-#instructions-div {
-    display: inline-block;
+#step-list {
+    padding: 1%;
 }
