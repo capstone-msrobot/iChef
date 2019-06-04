@@ -28,6 +28,10 @@
     overflow: hidden;
 }
 
+.showRecipe-card-title {
+    font-weight: bold;
+}
+
 #recipe-image {
     max-width:600px; 
     max-height: 450px;
@@ -106,7 +110,7 @@ hr {
 
 #customlist>li:before {
     /* print out "Element " followed by the current counter value */
-    content: "STEP " counter(elementcounter) ": ";
+    content: counter(elementcounter) ": ";
     /* increment counter */
     counter-increment: elementcounter;
     font-weight: bold;
@@ -117,10 +121,29 @@ hr {
     color:red;
 }
 
-li {
-    padding: 0.25%;
+ul {
+    list-style-type: none;
 }
 
 .number-in-ingredient {
     font-size: 13pt;
+    display: inline;
+}
+
+#instructions-strike2 {
+    font-style: italic;
+    display: inline;
+    font-weight: bold;
+}
+
+#instructions-strike {
+    font-style: italic;
+}
+
+#ingred-list {
+    padding-top: 3%;
+}
+
+#instructions-div {
+    display: inline-block;
 }
