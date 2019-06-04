@@ -107,7 +107,6 @@ export default class Explore extends React.Component {
             })
         });
     }
-    //GOTTA FIX THIS!!
     handleIngredientsFilter = (value) => {
         this.setState({result: this.state.oldResult})
         // let val = this.state.result;
@@ -137,7 +136,7 @@ export default class Explore extends React.Component {
         // })
         var filtering = 'ingredientsList:' + value[0].toLowerCase();
         for (let i = 1; i < value.length; i++) {
-            filtering = filtering + ' AND ingredientsList' + value[i].toLowerCase();
+            filtering = filtering + ' OR ingredientsList' + value[i].toLowerCase();
         }
         index.search({
             filters: filtering
