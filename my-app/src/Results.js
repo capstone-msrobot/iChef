@@ -35,6 +35,29 @@ export default class Results extends React.Component {
         })
     }
 
+
+    componentWillMount() {
+        this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({
+                    email: user.email,
+                    subEmail: user.email.substr(0, user.email.indexOf('@'))
+                })
+
+                let reference = firebase.database().ref('users/' + this.state.subEmail + '/Equipment');
+                reference.on('value', (snapshot) => {
+                    // let settings = snapshot.val();
+                    let equipment = snapshot.val();
+                    if (equipment != null) {
+                        this.handleEquipmentFilter(equipment);
+                    }
+                    console.log(snapshot.val())
+
+                })
+            }
+        })
+    }
+
     handleEquipmentFilter = (value) => {
         this.setState({result: this.state.oldResult})
         // let val = this.state.result;
@@ -59,21 +82,18 @@ export default class Results extends React.Component {
         //   });
         var filtering = 'equipmentList:' + value[0].toLowerCase();
         for (let i = 1; i < value.length; i++) {
-            filtering = filtering + ' AND equipmentList' + value[i].toLowerCase();
+            filtering = filtering + ' OR equipmentList:' + value[i].toLowerCase();
         }
         // console.log(filtering)
         index.search({
             query: (this.props.location.state.search).toLowerCase(),
-            facetFilters: [
-                filtering,
-                this.state.filter
-            ]
+            filters: filtering
           }).then(res => {
-              console.log(this.state.filter)
+            console.log(this.state.filter)
             console.log(res.hits);
             this.setState({
                 result: res.hits,
-                filter: this.state.filter === "" ? filtering : this.state.filter + " AND " + filtering
+                filter: this.state.filter === "" ? filtering : this.state.filter + " OR " + filtering
             })
         });
     }
