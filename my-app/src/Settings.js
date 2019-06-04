@@ -4,8 +4,6 @@ import Footer from "./Footer"
 import "./Profile.css"
 import user from "./img/user.jpg";
 import recipesIconNotSelected from "./img/menu grey.png";
-import recipesIcon from "./img/recipesIcon-notSelected.png";
-import equipIconSelected from "./img/equipment-selected.png";
 import equipIconNotSelected from "./img/equipment 2.png";
 import ingredIconNotSelected from "./img/ingredient.png";
 // import equipmentIconNotSelected from"./img/equipment-notSelected.png";
