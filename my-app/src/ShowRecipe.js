@@ -17,6 +17,7 @@ export default class ShowRecipe extends React.Component {
     componentDidMount() {
         let arr = []
         arr.push(this.props.location.state.recipe)
+        console.log("FUCK MY LIFE", arr)
         this.setState({
             recipe: arr
         })

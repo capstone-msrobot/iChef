@@ -8,8 +8,9 @@ import recipesIconSelected from "./img/recipesIcon-selected.png";
 import equipIconNotSelected from "./img/equipment 2.png";
 import ingredIconNotSelected from "./img/ingredient.png";
 import settingsIcon from "./img/settingsIcon.png";
-
+import ShowRecipe from "./ShowRecipe";
 import firebase from 'firebase';
+import {withRouter} from 'react-router-dom';
 
 
 // https://bootsnipp.com/snippets/M48pA
@@ -24,6 +25,7 @@ export default class Profile extends React.Component {
             password: '',
             username: '',
             setting: false,
+            recipe: [],
         };
     }
 
@@ -127,7 +129,7 @@ export default class Profile extends React.Component {
                 </div>
 
 
-                <Recipes recipes={this.state.recipes} />
+                <Recipes recipes={this.state.recipes} history={this.props.history} />
                 <Footer />
             </div>
         )
@@ -143,44 +145,23 @@ export class Recipes extends React.Component {
     }
     
     ShowRecipe = (d) => {
-        this.props.history.push({pathname: '/ShowRecipe', state:{recipe: d}});
-    };
+        this.props.history.push(
+            {
+                pathname: './ShowRecipe', 
+                state: {
+                    recipe: d
+                }
+            });
+    }
     
-    // componentDidMount() {
-    //     // let arr = [];
-    //     let arr2 = [];
-    //     // var query = firebase.database().ref("recipes").orderByKey();
-    //     // query.once("value")
-    //     // .then(function(snapshot) {
-    //     //     snapshot.forEach(function(childSnapshot) {
-    //     //         arr.push(childSnapshot.val());
-    //     //     });
-    //     // }).then(()=>{
-    //     //     this.setState({
-    //     //         result: arr,
-    //     //         oldResult: arr
-    //     //     })
-    //     // });
 
-    //     console.log(this.state.subEmail);
-    //     var query2 = firebase.database().ref("users/" + this.state.subEmail + "/Recipes").orderByKey();
-    //     query2.once("value")
-    //     .then(function(snapshot) {
-    //         snapshot.forEach(function(childSnapshot) {
-    //             arr2.push(childSnapshot.val());
-    //         });
-    //     }).then(()=>{
-    //         this.setState({
-    //             result2: arr2,
-    //         })
-    //     });
-    // }
     
     render() {
         console.log("here");
         // this.recipeClicked = ;
 
         let array = this.props.recipes.map((d, i) => {
+            console.log(d);
             return  (
                 <div id="recipe" className="col-md-4">
                         <div className="card results-card" onClick={()=> this.ShowRecipe(d)}>
@@ -189,7 +170,6 @@ export class Recipes extends React.Component {
                                     <img className={"img-fluid card-img-top results-card-image"} src={d.imageURL} alt="food" />
                                 </div>
 
-                               
                                 <h5 className="results-card-title">{d.name}</h5>
                                 {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
                                 <p className="card-text" id="card-text">Minutes: {d.time}</p>
@@ -227,3 +207,5 @@ export class Recipes extends React.Component {
         )
     }
 }
+
+// export default withRouter(Recipes)
