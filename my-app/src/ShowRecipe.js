@@ -4,7 +4,6 @@ import Footer from "./Footer"
 import "./ShowRecipe.css"
 // import firebase from 'firebase/app';
 import "firebase/storage"
-import { PassThrough } from "stream";
 export default class ShowRecipe extends React.Component {
     constructor(props) {
         super(props);
@@ -28,7 +27,7 @@ export default class ShowRecipe extends React.Component {
         //     strikeThrough: !this.state.strikeThrough
         // })
 
-        if (this.state.strikeThrough == true) {
+        if (this.state.strikeThrough === true) {
             this.setState({
                 strikeThrough: false
             });

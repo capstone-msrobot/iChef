@@ -9,7 +9,6 @@ import equipIconNotSelected from "./img/equipment 2.png";
 import ingredIconNotSelected from "./img/ingredient.png";
 import settingsIcon from "./img/settingsIcon.png";
 
-import users from "./img/pasta.jpg";
 import firebase from 'firebase';
 
 
@@ -212,7 +211,7 @@ export class Recipes extends React.Component {
                 
                 <div className="row">
                     {/* <h4>Results</h4> */}
-                    {array != 0 ? <div className="row">
+                    {array !== 0 ? <div className="row">
                         {array.map((recipe, i) => {
                             return recipe
                         })} 

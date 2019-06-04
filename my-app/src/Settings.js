@@ -4,12 +4,10 @@ import Footer from "./Footer"
 import "./Profile.css"
 import user from "./img/user.jpg";
 import recipesIconNotSelected from "./img/menu grey.png";
-import recipesIcon from "./img/recipesIcon-notSelected.png";
 import equipIconNotSelected from "./img/equipment 2.png";
 import ingredIconNotSelected from "./img/ingredient.png";
 // import equipmentIconNotSelected from"./img/equipment-notSelected.png";
 import settingsIcon from "./img/settingsIcon-selected.png";
-import logoutIcon from "./img/logoutIcon.png";
 import firebase from 'firebase';
 import { ROUTES } from './constants';
 import { Link } from 'react-router-dom';

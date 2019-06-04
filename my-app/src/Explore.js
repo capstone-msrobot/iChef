@@ -36,76 +36,117 @@ export default class Explore extends React.Component {
         })
     }
 
-    handleEquipmentFilter = (value) => {
-        this.setState({filter: value, result: this.state.oldResult})
+    componentWillMount() {
+        this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({
+                    email: user.email,
+                    subEmail: user.email.substr(0, user.email.indexOf('@'))
+                })
 
-        // for (let i = 0; i < this.state.result.length; i++) {
-        //     for (let m = 0; m < this.state.result[i]; m++) {
-        //         for (let j = 0; j < this.state.result[i].recipe[m].equipment.length; j++) {
-        //             for (let k = 0; k < value.length; k++) {
-        //                 if (!this.state.result[i].recipe[m].equipmentList.includes(value[k].toLowerCase())) {
-        //                     this.setState({
-        //                         result: this.state.result.recipe.slice(m,m)
-        //                     })
-        //                     console.log(value[k])
-        //                     break;
-        //                 }
-        //             }
+                let reference = firebase.database().ref('users/' + this.state.subEmail + '/Equipment');
+                reference.on('value', (snapshot) => {
+                    // let settings = snapshot.val();
+                    let equipment = snapshot.val();
+                    if (equipment != null) {
+                        this.handleEquipmentFilter(equipment);
+                    }
+                    console.log("equi", snapshot.val())
+
+                })
+
+                let reference_ing = firebase.database().ref('users/' + this.state.subEmail + '/Ingredients');
+                reference_ing.on('value', (snapshot) => {
+                    // let settings = snapshot.val();
+                    let ingredients = snapshot.val();
+                    if (ingredients != null) {
+                        this.handleIngredientsFilter(ingredients);
+                    }
+                    console.log("ing: ",snapshot.val())
+
+                })
+            }
+        })
+    }
+
+    handleEquipmentFilter = (value) => {
+        this.setState({result2: this.state.oldResult})
+        // let val = this.state.result;
+        // let erase = []
+        // val.map((recipe, i) => {
+        //     for (let j = 0; j < value.length; j++) {
+        //         if (!recipe.equipmentList.includes(value[j].toLowerCase())) {
+        //             erase.push(i)
+
         //         }
         //     }
+        // })
+        // for (let i = erase.length - 1; i >= 0; i--) {
+        //     console.log(erase[i])
+        //     val.splice(erase[i], 1);
         // }
+        // this.setState({
+        //     result: val
+        // })
+        // index.search('harry', {
+        //     filters: 'categories:politics AND store:Gibert Joseph Saint-Michel'
+        //   });
         var filtering = 'equipmentList:' + value[0].toLowerCase();
         for (let i = 1; i < value.length; i++) {
-            filtering = filtering + ' AND equipmentList' + value[i].toLowerCase();
+            filtering = filtering + ' OR equipmentList:' + value[i].toLowerCase();
         }
         // console.log(filtering)
         index.search({
-            facetFilters: [
-                filtering,
-                this.state.filter
-            ]
+            filters: filtering
           }).then(res => {
-                console.log(this.state.filter)
-                console.log(res.hits);
-                this.setState({
-                    result2: res.hits,
-                    filter: this.state.filter === "" ? filtering : this.state.filter + " AND " + filtering
-                })
+            console.log(this.state.filter)
+            console.log(res.hits);
+            this.setState({
+                result2: res.hits,
+                filter: this.state.filter === "" ? filtering : this.state.filter + " OR " + filtering
+            })
         });
     }
 
     handleIngredientsFilter = (value) => {
-        this.setState({filter: value, result: this.state.oldResult})
+        this.setState({result: this.state.oldResult})
+        // let val = this.state.result;
+        // let erase = []
+        // val.map((recipe, i) => {
+        //     for (let j = 0; j < value.length; j++) {
+        //         if (!recipe.ingredientsList.includes(value[j].toLowerCase())) {
+        //             // this.state.result.splice(i, 1)
+        //             // let arr = this.state.result;
+        //             // this.setState({
+        //             //     result: arr
+        //             // })
+        //             erase.push(i)
+        //             // console.log(erase)
 
-        // for (let i = 0; i < this.state.result.length; i++) {
-        //     for (let m = 0; m < this.state.result[i]; m++) {
-        //         for (let j = 0; j < this.state.result[i].recipe[m].ingredients.length; j++) {
-        //             for (let k = 0; k < value.length; k++) {
-        //                 if (!this.state.result[i].recipe[m].ingredientsList.includes(value[k].toLowerCase())) {
-        //                     this.setState({
-        //                         result: this.state.result.recipe.slice(m,m)
-        //                     })
-        //                     console.log(value[k])
-        //                     break;
-        //                 }
-        //             }
         //         }
         //     }
+        // })
+        // for (let i = erase.length - 1; i >= 0; i--) {
+        //     console.log(erase[i])
+        //     val.splice(erase[i], 1);
+        //     // console.log(val)
+        //     // console.log(erase)
         // }
+        // this.setState({
+        //     result: val
+        // })
         var filtering = 'ingredientsList:' + value[0].toLowerCase();
         for (let i = 1; i < value.length; i++) {
-            filtering = filtering + ' AND ' + "ingredientsList" + value[i].toLowerCase();
+            filtering = filtering + ' AND ingredientsList' + value[i].toLowerCase();
         }
         index.search({
-            facetFilters: [
-                filtering,
-                this.state.filter
-            ]
+            filters: filtering
           }).then(res => {
+            console.log(this.state.filter)
             console.log(res.hits);
             this.setState({
                 result2: res.hits,
-                filter: this.state.filter == "" ? filtering : this.state.filter + " AND " + filtering
+                filter: this.state.filter === "" ? filtering : this.state.filter + " OR " + filtering
             })
         });
     }
@@ -221,7 +262,7 @@ export default class Explore extends React.Component {
             
                 <div id="results">
                     <h4>Results</h4>
-                    {array != 0 ? <div className="row">
+                    {array !== 0 ? <div className="row">
                         {array.map((recipe, i) => {
                             return recipe
                         })} 

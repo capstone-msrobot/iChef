@@ -5,10 +5,8 @@ import "./Profile.css"
 import user from "./img/user.jpg";
 
 import recipesIconNotSelected from "./img/recipesIcon-notSelected.png";
-import equipmentIconSelected from "./img/equipmentIcon-selected.png";
 
 import equipIconNotSelected from "./img/equipment 2.png";
-import ingredIconNotSelected from "./img/ingredient.png";
 import ingredIconSelected from "./img/ingredient green.png";
 import settingsIcon from "./img/settingsIcon.png";
 
