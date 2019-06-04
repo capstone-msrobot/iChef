@@ -31,9 +31,9 @@ export default class Upload extends React.Component {
             itemsEquip: [],
             itemsIngred: [],
             itemsSteps: [],
-            file: [],
-            imagePreviewUrl: [],
-            downloadURL: [],
+            file: '',
+            imagePreviewUrl: '',
+            downloadURL: '',
             objectKey: '',
             time: ''
         };
@@ -136,25 +136,26 @@ export default class Upload extends React.Component {
     // _handleSubmit(e) {
     //     e.preventDefault();
     //     // TODO: do something with -> this.state.file
+    //     this.putURLs();
         
     //     console.log('handle uploading-', this.state.file);
     //   }
     
-    //   _handleImageChange(e) {
-    //     e.preventDefault();
+      _handleImageChange(e) {
+        e.preventDefault();
     
-    //     let reader = new FileReader();
-    //     let file = e.target.files[0];
+        let reader = new FileReader();
+        let file = e.target.files[0];
     
-    //     reader.onloadend = () => {
-    //       this.setState({
-    //         file: file,
-    //         imagePreviewUrl: reader.result
-    //       });
-    //     }
+        reader.onloadend = () => {
+          this.setState({
+            file: file,
+            imagePreviewUrl: reader.result
+          });
+        }
     
-    //     reader.readAsDataURL(file)
-    //   }
+        reader.readAsDataURL(file)
+      }
 
     //   handleClick = () => {
     //     let img = this.state.imageViews
@@ -174,19 +175,28 @@ export default class Upload extends React.Component {
     //     </div>]
     //     })
     //   }
-
     putURLs() {
         return new Promise((resolve, reject) => {
-            for (var i = 0; i < this.state.file.length; i++) {
-                var imageFile = this.state.file[i];
-        
-                this.uploadImageAsPromise(imageFile);
-            }
+            var imageFile = this.state.file;
+            this.uploadImageAsPromise(imageFile);
             setTimeout(() => {
                 resolve("resolved");
             }, 4000)
         })
     }
+
+    // putURLs() {
+    //     return new Promise((resolve, reject) => {
+    //         for (var i = 0; i < this.state.file.length; i++) {
+    //             var imageFile = this.state.file[i];
+        
+    //             this.uploadImageAsPromise(imageFile);
+    //         }
+    //         setTimeout(() => {
+    //             resolve("resolved");
+    //         }, 4000)
+    //     })
+    // }
 
     _handleSubmit(e) {
         const database = firebase.database();
@@ -204,7 +214,7 @@ export default class Upload extends React.Component {
                 steps: this.state.itemsSteps,
                 equipment: this.state.itemsEquip,
                 equipmentList:this.state.itemsEquip,
-                imageURL: this.state.downloadURL.length == 0 ? '' : this.state.downloadURL[0],
+                imageURL: this.state.downloadURL.length == 0 ? '' : this.state.downloadURL,
                 originalURL: this.state.username,
                 stepsURL: ''
                 })
@@ -228,24 +238,24 @@ export default class Upload extends React.Component {
         });
       }
     
-    _handleImageChange(e) {
-        e.preventDefault();
-        let fileList = this.state.file;
-        let reader = new FileReader();
-        let file = e.target.files[0];
-        fileList.push(file);
+    // _handleImageChange(e) {
+    //     e.preventDefault();
+    //     let fileList = this.state.file;
+    //     let reader = new FileReader();
+    //     let file = e.target.files[0];
+    //     fileList.push(file);
 
-        reader.onloadend = () => {
-            let urls = this.state.imagePreviewUrl;
-            urls.push(reader.result);
-            this.setState({
-                file: fileList,
-                imagePreviewUrl: urls
-            });
-        }
+    //     reader.onloadend = () => {
+    //         let urls = this.state.imagePreviewUrl;
+    //         urls.push(reader.result);
+    //         this.setState({
+    //             file: fileList,
+    //             imagePreviewUrl: urls
+    //         });
+    //     }
 
-        reader.readAsDataURL(file)
-    }
+    //     reader.readAsDataURL(file)
+    // }
 
     uploadImageAsPromise(imageFile) {
         let recipeName = this.state.recipeName
@@ -267,10 +277,8 @@ export default class Upload extends React.Component {
                 },
                 () =>{
                     task.snapshot.ref.getDownloadURL().then((downloadURL) =>{
-                        let url = this.state.downloadURL
-                        url.push(downloadURL)
                         this.setState({
-                            downloadURL: url
+                            downloadURL: downloadURL
                         })
                         console.log(this.state.downloadURL);
                         console.log('File available at', downloadURL);
