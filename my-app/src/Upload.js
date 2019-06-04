@@ -326,7 +326,7 @@ export default class Upload extends React.Component {
             <div id="upload-content">
                 <Navigation />
                 <div id="title">
-                    <p className="title-upload">Your Recipe</p>
+                    <p className="title-upload">Upload A Recipe</p>
                 </div>
 
                 <div id="upload-content">
