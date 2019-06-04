@@ -3,17 +3,15 @@ import Navigation from "./Navigation"
 import Footer from "./Footer"
 import "./Profile.css"
 import user from "./img/user.jpg";
-import recipesIconSelected from "./img/recipesIcon-selected.png";
-// import recipesIconNotSelected from "./img/ingredientIcon-notSelected.png";
+
+import recipesIconNotSelected from "./img/recipesIcon-notSelected.png";
 import equipmentIconSelected from "./img/equipmentIcon-selected.png";
 import equipmentIconNotSelected from "./img/equipmentIcon-notSelected.png";
 import settingsIcon from "./img/settingsIcon.png";
-import logoutIcon from "./img/logoutIcon.png";
 
-import users from "./img/pasta.jpg";
 import firebase from 'firebase';
-import { ROUTES } from './constants';
-import { Link } from 'react-router-dom';
+// import { ROUTES } from './constants';
+// import { Link } from 'react-router-dom';
 
 
 // https://bootsnipp.com/snippets/M48pA
@@ -82,11 +80,17 @@ export default class Profile extends React.Component {
                     </div>
                     <div className="profile-usermenu">
                         <ul className="nav">
-                            <li className="active">
+                            <li >
+                                <a href="./Profile">
+                                    {/* check state and change image depending on if user is on recipes */}
+                                    <img src={recipesIconNotSelected} alt="recipes" />
+                                    Recipes
+                                </a>
+                               
                                 {/* <a href="#"> */}
                                 {/* check state and change image depending on if user is on recipes */}
-                                <img src={recipesIconSelected} alt="recipes" />
-                                Recipes
+                                {/* <img src={recipesIconSelected} alt="recipes" />
+                                Recipes */}
                             </li>
                             <li>
                                 <a href="./ProfileEquipment">
@@ -95,10 +99,10 @@ export default class Profile extends React.Component {
                                     Equipment
                                 </a>
                             </li>
-                            <li>
+                            <li className="active">
                                 {/* <a href="#"> */}
                                 {/* check state and change image depending on if user is on recipes */}
-                                <img src={equipmentIconNotSelected} alt="equipment" />
+                                <img src={equipmentIconSelected} alt="ingredient" />
                                 Ingredients
                             </li>
                             <li>

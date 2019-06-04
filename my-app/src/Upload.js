@@ -8,7 +8,6 @@ import firebase from 'firebase';
 import ReactDOM from 'react-dom'
 import List from './List';
 import ListSteps from "./ListSteps";
-import TodoItems from "./TodoItems";
 import { domainToASCII } from 'url';
 import algoliasearch from 'algoliasearch'
 import id from './algoliaConfig'
@@ -98,9 +97,17 @@ export default class Upload extends React.Component {
     //     let welcome = React.createElement('input',{id:'#add'})
     //     ReactDOM.render(welcome,document.getElementById('equipment-input'))
     // }
+    
+    onChangeEquip = (event) => {
+        this.setState({ termEquip: event.target.value });
+    }
 
-    onChange = (event) => {
-        this.setState({ term: event.target.value });
+    onChangeIngred = (event) => {
+        this.setState({ termIngred: event.target.value });
+    }
+
+    onChangeSteps = (event) => {
+        this.setState({ termSteps: event.target.value });
     }
 
     onSubmitEquip = (event) => {
@@ -323,11 +330,11 @@ export default class Upload extends React.Component {
                         <div className="col-md-6">
                             <div id="cooking-time" className="form-group">
                                 <label>Cooking Time (Minutes) *</label>
-                                <input type="recipeName"
+                                <input type="time"
                                     className="form-control"
-                                    id="cookingTime"
+                                    id="time"
                                     placeholder="ex: 25"
-                                    name="recipeName"
+                                    name="time"
                                     value={null}
                                     onInput={(event) => { this.handleChange(event) }} />
 
@@ -339,9 +346,6 @@ export default class Upload extends React.Component {
                             <input className="fileInput" 
                                 type="file" 
                                 onChange={(e)=>this._handleImageChange(e)} />
-                            <button className="submitButton" 
-                                type="submit" 
-                                onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
                             </form>
                             <div className="imgPreview">
                             {$imagePreview}
@@ -349,8 +353,6 @@ export default class Upload extends React.Component {
                         </div>
                         </div>
                     </div>
-
-
 
                     <div>
                         <label>Equipment *</label>
@@ -363,7 +365,7 @@ export default class Upload extends React.Component {
                                 name="recipeName"
                                 value={null}
                                 // onInput={(event) => { this.handleChange(event) }} 
-                                onChange={this.onChange} />
+                                onChange={this.onChangeEquip} />
                             <img src={add}
                                 alt="add"
                                 // onClick={this.add}
@@ -383,7 +385,7 @@ export default class Upload extends React.Component {
                                 name="recipeName"
                                 value={this.state.termIngred}
                                 // onInput={(event) => { this.handleChange(event) }} 
-                                onChange={this.onChange} />
+                                onChange={this.onChangeIngred} />
                             <img src={add}
                                 alt="add"
                                 // onClick={this.add}
@@ -405,7 +407,7 @@ export default class Upload extends React.Component {
                                 // onInput={(event) => { this.handleChange(event) }} />
                                 value={this.state.termSteps}
                                 // onInput={(event) => { this.handleChange(event) }} 
-                                onChange={this.onChange} />
+                                onChange={this.onChangeSteps} />
                             <img src={add}
                                 alt="add"
                                 onClick={this.onSubmitSteps}
@@ -424,7 +426,9 @@ export default class Upload extends React.Component {
                             {this.state.imageViews.map(child => child)}
                         </div>  */}
                     </div>
-
+                    <button className="submitButton" 
+                                type="submit" 
+                                onClick={(e)=>this._handleSubmit(e)}>Upload Recipe</button>
                 </div>
                 {/* <div id="save" onClick={() => {
                     this.addRecipe();

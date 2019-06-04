@@ -7,8 +7,6 @@ import recipesIcon from "./img/recipesIcon-notSelected.png";
 import equipmentIconNotSelected from "./img/equipmentIcon-notSelected.png";
 import settingsIcon from "./img/settingsIcon-selected.png";
 import logoutIcon from "./img/logoutIcon.png";
-
-import users from "./img/pasta.jpg";
 import firebase from 'firebase';
 import { ROUTES } from './constants';
 import { Link } from 'react-router-dom';
@@ -56,6 +54,16 @@ export default class Profile extends React.Component {
                 })
             }
         })
+    }
+
+    handleChange(event) {
+        //         console.log(event);
+        let field = event.target.name; // which input
+        let value = event.target.value; // what value
+        // console.log(value);
+        let changes = {}; // object to hold changes
+        changes[field] = value; // change this field
+        this.setState(changes); // update state
     }
 
     render() {

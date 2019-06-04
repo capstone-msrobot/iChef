@@ -3,12 +3,11 @@ import Navigation from "./Navigation"
 import Footer from "./Footer"
 import "./Profile.css"
 import user from "./img/user.jpg";
-import recipesIconSelected from "./img/recipesIcon-selected.png";
-// import recipesIconNotSelected from "./img/ingredientIcon-notSelected.png";
+import recipesIconNotSelected from "./img/recipesIcon-notSelected.png";
+import equipmentSelected from "./img/equipment-selected.png";
 import equipmentIconSelected from "./img/equipmentIcon-selected.png";
 import equipmentIconNotSelected from "./img/equipmentIcon-notSelected.png";
 import settingsIcon from "./img/settingsIcon.png";
-import logoutIcon from "./img/logoutIcon.png";
 
 // import users from "./img/pasta.jpg";
 import firebase from 'firebase';
@@ -82,23 +81,25 @@ export default class Profile extends React.Component {
                     </div>
                     <div className="profile-usermenu">
                         <ul className="nav">
+                            <li>
+                                <a href="./Profile">
+                                    {/* check state and change image depending on if user is on recipes */}
+                                    <img src={recipesIconNotSelected} alt="recipes" />
+                                    Recipes
+                                </a>
+                            </li>
                             <li className="active">
                                 {/* <a href="#"> */}
                                 {/* check state and change image depending on if user is on recipes */}
-                                <img src={recipesIconSelected} alt="recipes" />
-                                Recipes
-                            </li>
-                            <li>
-                                {/* <a href="#"> */}
-                                {/* check state and change image depending on if user is on recipes */}
-                                <img src={equipmentIconNotSelected} alt="equipment" />
+                                <img src={equipmentSelected} alt="equipment" />
                                 Equipment
                             </li>
                             <li>
-                                {/* <a href="#"> */}
-                                {/* check state and change image depending on if user is on recipes */}
-                                <img src={equipmentIconNotSelected} alt="equipment" />
-                                Ingredients
+                                <a href="./ProfileIngred">
+                                    {/* check state and change image depending on if user is on recipes */}
+                                    <img src={equipmentIconNotSelected} alt="equipment" />
+                                    Ingredients
+                                </a>
                             </li>
                             <li>
                                 <a href="./Settings"><img src={settingsIcon} alt="settings" /></a>
