@@ -4,9 +4,9 @@ import Footer from "./Footer"
 import "./Profile.css"
 import user from "./img/user.jpg";
 import recipesIconNotSelected from "./img/recipesIcon-notSelected.png";
-import equipmentSelected from "./img/equipment-selected.png";
-import equipmentIconSelected from "./img/equipmentIcon-selected.png";
-import equipmentIconNotSelected from "./img/equipmentIcon-notSelected.png";
+
+import equipIconSelected from "./img/equipment green.png";
+import ingredIconNotSelected from "./img/ingredient.png";
 import settingsIcon from "./img/settingsIcon.png";
 
 // import users from "./img/pasta.jpg";
@@ -89,18 +89,18 @@ export default class Profile extends React.Component {
                             <li className="active">
                                 {/* <a href="#"> */}
                                 {/* check state and change image depending on if user is on recipes */}
-                                <img src={equipmentSelected} alt="equipment" />
+                                <img src={equipIconSelected} alt="equipment" />
                                 Equipment
                             </li>
                             <li>
                                 <a href="./ProfileIngred">
                                     {/* check state and change image depending on if user is on recipes */}
-                                    <img src={equipmentIconNotSelected} alt="equipment" />
+                                    <img src={ingredIconNotSelected} alt="equipment" />
                                     Ingredients
                                 </a>
                             </li>
                             <li>
-                                <a href="./Settings"><img src={settingsIcon} alt="settings" /></a>
+                                <a href="./Settings"><img src={settingsIcon} alt="settings" />Settings</a>
                                 {/* <Link to={ROUTES.Settings}>Settings</Link> */}
                             </li>
                             {/* <li>
@@ -160,7 +160,7 @@ export class Equipment extends React.Component {
             <div id="show-content">
                 <div id="page-label">
                     <p className="title">Your Equipment</p>
-                    <img src={equipmentIconSelected} alt="recipes" className="title-icon" />
+                    <img src={equipIconSelected} alt="recipes" className="title-icon" />
                 </div>
 
                 <div class="container">
