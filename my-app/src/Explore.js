@@ -107,7 +107,6 @@ export default class Explore extends React.Component {
             })
         });
     }
-    //GOTTA FIX THIS!!
     handleIngredientsFilter = (value) => {
         this.setState({result: this.state.oldResult})
         // let val = this.state.result;
@@ -115,7 +114,7 @@ export default class Explore extends React.Component {
         // val.map((recipe, i) => {
         //     for (let j = 0; j < value.length; j++) {
         //         if (!recipe.ingredientsList.includes(value[j].toLowerCase())) {
-        //             // this.state.result.splice(i, 1)
+        //             // this.state.resRult.splice(i, 1)
         //             // let arr = this.state.result;
         //             // this.setState({
         //             //     result: arr
@@ -137,7 +136,7 @@ export default class Explore extends React.Component {
         // })
         var filtering = 'ingredientsList:' + value[0].toLowerCase();
         for (let i = 1; i < value.length; i++) {
-            filtering = filtering + ' AND ingredientsList' + value[i].toLowerCase();
+            filtering = filtering + ' OR ingredientsList' + value[i].toLowerCase();
         }
         index.search({
             filters: filtering
@@ -255,7 +254,7 @@ export default class Explore extends React.Component {
                         <Ingredients array={recipes} filter={this.handleIngredientsFilter}/>
                         
                         <div id="reset" onClick={()=> this.setState({clicked: true})}> 
-                            <a href="/Results">Reset</a>
+                            <a href="/Explore">Reset</a>
                         </div>
                     </div>
                 </div>

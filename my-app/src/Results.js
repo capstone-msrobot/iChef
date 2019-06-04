@@ -144,7 +144,7 @@ export default class Results extends React.Component {
         // })
         var filtering = 'ingredientsList:' + value[0].toLowerCase();
         for (let i = 1; i < value.length; i++) {
-            filtering = filtering + ' AND ingredientsList' + value[i].toLowerCase();
+            filtering = filtering + ' OR ingredientsList' + value[i].toLowerCase();
         }
         index.search({
             query: (this.props.location.state.search).toLowerCase(),
@@ -152,7 +152,7 @@ export default class Results extends React.Component {
           }).then(res => {
             this.setState({
                 result: res.hits,
-                filter: this.state.filter === "" ? filtering : this.state.filter + " AND " + filtering
+                filter: this.state.filter === "" ? filtering : this.state.filter + " OR " + filtering
             })
         });
     }
