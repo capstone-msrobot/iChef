@@ -14,7 +14,7 @@ export default class Results extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: this.props.location.state.search,
+            search: this.props.search,
             result:[],
             filter: "",
             oldResult: [],

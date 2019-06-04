@@ -107,7 +107,7 @@ export default class Explore extends React.Component {
             })
         });
     }
-
+    //GOTTA FIX THIS!!
     handleIngredientsFilter = (value) => {
         this.setState({result: this.state.oldResult})
         // let val = this.state.result;
