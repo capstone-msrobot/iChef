@@ -8,9 +8,7 @@ import recipesIconSelected from "./img/recipesIcon-selected.png";
 import equipIconNotSelected from "./img/equipment 2.png";
 import ingredIconNotSelected from "./img/ingredient.png";
 import settingsIcon from "./img/settingsIcon.png";
-import ShowRecipe from "./ShowRecipe";
 import firebase from 'firebase';
-import {withRouter} from 'react-router-dom';
 
 
 // https://bootsnipp.com/snippets/M48pA

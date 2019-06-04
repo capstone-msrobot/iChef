@@ -114,7 +114,7 @@ export default class Explore extends React.Component {
         // val.map((recipe, i) => {
         //     for (let j = 0; j < value.length; j++) {
         //         if (!recipe.ingredientsList.includes(value[j].toLowerCase())) {
-        //             // this.state.result.splice(i, 1)
+        //             // this.state.resRult.splice(i, 1)
         //             // let arr = this.state.result;
         //             // this.setState({
         //             //     result: arr
@@ -254,7 +254,7 @@ export default class Explore extends React.Component {
                         <Ingredients array={recipes} filter={this.handleIngredientsFilter}/>
                         
                         <div id="reset" onClick={()=> this.setState({clicked: true})}> 
-                            <a href="/Results">Reset</a>
+                            <a href="/Explore">Reset</a>
                         </div>
                     </div>
                 </div>
