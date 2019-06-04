@@ -323,7 +323,7 @@ export default class Upload extends React.Component {
             $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
         }
         return (
-            <div id="upload-content">
+            <div>
                 <Navigation />
                 <div id="title">
                     <p className="title-upload">Upload A Recipe</p>
@@ -447,9 +447,11 @@ export default class Upload extends React.Component {
                             {this.state.imageViews.map(child => child)}
                         </div>  */}
                     </div>
-                    <button className="submitButton"
-                        type="submit"
-                        onClick={(e) => this._handleSubmit(e)}>Upload Recipe</button>
+                    <div id="final-button">
+                        <button className="submitButton"
+                            type="submit"
+                            onClick={(e) => this._handleSubmit(e)}>Upload Recipe</button>
+                    </div>
                 </div>
                 {/* <div id="save" onClick={() => {
                     this.addRecipe();
