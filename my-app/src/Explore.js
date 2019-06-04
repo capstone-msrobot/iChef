@@ -18,7 +18,8 @@ export default class Explore extends React.Component {
             result:[],
             filter: [],
             oldResult: [],
-            result2:[]
+            result2:[],
+            clicked: false
         }
     }
     
@@ -55,7 +56,7 @@ export default class Explore extends React.Component {
         // }
         var filtering = 'equipmentList:' + value[0].toLowerCase();
         for (let i = 1; i < value.length; i++) {
-            filtering = filtering + ' AND ' + "equipmentList" + value[i].toLowerCase();
+            filtering = filtering + ' AND equipmentList' + value[i].toLowerCase();
         }
         // console.log(filtering)
         index.search({
@@ -68,7 +69,7 @@ export default class Explore extends React.Component {
             console.log(res.hits);
             this.setState({
                 result2: res.hits,
-                filter: this.state.filter == "" ? filtering : this.state.filter + " AND " + filtering
+                filter: this.state.filter === "" ? filtering : this.state.filter + " AND " + filtering
             })
         });
     }
