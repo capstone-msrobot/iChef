@@ -374,7 +374,11 @@ export default class Upload extends React.Component {
                             </div>
                         </div>
                     </div>
-
+                    <div>
+                        <label id="fixed-label">Source of Recipe *</label>
+                        {/* <input type="radio" checked>You are the Creator of this Recipe</input> */}
+                        {/* <input type="radio" name="source" value="other">Link to Original Website</input> */}
+                    </div>
                     <div>
                         <label>Equipment *</label>
                         <div id="equipment-input" className="form-group">
