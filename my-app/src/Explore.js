@@ -4,6 +4,12 @@ import Footer from "./Footer"
 import "./Results.css"
 import firebase from 'firebase/app';
 import 'firebase/database';
+import algoliasearch from 'algoliasearch'
+import id from './algoliaConfig'
+import config from './algoliaConfigVal'
+// import index from 'algoliaConfig/index'
+const client = algoliasearch(id, config);
+const index = client.initIndex('contacts');
 
 export default class Explore extends React.Component {
     constructor(props) {
@@ -12,7 +18,8 @@ export default class Explore extends React.Component {
             result:[],
             filter: [],
             oldResult: [],
-            result2:[]
+            result2:[],
+            clicked: false
         }
     }
     
@@ -32,58 +39,92 @@ export default class Explore extends React.Component {
     handleEquipmentFilter = (value) => {
         this.setState({filter: value, result: this.state.oldResult})
 
-        for (let i = 0; i < this.state.result.length; i++) {
-            for (let m = 0; m < this.state.result[i]; m++) {
-                for (let j = 0; j < this.state.result[i].recipe[m].equipment.length; j++) {
-                    for (let k = 0; k < value.length; k++) {
-                        if (!this.state.result[i].recipe[m].equipmentList.includes(value[k].toLowerCase())) {
-                            this.setState({
-                                result: this.state.result.recipe.slice(m,m)
-                            })
-                            console.log(value[k])
-                            break;
-                        }
-                    }
-                }
-            }
+        // for (let i = 0; i < this.state.result.length; i++) {
+        //     for (let m = 0; m < this.state.result[i]; m++) {
+        //         for (let j = 0; j < this.state.result[i].recipe[m].equipment.length; j++) {
+        //             for (let k = 0; k < value.length; k++) {
+        //                 if (!this.state.result[i].recipe[m].equipmentList.includes(value[k].toLowerCase())) {
+        //                     this.setState({
+        //                         result: this.state.result.recipe.slice(m,m)
+        //                     })
+        //                     console.log(value[k])
+        //                     break;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        var filtering = 'equipmentList:' + value[0].toLowerCase();
+        for (let i = 1; i < value.length; i++) {
+            filtering = filtering + ' AND equipmentList' + value[i].toLowerCase();
         }
+        // console.log(filtering)
+        index.search({
+            facetFilters: [
+                filtering,
+                this.state.filter
+            ]
+          }).then(res => {
+              console.log(this.state.filter)
+            console.log(res.hits);
+            this.setState({
+                result2: res.hits,
+                filter: this.state.filter === "" ? filtering : this.state.filter + " AND " + filtering
+            })
+        });
     }
 
     handleIngredientsFilter = (value) => {
         this.setState({filter: value, result: this.state.oldResult})
 
-        for (let i = 0; i < this.state.result.length; i++) {
-            for (let m = 0; m < this.state.result[i]; m++) {
-                for (let j = 0; j < this.state.result[i].recipe[m].ingredients.length; j++) {
-                    for (let k = 0; k < value.length; k++) {
-                        if (!this.state.result[i].recipe[m].ingredientsList.includes(value[k].toLowerCase())) {
-                            this.setState({
-                                result: this.state.result.recipe.slice(m,m)
-                            })
-                            console.log(value[k])
-                            break;
-                        }
-                    }
-                }
-            }
+        // for (let i = 0; i < this.state.result.length; i++) {
+        //     for (let m = 0; m < this.state.result[i]; m++) {
+        //         for (let j = 0; j < this.state.result[i].recipe[m].ingredients.length; j++) {
+        //             for (let k = 0; k < value.length; k++) {
+        //                 if (!this.state.result[i].recipe[m].ingredientsList.includes(value[k].toLowerCase())) {
+        //                     this.setState({
+        //                         result: this.state.result.recipe.slice(m,m)
+        //                     })
+        //                     console.log(value[k])
+        //                     break;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        var filtering = 'ingredientsList:' + value[0].toLowerCase();
+        for (let i = 1; i < value.length; i++) {
+            filtering = filtering + ' AND ' + "ingredientsList" + value[i].toLowerCase();
         }
+        index.search({
+            facetFilters: [
+                filtering,
+                this.state.filter
+            ]
+          }).then(res => {
+            console.log(res.hits);
+            this.setState({
+                result2: res.hits,
+                filter: this.state.filter == "" ? filtering : this.state.filter + " AND " + filtering
+            })
+        });
     }
 
     componentDidMount() {
-        let arr = [];
+        // let arr = [];
         let arr2 = [];
-        var query = firebase.database().ref("recipes").orderByKey();
-        query.once("value")
-        .then(function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-                arr.push(childSnapshot.val());
-            });
-        }).then(()=>{
-            this.setState({
-                result: arr,
-                oldResult: arr
-            })
-        });
+        // var query = firebase.database().ref("recipes").orderByKey();
+        // query.once("value")
+        // .then(function(snapshot) {
+        //     snapshot.forEach(function(childSnapshot) {
+        //         arr.push(childSnapshot.val());
+        //     });
+        // }).then(()=>{
+        //     this.setState({
+        //         result: arr,
+        //         oldResult: arr
+        //     })
+        // });
 
         var query2 = firebase.database().ref("recipesFinal").orderByKey();
         query2.once("value")
