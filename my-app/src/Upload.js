@@ -78,12 +78,21 @@ export default class Upload extends React.Component {
         // }
         // reference.child(subEmail).set(newData)'
         var postData = {
-            recipes: this.state.objectKey
+            equipment: this.state.itemsEquip,
+            equipmentList: this.state.itemsEquip,
+            imageURL: this.state.downloadURL,
+            ingredients: this.state.itemsIngred,
+            ingredientsList: this.state.itemsIngred,
+            name: this.state.recipeName,
+            originalURL: this.state.username,
+            steps: this.state.itemsSteps,
+            stepsURL: '',
+            time: this.state.time
         };
-        var newPostKey = firebase.database().ref().child('users/'+subEmail+'/Author').push().key;
-        console.log(newPostKey);
+        // var newPostKey = firebase.database().ref().child('users/'+subEmail+'/Author').push().key;
+        // console.log(newPostKey);
         var updates = {};
-        updates['/users/'+subEmail+'/Recipes/' + newPostKey] = postData;
+        updates['/users/'+subEmail+'/Recipes/' + this.state.objectKey] = postData;
         return firebase.database().ref().update(updates);
     }
 
@@ -249,6 +258,7 @@ export default class Upload extends React.Component {
         }).then(() => {
             this.addRecipe();
         });
+        // this.addRecipe();
       }
     
     // _handleImageChange(e) {
