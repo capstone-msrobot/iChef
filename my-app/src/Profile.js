@@ -8,12 +8,9 @@ import recipesIconSelected from "./img/recipesIcon-selected.png";
 import equipmentIconSelected from "./img/equipmentIcon-selected.png";
 import equipmentIconNotSelected from "./img/equipmentIcon-notSelected.png";
 import settingsIcon from "./img/settingsIcon.png";
-import logoutIcon from "./img/logoutIcon.png";
 
 import users from "./img/pasta.jpg";
 import firebase from 'firebase';
-import { ROUTES } from './constants';
-import { Link } from 'react-router-dom';
 
 
 // https://bootsnipp.com/snippets/M48pA
@@ -106,6 +103,7 @@ export default class Profile extends React.Component {
                             <li>
                                 <a href="./Settings">
                                     <img src={settingsIcon} alt="settings" />
+                                    Settings
                                 </a>
                                 {/* <Link to={ROUTES.Settings}>Settings</Link> */}
                             </li>

@@ -77,9 +77,6 @@ export default class SignUp extends React.Component {
                 email: this.state.email,
                 password: this.state.password,
             },
-            Recipes: {},
-            Equipment: {},
-            Ingredients: {},
         }
         reference.child(subEmail).set(newData)
     }

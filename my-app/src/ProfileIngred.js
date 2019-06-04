@@ -21,16 +21,10 @@ export default class Profile extends React.Component {
         this.state = {
             user: this.props.user,
             loggedIn: this.props.loggedIn,
-            recipes: [],
-            equipment: [],
             ingredients: [],
             email: '',
             password: '',
             username: '',
-            recipeClicked: false,
-            equipClicked: false,
-            ingredClicked: false,
-            setting: false,
         };
     }
 
@@ -74,7 +68,7 @@ export default class Profile extends React.Component {
                     </div>
                     <div className="profile-usertitle">
                         <div className="profile-usertitle-name">
-                            Soobinsoo
+                        {this.state.username}
                                         </div>
 
                     </div>
@@ -106,7 +100,11 @@ export default class Profile extends React.Component {
                                 Ingredients
                             </li>
                             <li>
-                                <a href="./Settings"><img src={settingsIcon} alt="settings" /></a>
+                                <a href="./Settings">
+                                    <img src={settingsIcon} alt="settings" /> 
+                                    Settings
+                                </a>
+                                Settings
                                 {/* <Link to={ROUTES.Settings}>Settings</Link> */}
                             </li>
                             {/* <li>
@@ -126,6 +124,42 @@ export default class Profile extends React.Component {
 }
 
 export class Ingredients extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            ingredient: [],
+            subEmail: this.props.subEmail,
+        };
+    }
+
+    componentWillMount() {
+        this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
+                this.setState({
+                    email: user.email,
+                    subEmail: user.email.substr(0, user.email.indexOf('@'))
+
+                })
+        })
+    }
+
+    handleChange =  (event)=> {
+        let value = event.target.value; // what value
+        let ingred = this.state.ingredient
+        ingred.push(value);
+        this.setState({
+            ingredient: ingred
+        });
+    }
+
+    handleIngredient() {
+        let reference = firebase.database().ref('users');
+        let newData = {
+            Ingredients: this.state.ingredient,
+        }
+        console.log(this.state.subEmail);
+        reference.child(this.state.subEmail).update(newData)
+    }
+    
     render() {
         return (
             <div id="show-content">
@@ -138,40 +172,34 @@ export class Ingredients extends React.Component {
                     <div class="row">
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Carrots
+                                <input class="form-check-input" type="checkbox" value="chicken" onClick={(event) => { this.handleChange(event) }}/>Chicken
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Carrots
+                                <input class="form-check-input" type="checkbox" value="pasta" onClick={(event) => { this.handleChange(event) }}/>Pasta
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Carrots
+                                <input class="form-check-input" type="checkbox" value="cilantro" onClick={(event) => { this.handleChange(event) }}/>Cilantro
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Carrots
+                                <input class="form-check-input" type="checkbox" value="lemon" onClick={(event) => { this.handleChange(event) }}/>Lemon
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Carrots
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Carrots
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />Carrots
+                                <input class="form-check-input" type="checkbox" value="garlic" onClick={(event) => { this.handleChange(event) }}/>Garlic
                             </div>
                         </div>
                     </div>
+                </div>
+                <div id="signIn" onClick={() => this.handleIngredient()}> Save
+                    {/* <div className="save" onClick={() => this.updatesignup()}> */}
+                        {/* <Link to={ROUTES.Profile}>Sign In</Link> */}
                 </div>
             </div>
         )
