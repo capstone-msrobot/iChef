@@ -5,17 +5,17 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 
 export default class Navigation extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             user: this.props.user,
             loggedIn: this.props.loggedIn
-        };  
+        };
     }
 
     componentWillUnmount() {
-        this.stopWatchingAuth();
-    }
+        this.stopWatchingAuth();
+    }
 
     componentDidMount() {
         // Authentication
@@ -28,11 +28,11 @@ export default class Navigation extends React.Component {
                 });
             }
             else {
-                this.setState({ user: null, loggedIn:false}); //null out the saved state
+                this.setState({ user: null, loggedIn: false }); //null out the saved state
             }
         });
     }
-    
+
     handleSignOut() {
         this.setState({ errorMessage: null }); //clear old error
 
@@ -40,7 +40,7 @@ export default class Navigation extends React.Component {
         firebase.auth().signOut()
             .catch((err) => {
                 console.log(err)
-                this.setState({ 
+                this.setState({
                     errorMessage: err.message,
                     user: null,
                     loggedIn: false
@@ -66,11 +66,11 @@ export default class Navigation extends React.Component {
                     <div className="collapse navbar-collapse"
                         id="navbarNavAltMarkup">
                         <div className="navbar-nav" id="navTabs">
-                            <a 
-                                className="nav-item nav-link" 
+                            <a
+                                className="nav-item nav-link"
                                 id="tabLink-home"
                                 href="Home">
-                                Home 
+                                Home
                             </a>
                             <a
                                 className="nav-item nav-link"
@@ -79,8 +79,17 @@ export default class Navigation extends React.Component {
                             >
                                 About Us
                             </a>
-                            <a 
-                                className="navbar-brand" 
+                            {(this.state.user && this.state.loggedIn) &&
+                                <a
+                                    className="nav-item nav-link"
+                                    id="tabLink-explore"
+                                    href="./Explore"
+                                >
+                                    Explore
+                            </a>
+                            }
+                            <a
+                                className="navbar-brand"
                                 id="tabLink-logo"
                                 href="Home">
                                 <img id="logo" src={logo} alt="logo" />
@@ -91,17 +100,18 @@ export default class Navigation extends React.Component {
                             {/* https://stackoverflow.com/questions/54896637/how-to-change-navbar-when-user-signs-in-and-signs-out */}
                             {/* https://stackoverflow.com/questions/46993357/logout-update-navbar-react-js */}
                             {/* https://stackoverflow.com/questions/40055439/check-if-logged-in-react-router-app-es6 */}
-                            <a
-                                className="nav-item nav-link"
-                                id="tabLink-explore"
-                                href="./Explore"
+                            {(!this.state.user && !this.state.loggedIn) &&
+                                <a
+                                    className="nav-item nav-link"
+                                    id="tabLink-explore"
+                                    href="./Explore"
                                 >
                                     Explore
                             </a>
-
+                            }
                             {/* Change this to be Upload a Recipe page IF THEY ARE LOGGED IN  */}
-                            
-                            {(this.state.user && this.state.loggedIn) && 
+
+                            {(this.state.user && this.state.loggedIn) &&
                                 <a
                                     className="nav-item nav-link"
                                     id="tabLink-signup"
@@ -111,7 +121,7 @@ export default class Navigation extends React.Component {
                                 </a>
                             }
 
-                            {(!this.state.user && !this.state.loggedIn) && 
+                            {(!this.state.user && !this.state.loggedIn) &&
                                 <a
                                     className="nav-item nav-link"
                                     id="tabLink-signup"
@@ -120,7 +130,7 @@ export default class Navigation extends React.Component {
                                     Login
                                 </a>
                             }
-                            {(this.state.user && this.state.loggedIn) && 
+                            {(this.state.user && this.state.loggedIn) &&
                                 <a
                                     className="nav-item nav-link"
                                     id="tabLink-signup"
@@ -129,11 +139,12 @@ export default class Navigation extends React.Component {
                                     Profile
                                 </a>
                             }
-                            {(this.state.user && this.state.loggedIn) && 
-                                <a 
-                                    className="nav-item nav-link" 
+
+                            {(this.state.user && this.state.loggedIn) &&
+                                <a
+                                    className="nav-item nav-link"
                                     id="tabLink-LogOut"
-                                    href="./Home" 
+                                    href="./Home"
                                     onClick={() => this.handleSignOut()}>
                                     Log out
                                 </a>
@@ -142,6 +153,110 @@ export default class Navigation extends React.Component {
                     </div>
                 </nav>
             </div>
+
+
+            // <div id="navigationBar" className="navigBar">
+            //     <nav className="navbar navbar-expand-lg navbar-light" id="navigation">
+            //         <button
+            //             className="navbar-toggler"
+            //             type="button"
+            //             data-toggle="collapse"
+            //             data-target="#navbarNavAltMarkup"
+            //             aria-controls="navbarNavAltMarkup"
+            //             aria-expanded="false"
+            //             aria-label="Toggle navigation"
+            //         >
+            //             <span className="navbar-toggler-icon" />
+            //         </button>
+            //         <div className="collapse navbar-collapse"
+            //             id="navbarNavAltMarkup">
+            //             <div className="navbar-nav" id="navTabs">
+            //                 <a
+            //                     className="nav-item nav-link"
+            //                     id="tabLink-home"
+            //                     href="Home">
+            //                     Home
+            //                 </a>
+            //                 <a
+            //                     className="nav-item nav-link"
+            //                     id="tabLink-about"
+            //                     href="./AboutUs"
+            //                 >
+            //                     About Us
+            //                 </a>
+            //                 {(this.state.user && this.state.loggedIn) &&
+            //                     <a
+            //                         className="nav-item nav-link"
+            //                         id="tabLink-explore"
+            //                         href="./Explore"
+            //                     >
+            //                         Explore
+            //                 </a>
+            //                 }
+            //                 <a
+            //                     className="navbar-brand"
+            //                     id="tabLink-logo"
+            //                     href="Home">
+            //                     <img id="logo" src={logo} alt="logo" />
+            //                 </a>
+
+
+            //                 {/* Explore should show ALL of the recipes? */}
+            //                 {/* https://stackoverflow.com/questions/54896637/how-to-change-navbar-when-user-signs-in-and-signs-out */}
+            //                 {/* https://stackoverflow.com/questions/46993357/logout-update-navbar-react-js */}
+            //                 {/* https://stackoverflow.com/questions/40055439/check-if-logged-in-react-router-app-es6 */}
+            //                 {(!this.state.user && !this.state.loggedIn) &&
+            //                     <a
+            //                         className="nav-item nav-link"
+            //                         id="tabLink-explore"
+            //                         href="./Explore"
+            //                     >
+            //                         Explore
+            //                 </a>
+            //                 }
+            //                 {/* Change this to be Upload a Recipe page IF THEY ARE LOGGED IN  */}
+
+            //                 {(this.state.user && this.state.loggedIn) &&
+            //                     <a
+            //                         className="nav-item nav-link"
+            //                         id="tabLink-signup"
+            //                         href="./Upload"
+            //                     >
+            //                         Upload Recipe
+            //                     </a>
+            //                 }
+
+            //                 {(!this.state.user && !this.state.loggedIn) &&
+            //                     <a
+            //                         className="nav-item nav-link"
+            //                         id="tabLink-signup"
+            //                         href="./Login"
+            //                     >
+            //                         Login
+            //                     </a>
+            //                 }
+            //                 {(this.state.user && this.state.loggedIn) &&
+            //                     <a
+            //                         className="nav-item nav-link"
+            //                         id="tabLink-signup"
+            //                         href="./Profile"
+            //                     >
+            //                         Profile
+            //                     </a>
+            //                 }
+            //                 {(this.state.user && this.state.loggedIn) &&
+            //                     <a
+            //                         className="nav-item nav-link"
+            //                         id="tabLink-LogOut"
+            //                         href="./Home"
+            //                         onClick={() => this.handleSignOut()}>
+            //                         Log out
+            //                     </a>
+            //                 }
+            //             </div>
+            //         </div>
+            //     </nav>
+            // </div>
         );
     }
 }
@@ -168,14 +283,14 @@ export default class Navigation extends React.Component {
 // export default className Navigation extends Component {
 //     constructor(props) {
 //         super(props);
-    
+
 //         this.toggle = this.toggle.bind(this);
-    
+
 //         this.state = {
 //             isOpen: false
 //         };
 //       }
-    
+
 //       toggle() {
 //         this.setState({
 //             isOpen: !this.state.isOpen

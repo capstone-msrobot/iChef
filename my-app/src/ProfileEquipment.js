@@ -5,7 +5,7 @@ import "./Profile.css"
 import user from "./img/user.jpg";
 import recipesIconNotSelected from "./img/recipesIcon-notSelected.png";
 
-import equipIconSelected from "./img/equipment green.png";
+import equipIconSelected from "./img/equipment-selected.png";
 import ingredIconNotSelected from "./img/ingredient.png";
 import settingsIcon from "./img/settingsIcon.png";
 
@@ -33,27 +33,27 @@ export default class Profile extends React.Component {
     componentWillMount() {
         this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
             // if (user) {
-                this.setState({
-                    email: user.email,
-                    subEmail: user.email.substr(0, user.email.indexOf('@'))
+            this.setState({
+                email: user.email,
+                subEmail: user.email.substr(0, user.email.indexOf('@'))
 
-                })
-                console.log (this.state.subEmail);
+            })
+            console.log(this.state.subEmail);
 
-                let reference = firebase.database().ref('users/' + this.state.subEmail + '/Author');
-                reference.on('value', (snapshot) => {
-                    
-                    let settings = snapshot.val();
+            let reference = firebase.database().ref('users/' + this.state.subEmail + '/Author');
+            reference.on('value', (snapshot) => {
 
-                    if (settings != null) {
-                        this.setState({
-                            email: settings.email,
-                            password: settings.password,
-                            username: settings.username,
-                        })
-                    }
+                let settings = snapshot.val();
 
-                })
+                if (settings != null) {
+                    this.setState({
+                        email: settings.email,
+                        password: settings.password,
+                        username: settings.username,
+                    })
+                }
+
+            })
             // }
         })
     }
@@ -74,7 +74,7 @@ export default class Profile extends React.Component {
                     <div className="profile-usertitle">
                         <div className="profile-usertitle-name">
                             {this.state.username}
-                                        </div>
+                        </div>
 
                     </div>
                     <div className="profile-usermenu">
@@ -100,7 +100,10 @@ export default class Profile extends React.Component {
                                 </a>
                             </li>
                             <li>
-                                <a href="./Settings"><img src={settingsIcon} alt="settings" />Settings</a>
+                                <a href="./Settings">
+                                    <img src={settingsIcon} alt="settings" />
+                                    Settings
+                                </a>
                                 {/* <Link to={ROUTES.Settings}>Settings</Link> */}
                             </li>
                             {/* <li>
@@ -111,7 +114,7 @@ export default class Profile extends React.Component {
                     </div>
                 </div>
 
-                <Equipment user={this.state.user} subEmail={this.state.subEmail}/>
+                <Equipment user={this.state.user} subEmail={this.state.subEmail} />
                 <Footer />
             </div>
         )
@@ -129,22 +132,22 @@ export class Equipment extends React.Component {
 
     componentWillMount() {
         this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
-                this.setState({
-                    email: user.email,
-                    subEmail: user.email.substr(0, user.email.indexOf('@'))
+            this.setState({
+                email: user.email,
+                subEmail: user.email.substr(0, user.email.indexOf('@'))
 
-                })
+            })
         })
     }
 
-    handleChange =  (event)=> {
-        let value = event.target.value; // what value
+    handleChange = (event) => {
+        let value = event.target.value; // what value
         let equip = this.state.equipment
         equip.push(value);
         this.setState({
             equipment: equip
         });
-    }
+    }
 
     handleEquipment() {
         let reference = firebase.database().ref('users');
@@ -167,64 +170,64 @@ export class Equipment extends React.Component {
                     <div class="row">
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="pan" onClick={(event) => { this.handleChange(event) }}/>Pan
+                                <input class="form-check-input" type="checkbox" value="pan" onClick={(event) => { this.handleChange(event) }} />Pan
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="pot" onClick={(event) => { this.handleChange(event) }}/>Pot
+                                <input class="form-check-input" type="checkbox" value="pot" onClick={(event) => { this.handleChange(event) }} />Pot
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="blender" onClick={(event) => { this.handleChange(event) }}/>Blender
+                                <input class="form-check-input" type="checkbox" value="blender" onClick={(event) => { this.handleChange(event) }} />Blender
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="fryer" onClick={(event) => { this.handleChange(event) }}/>Fryer
+                                <input class="form-check-input" type="checkbox" value="fryer" onClick={(event) => { this.handleChange(event) }} />Fryer
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="grinder" onClick={(event) => { this.handleChange(event) }}/>Grinder
+                                <input class="form-check-input" type="checkbox" value="grinder" onClick={(event) => { this.handleChange(event) }} />Grinder
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="ladle" onClick={(event) => { this.handleChange(event) }}/>Ladle
+                                <input class="form-check-input" type="checkbox" value="ladle" onClick={(event) => { this.handleChange(event) }} />Ladle
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="spatula" onClick={(event) => { this.handleChange(event) }}/>Spatula
+                                <input class="form-check-input" type="checkbox" value="spatula" onClick={(event) => { this.handleChange(event) }} />Spatula
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="kitchen shears" onClick={(event) => { this.handleChange(event) }}/>Kitchen Shears
+                                <input class="form-check-input" type="checkbox" value="kitchen shears" onClick={(event) => { this.handleChange(event) }} />Kitchen Shears
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="can opener" onClick={(event) => { this.handleChange(event) }}/>Can Opener
+                                <input class="form-check-input" type="checkbox" value="can opener" onClick={(event) => { this.handleChange(event) }} />Can Opener
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="corkscrew" onClick={(event) => { this.handleChange(event) }}/>Corkscrew
+                                <input class="form-check-input" type="checkbox" value="corkscrew" onClick={(event) => { this.handleChange(event) }} />Corkscrew
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="thermometer" onClick={(event) => { this.handleChange(event) }}/>Thermometer
+                                <input class="form-check-input" type="checkbox" value="thermometer" onClick={(event) => { this.handleChange(event) }} />Thermometer
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="signIn" onClick={() => this.handleEquipment()}> Save
                     {/* <div className="save" onClick={() => this.updatesignup()}> */}
-                        {/* <Link to={ROUTES.Profile}>Sign In</Link> */}
+                    {/* <Link to={ROUTES.Profile}>Sign In</Link> */}
                 </div>
             </div>
         )
