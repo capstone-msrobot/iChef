@@ -9,7 +9,6 @@ import equipIconNotSelected from "./img/equipment 2.png";
 import ingredIconNotSelected from "./img/ingredient.png";
 import settingsIcon from "./img/settingsIcon.png";
 
-import users from "./img/pasta.jpg";
 import firebase from 'firebase';
 
 
@@ -21,26 +20,23 @@ export default class Profile extends React.Component {
             user: this.props.user,
             loggedIn: this.props.loggedIn,
             recipes: [],
-            equipment: [],
-            ingredients: [],
             email: '',
             password: '',
             username: '',
-            recipeClicked: false,
-            equipClicked: false,
-            ingredClicked: false,
             setting: false,
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        console.log(this.state.user)
         this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
+            console.log(user);
             if (user) {
                 this.setState({
                     email: user.email,
                     subEmail: user.email.substr(0, user.email.indexOf('@'))
                 })
-
+                console.log(this.state.subEmail);
                 let reference = firebase.database().ref('users/' + this.state.subEmail + '/Author');
                 reference.on('value', (snapshot) => {
                     let settings = snapshot.val();
@@ -53,6 +49,20 @@ export default class Profile extends React.Component {
                         })
                     }
 
+                })
+                let reference2 = firebase.database().ref('users/' + this.state.subEmail + '/Recipes');
+                reference2.on('value', (snapshot) => {
+                    console.log(snapshot.val())
+                    let itemsArr = []
+                    snapshot.forEach((child) => {
+                        itemsArr.push(child.val());
+                        console.log("child: :", child.val())
+                    })
+                    console.log(itemsArr);
+                    this.setState({
+                        recipes: itemsArr
+                    })
+                    console.log(this.state.recipes);
                 })
             }
         })
@@ -73,8 +83,8 @@ export default class Profile extends React.Component {
                     </div>
                     <div className="profile-usertitle">
                         <div className="profile-usertitle-name">
-                            Soobinsoo
-                                        </div>
+                            {this.state.username}
+                        </div>
 
                     </div>
                     <div className="profile-usermenu">
@@ -116,7 +126,7 @@ export default class Profile extends React.Component {
                 </div>
 
 
-                <Recipes />
+                <Recipes recipes={this.state.recipes} />
                 <Footer />
             </div>
         )
@@ -124,139 +134,95 @@ export default class Profile extends React.Component {
 }
 
 export class Recipes extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+           recipes: this.props.recipes
+        };
+    }
+    
+    ShowRecipe = (d) => {
+        this.props.history.push({pathname: '/ShowRecipe', state:{recipe: d}});
+    };
+    
+    // componentDidMount() {
+    //     // let arr = [];
+    //     let arr2 = [];
+    //     // var query = firebase.database().ref("recipes").orderByKey();
+    //     // query.once("value")
+    //     // .then(function(snapshot) {
+    //     //     snapshot.forEach(function(childSnapshot) {
+    //     //         arr.push(childSnapshot.val());
+    //     //     });
+    //     // }).then(()=>{
+    //     //     this.setState({
+    //     //         result: arr,
+    //     //         oldResult: arr
+    //     //     })
+    //     // });
+
+    //     console.log(this.state.subEmail);
+    //     var query2 = firebase.database().ref("users/" + this.state.subEmail + "/Recipes").orderByKey();
+    //     query2.once("value")
+    //     .then(function(snapshot) {
+    //         snapshot.forEach(function(childSnapshot) {
+    //             arr2.push(childSnapshot.val());
+    //         });
+    //     }).then(()=>{
+    //         this.setState({
+    //             result2: arr2,
+    //         })
+    //     });
+    // }
+    
     render() {
         console.log("here");
         // this.recipeClicked = ;
+
+        let array = this.props.recipes.map((d, i) => {
+            return  (
+                <div id="recipe" className="col-md-4">
+                        <div className="card results-card" onClick={()=> this.ShowRecipe(d)}>
+                            <div className="card-body" id="results-card-body">
+                                <div className="card-img-top recipe-image">
+                                    <img className={"img-fluid card-img-top results-card-image"} src={d.imageURL} alt="food" />
+                                </div>
+
+                               
+                                <h5 className="results-card-title">{d.name}</h5>
+                                {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
+                                <p className="card-text" id="card-text">Minutes: {d.time}</p>
+                                <p className="card-text" id="card-text">Equipments: {d.equipment.length}</p>
+                                <p className="card-text" id="card-text">Ingredients: {d.ingredients.length}</p>
+                            </div>
+                        </div>
+                    </div>
+            )
+        })
+        
+        
         return (
             <div id="show-content">
                 <div id="page-label">
                     <p className="title">Your Recipes</p>
                     <img src={recipesIconSelected} alt="recipes" className="title-icon" />
                 </div>
+                
+                
                 <div className="row">
-                    <div id="recipe" className="col-md-4">
-                        <div className="card results-card">
-                            <div className="card-body" id="results-card-body">
-                                <div className="card-img-top recipe-image">
-                                    <img className={"img-fluid card-img-top results-card-image"} src={users} alt="food" />
-                                </div>
-
-                                {/* If clicked without a word in search --> should link back to Explore page with ALL of the recipes showing */}
-
-                                <h5 className="results-card-title">Test</h5>
-                                {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
-                                <p className="card-text" id="card-text">Minutes: 1</p>
-                                <p className="card-text" id="card-text">Equipments: 1</p>
-                                <p className="card-text" id="card-text">Ingredients: 1</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="recipe" className="col-md-4">
-                        <div className="card results-card">
-                            <div className="card-body" id="results-card-body">
-                                <div className="card-img-top recipe-image">
-                                    <img className={"img-fluid card-img-top results-card-image"} src={users} alt="food" />
-                                </div>
-
-                                {/* If clicked without a word in search --> should link back to Explore page with ALL of the recipes showing */}
-
-                                <h5 className="results-card-title">Test</h5>
-                                {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
-                                <p className="card-text" id="card-text">Minutes: 1</p>
-                                <p className="card-text" id="card-text">Equipments: 1</p>
-                                <p className="card-text" id="card-text">Ingredients: 1</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="recipe" className="col-md-4">
-                        <div className="card results-card">
-                            <div className="card-body" id="results-card-body">
-                                <div className="card-img-top recipe-image">
-                                    <img className={"img-fluid card-img-top results-card-image"} src={users} alt="food" />
-                                </div>
-
-                                {/* If clicked without a word in search --> should link back to Explore page with ALL of the recipes showing */}
-
-                                <h5 className="results-card-title">Test</h5>
-                                {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
-                                <p className="card-text" id="card-text">Minutes: 1</p>
-                                <p className="card-text" id="card-text">Equipments: 1</p>
-                                <p className="card-text" id="card-text">Ingredients: 1</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="recipe" className="col-md-4">
-                        <div className="card results-card">
-                            <div className="card-body" id="results-card-body">
-                                <div className="card-img-top recipe-image">
-                                    <img className={"img-fluid card-img-top results-card-image"} src={users} alt="food" />
-                                </div>
-
-                                {/* If clicked without a word in search --> should link back to Explore page with ALL of the recipes showing */}
-
-                                <h5 className="results-card-title">Test</h5>
-                                {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
-                                <p className="card-text" id="card-text">Minutes: 1</p>
-                                <p className="card-text" id="card-text">Equipments: 1</p>
-                                <p className="card-text" id="card-text">Ingredients: 1</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="recipe" className="col-md-4">
-                        <div className="card results-card">
-                            <div className="card-body" id="results-card-body">
-                                <div className="card-img-top recipe-image">
-                                    <img className={"img-fluid card-img-top results-card-image"} src={users} alt="food" />
-                                </div>
-
-                                {/* If clicked without a word in search --> should link back to Explore page with ALL of the recipes showing */}
-
-                                <h5 className="results-card-title">Test</h5>
-                                {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
-                                <p className="card-text" id="card-text">Minutes: 1</p>
-                                <p className="card-text" id="card-text">Equipments: 1</p>
-                                <p className="card-text" id="card-text">Ingredients: 1</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="recipe" className="col-md-4">
-                        <div className="card results-card">
-                            <div className="card-body" id="results-card-body">
-                                <div className="card-img-top recipe-image">
-                                    <img className={"img-fluid card-img-top results-card-image"} src={users} alt="food" />
-                                </div>
-
-                                {/* If clicked without a word in search --> should link back to Explore page with ALL of the recipes showing */}
-
-                                <h5 className="results-card-title">Test</h5>
-                                {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
-                                <p className="card-text" id="card-text">Minutes: 1</p>
-                                <p className="card-text" id="card-text">Equipments: 1</p>
-                                <p className="card-text" id="card-text">Ingredients: 1</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="recipe" className="col-md-4">
-                        <div className="card results-card">
-                            <div className="card-body" id="results-card-body">
-                                <div className="card-img-top recipe-image">
-                                    <img className={"img-fluid card-img-top results-card-image"} src={users} alt="food" />
-                                </div>
-
-                                {/* If clicked without a word in search --> should link back to Explore page with ALL of the recipes showing */}
-
-                                <h5 className="results-card-title">Test</h5>
-                                {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
-                                <p className="card-text" id="card-text">Minutes: 1</p>
-                                <p className="card-text" id="card-text">Equipments: 1</p>
-                                <p className="card-text" id="card-text">Ingredients: 1</p>
-                            </div>
-                        </div>
-                    </div>
+                    {/* <h4>Results</h4> */}
+                    {array !== 0 ? <div className="row">
+                        {array.map((recipe, i) => {
+                            return recipe
+                        })} 
+                    </div> : <div></div>}
+                    {/* <div className="row">
+                        {array.map((recipe, i) => {
+                            return recipe
+                        })} 
+                    </div>  */}
                 </div>
             </div>
-
         )
     }
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import Navigation from "./Navigation"
 import Footer from "./Footer"
 import add from "./img/addIcon.png";
-import upload from "./img/uploadIcon.png";
 import "./Upload.css";
 import firebase from 'firebase';
 import List from './List';
@@ -315,13 +314,13 @@ export default class Upload extends React.Component {
     }
 
     render() {
-        let { imagePreviewUrl } = this.state;
-        let $imagePreview = null;
-        if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl} alt="preview" />);
-        } else {
-            $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
-        }
+        // let { imagePreviewUrl } = this.state;
+        // let $imagePreview = null;
+        // if (imagePreviewUrl) {
+        //     $imagePreview = (<img src={imagePreviewUrl} alt="preview" />);
+        // } else {
+        //     $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+        // }
         return (
             <div>
                 <Navigation />
