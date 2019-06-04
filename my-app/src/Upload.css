@@ -2,6 +2,18 @@
     width: 80%;
 }
 
+#upload-button {
+    display: flex;
+}
+
+#fixed-label {
+    width: 1000px;
+}
+#previewComponent {
+    flex-grow: 1;
+}
+
+
 .fileInput {
     margin-bottom: 3%;
     
